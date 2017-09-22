@@ -81,17 +81,16 @@ Below is the high-level architecture of SciBot
 ![High-level Architecture](ArchitectureDiagram/MainArchi.jpg?raw=true "High-level Architecture")
 The basic components are:
 
-1. The Slack User Interface– Which is used by the users for interaction with bot.
+1. The Slack User Interface– The Slack UI is used by the users for interaction with bot
 
-2. Slack API – This is used to send and receive data. Send data to the bot from the admin to the bot. Then the bot sends data like reminders and notification to the users.
-
-3. Bot App Server – These are the components of the bot which include  
-&nbsp;&nbsp; a. Slack integrator – Which connects slack to the bot.  
-&nbsp;&nbsp; b. Input parser – That takes the input from the admin which needs to be fed into the bot.  
-&nbsp;&nbsp; c. Event manager – This is responsible for managing the notifications that are to be provided by the bot to the user.  
-&nbsp;&nbsp; d. Bot controller / engine – This component is responsible for connecting and managing the other components of the bot.  
-&nbsp;&nbsp; e. Git integrator – This is responsible to connect GitHub with the bot.  
-
+2. SciBot App Server – The bot server has the following components  
+&nbsp;&nbsp; a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine
+&nbsp;&nbsp; b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
+&nbsp;&nbsp; c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components  
+&nbsp;&nbsp; c. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs to display appropritate time reminders to the users
+&nbsp;&nbsp; d. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum 
+&nbsp;&nbsp; e. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
+&nbsp;&nbsp; f. Slack API Manager – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
 4. GitHub API – These APIs are going to be used send and receive data between the bot and GitHub.
 
 5. GitHub – Where all the project work of the users is stored.
