@@ -6,7 +6,7 @@
 
 ## Use Cases
 
-#### USECASE 1: Collect Daily tasks and keep track of the commits
+#### USECASE 1: Collect daily tasks and keep track of the commits
 
 The first use case is for sending reminders to the users i.e. team members to commit at the end of the day and if the user does not commit then shows the time overdue.
 
@@ -36,7 +36,7 @@ The user is not at work for that day.
 
 #### USECASE 2: Creation and assignment of tasks**
 
-The second use case is for the admin i.e., the team lead to create and assign tasks to the different team members.
+The second use case is for the admin i.e. the team lead to create and assign tasks to the different team members.
 
 **1. Preconditions**
 
@@ -104,6 +104,29 @@ The following mockups bring out our bot idea and let you check SciBot in action.
 ![Configure](Mockup/Configure.png?raw=true "Configure")
 
 ## Architecture Design
+
+**SciBot** is a slack bot that assists implementation of the Agile **Scrum** method. The architectural pattern of the bot could be a **hybrid of the repository and event triggered patterns.**
+It is a repository model because all the work done by the teams is stored on GitHub. But since it also gives notifications when users login and talk to the bot, it is also event triggered.
+
+The basic components are:
+
+1. The Slack User Interface– Which is used by the users for interaction with bot.
+
+2. Slack API – This is used to send and receive data. Send data to the bot from the admin to the bot. Then the bot sends data like reminders and notification to the users.
+
+3. Bot App Server – These are the components of the bot which include  
+&nbsp;&nbsp; a. Slack integrator – Which connects slack to the bot.  
+&nbsp;&nbsp; b. Input parser – That takes the input from the admin which needs to be fed into the bot.  
+&nbsp;&nbsp; c. Event manager – This is responsible for managing the notifications that are to be provided by the bot to the user.  
+&nbsp;&nbsp; d. Bot controller / engine – This component is responsible for connecting and managing the other components of the bot.  
+&nbsp;&nbsp; e. Git integrator – This is responsible to connect GitHub with the bot.  
+
+4. GitHub API – These APIs are going to be used send and receive data between the bot and GitHub.
+
+5. GitHub – Where all the project work of the users is stored.
+
+6. MySQL Database – All the user, admin, tasks, project and bot processed information is stored in this database.
+
 
 ## Additional Patterns
 
