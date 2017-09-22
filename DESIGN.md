@@ -108,6 +108,9 @@ The following mockups bring out our bot idea and let you check SciBot in action.
 **SciBot** is a slack bot that assists implementation of the Agile **Scrum** method. The architectural pattern of the bot could be a **hybrid of the repository and event triggered patterns.**
 It is a repository model because all the work done by the teams is stored on GitHub. But since it also gives notifications when users login and talk to the bot, it is also event triggered.
 
+Below is the high-level architecture of SciBot  
+
+![High-level Architecture](ArchitectureDiagram/MainArchi.jpg?raw=true "High-level Architecture")
 The basic components are:
 
 1. The Slack User Interface– Which is used by the users for interaction with bot.
