@@ -19,7 +19,7 @@ The SciBot belongs to the category of Responders. It keeps track of the tasks to
 
 ### Use Cases
 ```
-USECASE 1: Collect daily tasks and keep track of the commits
+USECASE 1: Collect daily tasks and keep track of commits
 
 The first use case is for sending reminders to the users i.e. team members to commit at the end of the day and if the user does not commit then shows the time overdue.
 1 Preconditions
@@ -38,7 +38,7 @@ The first use case is for sending reminders to the users i.e. team members to co
 ```
 USECASE 2: Creation and assignment of tasks
 
-The second use case is for the admin i.e. the team lead to create and assign tasks to the different team members.
+The second use case is for the admin i.e. the team lead to create and assign tasks to the different team members. The admin will be responsible for deciding and uploading the concrete deliverables for each sprint cycle as well as deciding the sprint time.
 1 Preconditions
   The admin is the only person who can directly assign and configure the bot
   The admin should have a GitHub and slack account as well
@@ -52,12 +52,12 @@ The second use case is for the admin i.e. the team lead to create and assign tas
   [E2] One or more team members don't have any tasks assigned to them
 ```
 ```
-USECASE 3: Notification the tasks due
+USECASE 3: Notifications of the tasks due 
 
 One more use of this bot is to collect daily tasks and activities of the users i.e. the team members. It is used notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
 1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis
-  The user must also have a slack account and be member of the team he is working with
+  User must have a GitHub account to push all the work done on a daily basis.
+  The user must also have a slack account and be member of the team he is working with.
 2 Main Flow
   The user will log into the system in the morning and then ask the bot what are the tasks for today [S1] to help keep track of what should be done. The bot having saved all the previous activities will provide a list of tasks that should be dealt with immediately which are of utmost importance [S2] and then the other tasks after.
 3 Sub Flows
@@ -67,6 +67,20 @@ One more use of this bot is to collect daily tasks and activities of the users i
   [E1] All the tasks have already been completed before hand
   [E2] Too many tasks are remaining and the user cannot complete everything
 ```
+```
+USECASE 4: Daily Scrum Update
+1 Preconditions
+  User must have a GitHub account to push all the work done on a daily basis.
+  The user must also have a slack account and be member of the team he is working with.
+2 Main Flow
+  The user logs on to Slack [S1].  The bot like a scrum master conducts a daily meeting [S2] where it asks the user what they did yesterday, what they plan to do today and if they faced any obstacles. The user replies to the bot with the answers[S3]
+3 Sub Flows
+  [S1] The user logs on to Slack
+  [S2] The bot like a scrum master conducts a daily meeting.
+  [S3] The user replies to the bot with the answers
+ 4 Alternative Flows
+  [E1] The user does not log into slack
+
 ### Design Sketches
 
 #### Wireframe  
