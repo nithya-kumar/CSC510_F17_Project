@@ -3,6 +3,20 @@
 ## Problem Statement
 Agile Scrum is an iterative and incremental framework for managing software product development. There are three core roles in the Scrum process viz, the product owner, the development team and the Scrum master. Each of the roles have sophisticated task lists which they need to manage and work upon. The role of a Scrum master is unique in the Scrum process. The Scrum master is accountable for removing impediments to the ability of the team to deliver the product goals and deliverables. Having a trustworthy and self-sufficient Scrum master is a big challenge (problem). Our project, called the **SciBot** is a lighter version of the Scrum master which is intended to assist the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.
 
+## Bot Description  
+The **SciBot** is an easy to use bot that helps the user keep track of the sprint activities.
+The scrum agile methodology is a well-known methodology for the Software Development Lifecycle Management. Sprint being the core of the scrum holds an important role in the development of a product. As a part of scrum, teams collaborate to list down the project requirements. Scrum is further divided into sprint cycles that monitor the flow of development. Daily sprint activities help the teams to meet the project targets and deadlines within time period and gives abilities to perform better.  
+
+A major issue involved in this scenario can be identified as the daily management of the sprint tasks and their requirements. A SciBot user needs an automated manager to help the user monitor these activities and assist in the daily tasks that do not need any supervision of the user and might take up a lot of the user’s time.  
+
+The following are the reasons why the SciBot is of help in this situation,
+* The user does not need to manually keep track of the daily sprint activities.
+* The user can choose to automate the process of pushing the daily code, documentation or any other new files generated without the need to manually do these activities that do not usually require any supervision.
+* The SciBot can generate reminders for the user in case the user forgets the tasks or does not push them.
+* The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions according to the requirements specified in the file given by the user.  
+
+The SciBot belongs to the category of Responders. It keeps track of the tasks to be performed and generates reminders for the tasks as the deadline approaches. It can differentiate between different users and identify their tasks independently. It maintains a memory to store all the data related to the user, tasks, deadlines and any other specific requirements of the scrum master.
+
 ## Bot Description
 
 ## Use Cases
@@ -79,21 +93,25 @@ It is a repository model because all the work done by the teams is stored on Git
 
 Below is the high-level architecture of SciBot  
 
-![High-level Architecture](ArchitectureDiagram/MainArchi.jpg?raw=true "High-level Architecture")
+![High-level Architecture](ArchitectureDiagram/MainArchi.jpg?raw=true "High-level Architecture")  
+
 The basic components are:
 
-1. The Slack User Interface– The Slack UI is used by the users for interaction with bot
+#### 1. The Slack User Interface  
+The Slack UI is used by the users for interaction with bot
 
-2. SciBot App Server – The bot server has the following components
-  a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine
-  b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
-  c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components
-  d. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs (timezonedb) to display appropritate time reminders to the users
-  e. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum
-  f. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
+#### 2. SciBot App Server  
+The bot server has the following components  
+  a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine  
+  b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users  
+  c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components  
+  d. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs (timezonedb) to display appropritate time reminders to the users  
+  e. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum  
+  f. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component  
   g. Slack API Manager – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
 
-3. SQL Database – All the user, admin, tasks, project and bot processed information is stored in SQL database.
+#### 3. SQL Database  
+All the user, admin, tasks, project and bot processed information is stored in SQL database.
 
 ## Additional Patterns
 
