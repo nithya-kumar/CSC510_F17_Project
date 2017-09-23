@@ -54,7 +54,7 @@ The second use case is for the admin i.e. the team lead to create and assign tas
 ```
 USECASE 3: Notifications of the tasks due 
 
-One more use of this bot is to collect daily tasks and activities of the users i.e. the team members. It is used notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
+One more use of this bot is for notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis.
   The user must also have a slack account and be member of the team he is working with.
@@ -69,6 +69,8 @@ One more use of this bot is to collect daily tasks and activities of the users i
 ```
 ```
 USECASE 4: Daily Scrum Update
+
+Another usecase could be to collect daily tasks and activities of the users i.e. the team members.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis.
   The user must also have a slack account and be member of the team he is working with.
