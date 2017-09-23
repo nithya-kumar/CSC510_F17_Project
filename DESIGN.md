@@ -24,7 +24,7 @@ USECASE 1: Collect daily tasks and keep track of commits
 The first use case is for sending reminders to the users i.e. team members to commit at the end of the day and if the user does not commit then shows the time overdue.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis.
-  User must have a slack account and be member of the team they are working with.
+  User must have a Slack account and be member of the team they are working with.
 2 Main Flow
   The user will inform the bot that they are done for the day [S1], then the bot will notify and remind the user that it is time to commit the work done [S2]. Also, it shows users overdue tasks with time if they have not committed previously [S3], to prevent users from slacking in their work.
 3 Sub Flow
@@ -41,7 +41,7 @@ USECASE 2: Creation and assignment of tasks
 The second use case is for the admin i.e. the team lead to create and assign tasks to the different team members. The admin will be responsible for deciding and uploading the concrete deliverables for each sprint cycle as well as deciding the sprint time.
 1 Preconditions
   The admin is the only person who can directly assign and configure the bot
-  The admin should have a GitHub and slack account as well
+  The admin should have a GitHub and Slack account as well
 2 Main Flow
   Instead of the admin sending out separate emails to each person with their tasks, they will just need to upload the task assignment to the bot [S1] and the bot will take care of notifying the team members of their tasks [S2]. The different tasks will be assigned to the team members according to what the admin has sent to the bot.
 3 Sub Flows
@@ -57,7 +57,7 @@ USECASE 3: Notifications of the tasks due
 One more use of this bot is for notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis.
-  The user must also have a slack account and be member of the team he is working with.
+  The user must also have a Slack account and be member of the team he is working with.
 2 Main Flow
   The user will log into the system in the morning and then ask the bot what are the tasks for today [S1] to help keep track of what should be done. The bot having saved all the previous activities will provide a list of tasks that should be dealt with immediately which are of utmost importance [S2] and then the other tasks after.
 3 Sub Flows
@@ -68,20 +68,20 @@ One more use of this bot is for notifying the users who are working on the proje
   [E2] Too many tasks are remaining and the user cannot complete everything
 ```
 ```
-USECASE 4: Daily Scrum Update
+USECASE 4: Daily scrum update
 
-Another usecase could be to collect daily tasks and activities of the users i.e. the team members.
+Another usecase could be to collect the daily tasks and activities of users i.e. the team members.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis.
-  The user must also have a slack account and be member of the team he is working with.
+  The user must also have a Slack account and be member of the team he is working with.
 2 Main Flow
-  The user logs on to Slack [S1].  The bot like a scrum master conducts a daily meeting [S2] where it asks the user what they did yesterday, what they plan to do today and if they faced any obstacles. The user replies to the bot with the answers[S3]
+  The user logs on to Slack [S1]. The bot like a scrum master conducts a daily meeting [S2] where it asks the user what they did yesterday, what they plan to do today and if they faced any obstacles. The user replies to the bot with the answers[S3]
 3 Sub Flows
-  [S1] The user logs on to Slack
+  [S1] The user logs on to Slack.
   [S2] The bot like a scrum master conducts a daily meeting.
   [S3] The user replies to the bot with the answers
  4 Alternative Flows
-  [E1] The user does not log into slack
+  [E1] The user does not log into Slack
  ```
 
 ### Design Sketches
