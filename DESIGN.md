@@ -105,13 +105,13 @@ The Slack UI is used by the users for interaction with bot
 
 #### 2. SciBot App Server  
 The bot server has the following components  
-  a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine  
-  b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users  
-  c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components  
-  d. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs (timezonedb) to display appropritate time reminders to the users  
-  e. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum  
-  f. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component  
-  g. Slack API Manager – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
+  **Bot Engine** – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine  
+  **Slack API Manager** – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users  
+  **Parser Engine** – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components  
+  **Event Manager** – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs (timezonedb) to display appropritate time reminders to the users  
+  **Git API Manager** – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum  
+  **Database Manager** – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component  
+  **Slack API Manager** – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
 
 #### 3. SQL Database  
 All the user, admin, tasks, project and bot processed information is stored in SQL database.
