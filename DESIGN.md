@@ -112,6 +112,12 @@ The bot server has the following components
 
 #### 3. SQL Database  
 All the user, admin, tasks, project and bot processed information is stored in SQL database.
+#### 4. Constraints
+Constraints:
+The following constraints can be observed in the Scibot:  
+* It will establish entitlements for different users and thus defining the permissions for all the users to do various tasks. Example: The Admin will have the functionality to create and assign tasks to different team members. The team members cannot create tasks thus limiting their entitlements.  
+* SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant. We can create multiple instances of the bot and add the functionality of multiple interacting points as a future scope. 
+
 
 ## Additional Patterns
 
