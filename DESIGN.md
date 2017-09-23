@@ -1,6 +1,7 @@
 # Design Document
 
 ## Problem Statement
+Agile Scrum is an iterative and incremental framework for managing software product development. There are three core roles in the Scrum process viz, the product owner, the development team and the Scrum master. Each of the roles have sophisticated task lists which they need to manage and work upon. The role of a Scrum master is unique in the Scrum process. The Scrum master is accountable for removing impediments to the ability of the team to deliver the product goals and deliverables. Having a trustworthy and self-sufficient Scrum master is a big challenge (problem). Our project, called the **SciBot** is a lighter version of the Scrum master which is intended to assist the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.
 
 ## Bot Description
 
@@ -83,20 +84,16 @@ The basic components are:
 
 1. The Slack User Interface– The Slack UI is used by the users for interaction with bot
 
-2. SciBot App Server – The bot server has the following components  
-&nbsp;&nbsp; a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine
-&nbsp;&nbsp; b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
-&nbsp;&nbsp; c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components  
-&nbsp;&nbsp; c. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs to display appropritate time reminders to the users
-&nbsp;&nbsp; d. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum 
-&nbsp;&nbsp; e. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
-&nbsp;&nbsp; f. Slack API Manager – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
-4. GitHub API – These APIs are going to be used send and receive data between the bot and GitHub.
+2. SciBot App Server – The bot server has the following components
+  a. Bot Engine – Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine
+  b. Slack API Manager – Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
+  c. Parser Engine – Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components
+  d. Event Manager – Event Manager is responsible for managing the notifications that are to be provided by the bot to the user. It interacts with Time APIs (timezonedb) to display appropritate time reminders to the users
+  e. Git API Manager – Git API Manager is responsible to connect GitHub with the bot. It interacts with GitHub via Rest APIs to accomplish Git tasks required in the Scrum
+  f. Database Manager – Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
+  g. Slack API Manager – The Slack API Manager helps SciBot and users to communicate effectively. It is used to send and receive data between the Bot App server and users
 
-5. GitHub – Where all the project work of the users is stored.
-
-6. MySQL Database – All the user, admin, tasks, project and bot processed information is stored in this database.
-
+3. SQL Database – All the user, admin, tasks, project and bot processed information is stored in SQL database.
 
 ## Additional Patterns
 
