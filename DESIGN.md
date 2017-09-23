@@ -80,6 +80,7 @@ USECASE 4: Daily Scrum Update
   [S3] The user replies to the bot with the answers
  4 Alternative Flows
   [E1] The user does not log into slack
+ ```
 
 ### Design Sketches
 
