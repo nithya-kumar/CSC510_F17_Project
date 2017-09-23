@@ -119,7 +119,9 @@ All the user, admin, tasks, project and bot processed information is stored in S
 ### Constraints
 The following constraints can be observed in the Scibot:  
 * It will establish entitlements for different users and thus defining the permissions for all the users to do various tasks. Example: The Admin will have the functionality to create and assign tasks to different team members. The team members cannot create tasks thus limiting their entitlements.  
-* SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant. We can create multiple instances of the bot and add the functionality of multiple interacting points as a future scope. 
+* SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant. 
+* SciBot makes API calls to GitHub and Slack. It relies on GitHub and Slack API being statically incorporated into the functions. If any changes are made to the GitHub and Slack API, they will be needed to be manually updated in the bot.   
+* The SciBot can only use GitHub for version control.  
 
 ### Additional patterns
 
