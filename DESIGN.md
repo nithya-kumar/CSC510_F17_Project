@@ -102,8 +102,7 @@ The following mockups bring out our bot idea and let you check SciBot in action.
 ![Configure](Mockup/Configure.png?raw=true "Configure")
 
 #### Storyboard
-
-
+![StoryBoard](StoryBoard/StoryBoard.png?raw=true "StoryBoard")
 
 ## Architecture Design
 
