@@ -1,4 +1,4 @@
-# Design Document
+# Design Milestone
 
 ## Problem Statement
 Agile Scrum is an iterative and incremental framework for managing software product development. There are three core roles in the Scrum process viz, the product owner, the development team and the Scrum master. Each of the roles have sophisticated task lists which they need to manage and work upon. The role of a Scrum master is unique in the Scrum process. The Scrum master is accountable for removing impediments to the ability of the team to deliver the product goals and deliverables. Having a trustworthy and self-sufficient Scrum master is a big challenge (problem). Our project, called the **SciBot** is a lighter version of the Scrum master which is intended to assist the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.
@@ -17,9 +17,7 @@ The following are the reasons why the SciBot is of help in this situation,
 
 The SciBot belongs to the category of Responders. It keeps track of the tasks to be performed and generates reminders for the tasks as the deadline approaches. It can differentiate between different users and identify their tasks independently. It maintains a memory to store all the data related to the user, tasks, deadlines and any other specific requirements of the scrum master.
 
-## Bot Description
-
-## Use Cases
+### Use Cases
 ```
 USECASE 1: Collect daily tasks and keep track of the commits
 
@@ -69,9 +67,9 @@ One more use of this bot is to collect daily tasks and activities of the users i
   [E1] All the tasks have already been completed before hand
   [E2] Too many tasks are remaining and the user cannot complete everything
 ```
-## Design Sketches
+### Design Sketches
 
-### Wireframe  
+#### Wireframe  
 The following mockups bring out our bot idea and let you check SciBot in action. Additionally, you can access its prototype [here](https://app.walkiebot.co/anon/2n90g-5htfz/story/daily-scrum-meeting "View prototype").
 
 * SciBot as a Scrum Master for daily status updates
@@ -86,16 +84,21 @@ The following mockups bring out our bot idea and let you check SciBot in action.
 * Interaction with Admin for configurations
 ![Configure](Mockup/Configure.png?raw=true "Configure")
 
+#### Storyboard
+
+
+
 ## Architecture Design
 
 **SciBot** is a slack bot that assists implementation of the Agile **Scrum** method. The architectural pattern of the bot could be a **hybrid of the repository and event triggered patterns.**
 It is a repository model because all the work done by the teams is stored on GitHub. But since it also gives notifications when users login and talk to the bot, it is also event triggered.
 
-Below is the high-level architecture of SciBot  
+### High-level architecture of SciBot  
 
 ![High-level Architecture](ArchitectureDiagram/MainArchi.jpg?raw=true "High-level Architecture")  
 
-The basic components are:
+### Architecture components  
+The basic components of SciBot architecture are:
 
 #### 1. The Slack User Interface  
 The Slack UI is used by the users for interaction with bot
@@ -112,23 +115,22 @@ The bot server has the following components
 
 #### 3. SQL Database  
 All the user, admin, tasks, project and bot processed information is stored in SQL database.
-#### 4. Constraints
-Constraints:
+
+### Constraints
 The following constraints can be observed in the Scibot:  
 * It will establish entitlements for different users and thus defining the permissions for all the users to do various tasks. Example: The Admin will have the functionality to create and assign tasks to different team members. The team members cannot create tasks thus limiting their entitlements.  
 * SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant. We can create multiple instances of the bot and add the functionality of multiple interacting points as a future scope. 
 
+### Additional patterns
 
-## Additional Patterns
-
-### Repository
+#### Repository
 We intend to design SciBot by using the Repository pattern as part of the Data Centered patterns. Below is the interaction of clients with the centralized database. SciBot interacts with all the clients and fetches the data from the database. Any data fed into the system is stored in to the centralized database. The functionalities of the SciBot depend on the data stored in the central repository.
 ![Repository Model](Repository/RepositoryModel.png?raw=true "Repository Model")
 
-### Object Oriented  
+#### Object Oriented  
 We intend to design SciBot by using the object-oriented pattern as part of the Call and Return patterns. On a high level, the class diagram for the bot is as shown below. *BotEngine* is the main class for the bot functioning and it interacts with rest of the components/classes (*SlackApiManager*, *GithubApiManager*, *EventManager*, and *ParserEngine*) via aggregation.
 
 ![Class Diagram](ClassDiagram/ClassDiagram.jpg?raw=true "Class Diagram")
 
-### Implicit Invocation
+#### Implicit Invocation
 We intend to design SciBot by using the Implicit Invocation as part of the Event Systems. SciBot receives the Sprint plan from the admin, parses it and stores it into the database. Once the plan is obtained, it notifies the users based on the time and plan implicitely without any external invocation.
