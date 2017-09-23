@@ -10,10 +10,10 @@ The scrum agile methodology is a well-known methodology for the Software Develop
 A major issue involved in this scenario can be identified as the daily management of the sprint tasks and their requirements. A SciBot user needs an automated manager to help the user monitor these activities and assist in the daily tasks that do not need any supervision of the user and might take up a lot of the user’s time.  
 
 The following are the reasons why the SciBot is of help in this situation,
-* The user does not need to manually keep track of the daily sprint activities.
-* The user can choose to automate the process of pushing the daily code, documentation or any other new files generated without the need to manually do these activities that do not usually require any supervision.
-* The SciBot can generate reminders for the user in case the user forgets the tasks or does not push them.
-* The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions according to the requirements specified in the file given by the user.  
+* The user does not need to manually keep track of the daily sprint activities
+* The user can choose to automate the process of pushing the daily code, documentation or any other new files generated without the need to manually do these activities that do not usually require any supervision
+* The SciBot can generate reminders for the user in case the user forgets the tasks or does not push them
+* The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions according to the requirements specified in the file given by the user  
 
 The SciBot belongs to the category of Responders. It keeps track of the tasks to be performed and generates reminders for the tasks as the deadline approaches. It can differentiate between different users and identify their tasks independently. It maintains a memory to store all the data related to the user, tasks, deadlines and any other specific requirements of the scrum master.
 
@@ -23,8 +23,8 @@ USECASE 1: Collect daily tasks and keep track of commits
 
 The first use case is for sending reminders to the users i.e. team members to commit at the end of the day and if the user does not commit then shows the time overdue.
 1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis.
-  User must have a Slack account and be member of the team they are working with.
+  User must have a GitHub account to push all the work done on a daily basis
+  User must have a Slack account and be member of the team they are working with
 2 Main Flow
   The user will inform the bot that they are done for the day [S1], then the bot will notify and remind the user that it is time to commit the work done [S2]. Also, it shows users overdue tasks with time if they have not committed previously [S3], to prevent users from slacking in their work.
 3 Sub Flow
@@ -56,8 +56,8 @@ USECASE 3: Notifications of the tasks due
 
 One more use of this bot is for notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
 1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis.
-  The user must also have a Slack account and be member of the team he is working with.
+  User must have a GitHub account to push all the work done on a daily basis
+  The user must also have a Slack account and be member of the team he is working with
 2 Main Flow
   The user will log into the system in the morning and then ask the bot what are the tasks for today [S1] to help keep track of what should be done. The bot having saved all the previous activities will provide a list of tasks that should be dealt with immediately which are of utmost importance [S2] and then the other tasks after.
 3 Sub Flows
@@ -72,13 +72,13 @@ USECASE 4: Daily scrum update
 
 Another usecase could be to collect the daily tasks and activities of users i.e. the team members.
 1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis.
-  The user must also have a Slack account and be member of the team he is working with.
+  User must have a GitHub account to push all the work done on a daily basis
+  The user must also have a Slack account and be member of the team he is working with
 2 Main Flow
   The user logs on to Slack [S1]. The bot like a scrum master conducts a daily meeting [S2] where it asks the user what they did yesterday, what they plan to do today and if they faced any obstacles. The user replies to the bot with the answers[S3]
 3 Sub Flows
-  [S1] The user logs on to Slack.
-  [S2] The bot like a scrum master conducts a daily meeting.
+  [S1] The user logs on to Slack
+  [S2] The bot like a scrum master conducts a daily meeting
   [S3] The user replies to the bot with the answers
  4 Alternative Flows
   [E1] The user does not log into Slack
@@ -135,10 +135,10 @@ All the user, admin, tasks, project and bot processed information is stored in S
 
 ### Constraints
 The following constraints can be observed in the Scibot:  
-* It will establish entitlements for different users and thus defining the permissions for all the users to do various tasks. Example: The Admin will have the functionality to create and assign tasks to different team members. The team members cannot create tasks thus limiting their entitlements.  
-* SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant. 
-* SciBot makes API calls to GitHub and Slack. It relies on GitHub and Slack API being statically incorporated into the functions. If any changes are made to the GitHub and Slack API, they will be needed to be manually updated in the bot.   
-* The SciBot can only use GitHub for version control.  
+* It will establish entitlements for different users and thus defining the permissions for all the users to do various tasks. Example: The Admin will have the functionality to create and assign tasks to different team members. The team members cannot create tasks thus limiting their entitlements  
+* SciBot can only interact with one user at a time. Thus it can take input from one user at a specific instant 
+* SciBot makes API calls to GitHub and Slack. It relies on GitHub and Slack API being statically incorporated into the functions. If any changes are made to the GitHub and Slack API, they will be needed to be manually updated in the bot   
+* The SciBot can only use GitHub for version control  
 
 ### Additional patterns
 
