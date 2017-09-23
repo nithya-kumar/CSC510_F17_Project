@@ -121,7 +121,14 @@ The following constraints can be observed in the Scibot:
 
 ## Additional Patterns
 
+### Repository
+We intend to design SciBot by using the Repository pattern as part of the Data Centered patterns. Below is the interaction of clients with the centralized database. SciBot interacts with all the clients and fetches the data from the database. Any data fed into the system is stored in to the centralized database. The functionalities of the SciBot depend on the data stored in the central repository.
+![Repository Model](Repostiory/RepositoryModel.jpg?raw=true "Repository Model")
+
 ### Object Oriented  
 We intend to design SciBot by using the object-oriented pattern as part of the Call and Return patterns. On a high level, the class diagram for the bot is as shown below. *BotEngine* is the main class for the bot functioning and it interacts with rest of the components/classes (*SlackApiManager*, *GithubApiManager*, *EventManager*, and *ParserEngine*) via aggregation.
 
 ![Class Diagram](ClassDiagram/ClassDiagram.jpg?raw=true "Class Diagram")
+
+### Implicit Invocation
+We intend to design SciBot by using the Implicit Invocation as part of the Event Systems. SciBot receives the Sprint plan from the admin, parses it and stores it into the database. Once the plan is obtained, it notifies the users based on the time and plan implicitely without any external invocation.
