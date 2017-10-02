@@ -5,15 +5,15 @@ Agile Scrum is an iterative and incremental framework for managing software prod
 
 ## Bot Description  
 The **SciBot** is an easy to use bot that helps the user keep track of the sprint activities.
-The scrum agile methodology is a well-known methodology for the Software Development Lifecycle Management. Sprint being the core of the scrum holds an important role in the development of a product. As a part of scrum, teams collaborate to list down the project requirements. Scrum is further divided into sprint cycles that monitor the flow of development. Daily sprint activities help the teams to meet the project targets and deadlines within time period and gives abilities to perform better.  
+The scrum agile methodology is a well-known methodology for the Software Development Lifecycle Management. Sprint being the core of the scrum holds an important role in the development of a product. As a part of scrum, teams collaborate to list down the project requirements. Scrum is further divided into sprint cycles that monitor the flow of development. Daily sprint activities help the teams to meet the project targets and deadlines within time period and gives abilities to perform better.  The Scrum master generates the sprint tasks and assigns them to the team members.  
 
-A major issue involved in this scenario can be identified as the daily management of the sprint tasks and their requirements. A SciBot user needs an automated manager to help the user monitor these activities and assist in the daily tasks that do not need any supervision of the user and might take up a lot of the user’s time.  
+A major issue involved in this scenario can be identified as the daily management of the sprint tasks and their requirements. A SciBot user needs an automated manager to help the user monitor these activities and assist in the daily tasks.  
 
 The following are the reasons why the SciBot is of help in this situation,
 * The user does not need to manually keep track of the daily sprint activities
-* The user can choose to automate the process of pushing the daily code, documentation or any other new files generated without the need to manually do these activities that do not usually require any supervision
 * The SciBot can generate reminders for the user in case the user forgets the tasks or does not push them
-* The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions according to the requirements specified in the file given by the user  
+* The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions according to the requirements specified in the file given by the user.  
+* It can help the scrum master to ping the team members to ensure the completion of sprint tasks.  
 
 The SciBot belongs to the category of Responders. It keeps track of the tasks to be performed and generates reminders for the tasks as the deadline approaches. It can differentiate between different users and identify their tasks independently. It maintains a memory to store all the data related to the user, tasks, deadlines and any other specific requirements of the scrum master.
 
