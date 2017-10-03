@@ -19,70 +19,55 @@ The SciBot belongs to the category of Responders. It keeps track of the tasks to
 
 ### Use Cases
 ```
-USECASE 1: Collect daily tasks and keep track of commits
+USECASE 1: Pinging a user for daily updates
 
-The first use case is for sending reminders to the users i.e. team members to commit at the end of the day and if the user does not commit then shows the time overdue.
+The first use case is to ask users for questions regarding the work done to get daily updates.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis
   User must have a Slack account and be member of the team they are working with
 2 Main Flow
-  The user will inform the bot that they are done for the day [S1], then the bot will notify and remind the user that it is time to commit the work done [S2]. Also, it shows users overdue tasks with time if they have not committed previously [S3], to prevent users from slacking in their work.
+  At the end of the day the bot will remind the user to update his daily status[S1], Then bot will ask the user what he completed that day at work [S2]. Then this information will be saved in their status update [S3].
 3 Sub Flow
-  [S1] The user will inform the bot that they are done for the day
-  [S2] The bot will remind the user that it is time to commit the work done
-  [S3] The bot shows them tasks overdue with time
+  [S1] The bot will remind the user to update his daily status
+  [S2] Then bot will ask the user what he completed that day at work
+  [S3] This information will be saved in their status update
 4 Alternative Flows
   [E1] No team members available
   [E2] The user is not at work for that day
 ```
 ```
-USECASE 2: Creation and assignment of tasks
+USECASE 2: Generating a summary report
 
-The second use case is for the admin i.e. the team lead to create and assign tasks to the different team members. The admin will be responsible for deciding and uploading the concrete deliverables for each sprint cycle as well as deciding the sprint time.
+The second use case is using the daily status collected from each user the bot will generate a summary report.
 1 Preconditions
-  The admin is the only person who can directly assign and configure the bot
+  The users must have put promptly entered their everyday work
   The admin should have a GitHub and Slack account as well
 2 Main Flow
-  Instead of the admin sending out separate emails to each person with their tasks, they will just need to upload the task assignment to the bot [S1] and the bot will take care of notifying the team members of their tasks [S2]. The different tasks will be assigned to the team members according to what the admin has sent to the bot.
+  The daily update collected, is stored in a database [S1] to help keep track of what has been done. The database having saved all the previous activities will all the information, The bot retrieves this information and puts them together to get a summary of the work done[S2].
 3 Sub Flows
-  [S1] The admin will upload a file with the team members and their respective tasks
-  [S2] The bot then notifies the team members of the tasks they have been assigned
+  [S1] The daily update collected, is stored in a database
+  [S2] The bot retrieves this information and puts them together to get a summary of the work done.
 4 Alternative Flows
-  [E1] No tasks need to be assigned
-  [E2] One or more team members don't have any tasks assigned to them
+  [E1] User has not updated their work
 ```
 ```
-USECASE 3: Notifications of the tasks due 
+USECASE 3: Providing a manager/admin the ability to confiure the setup days/times of the bot.
 
-One more use of this bot is for notifying the users who are working on the project with the tasks due and provide a list of tasks due with priority.
+One more use of this bot for the admin, i.e. the manager to configure the bot to set up days/times of the bot's ping and summary report.
 1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis
-  The user must also have a Slack account and be member of the team he is working with
+  The admin must have a Slack account and a github account
+  The admin must have permissions to configure the bot.
 2 Main Flow
-  The user will log into the system in the morning and then ask the bot what are the tasks for today [S1] to help keep track of what should be done. The bot having saved all the previous activities will provide a list of tasks that should be dealt with immediately which are of utmost importance [S2] and then the other tasks after.
+  The admin can configure this bot's timings for pinging [S1] the user everyday.The admin can also decide and accordingly configure the bot as to how often they want the summary report to be generated [S2].
 3 Sub Flows
-  [S1] The user asks the bot what are the tasks for today
-  [S2] The bot replies with a list of tasks with priority according to which one should be dealt with first
+  [S1] The admin can configure this bot's timings for pinging
+  [S2] The admin can also decide and accordingly configure the bot as to how often they want the summary report to be generated
 4 Alternative Flows
-  [E1] All the tasks have already been completed before hand
-  [E2] Too many tasks are remaining and the user cannot complete everything
-```
-```
-USECASE 4: Daily scrum update
+  [E1] The admin must have a Slack account and a github account
+  [E2] The admin must have permissions to configure the bot.
+  [E3] The admin has to setup and configure the bot to work.
 
-Another usecase could be to collect the daily tasks and activities of users i.e. the team members.
-1 Preconditions
-  User must have a GitHub account to push all the work done on a daily basis
-  The user must also have a Slack account and be member of the team he is working with
-2 Main Flow
-  The user logs on to Slack [S1]. The bot like a scrum master conducts a daily meeting [S2] where it asks the user what they did yesterday, what they plan to do today and if they faced any obstacles. The user replies to the bot with the answers[S3]
-3 Sub Flows
-  [S1] The user logs on to Slack
-  [S2] The bot like a scrum master conducts a daily meeting
-  [S3] The user replies to the bot with the answers
- 4 Alternative Flows
-  [E1] The user does not log into Slack
- ```
+```
 
 ### Design Sketches
 
