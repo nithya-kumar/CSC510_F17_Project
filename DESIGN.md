@@ -141,14 +141,14 @@ The following constraints can be observed in the Scibot:
 
 ### Additional patterns
 
-#### Repository
-We intend to design SciBot by using the Repository pattern as part of the Data Centered patterns. Below is the interaction of clients with the centralized database. SciBot interacts with all the clients and fetches the data from the database. Any data fed into the system is stored in to the centralized database. The functionalities of the SciBot depend on the data stored in the central repository.
-![Repository Model](Repository/RepositoryModel.png?raw=true "Repository Model")
+#### Blackboard
+We intend to design SciBot by using the Blackboard pattern as part of the Data Centered Patterns. Below is the interaction of clients with the centralized database. SciBot interacts with all the clients and collects the daily statuses from the users and stores it in the database. All the users acting as knowledge sources can concurrently post their updates to the SciBot which will be collected and saved to the database. All these updates from the team members is later used to generate the summary report. The functionalities of the SciBot depend on the data stored in the central repository.
+![Blackboard Model](Repository/BlackboardModel.png?raw=true "Blackboard Model")
 
 #### Object Oriented  
 We intend to design SciBot by using the object-oriented pattern as part of the Call and Return patterns. On a high level, the class diagram for the bot is as shown below. *BotEngine* is the main class for the bot functioning and it interacts with rest of the components/classes (*SlackApiManager*, *GithubApiManager*, *EventManager*, and *ParserEngine*) via aggregation.
 
 ![Class Diagram](ClassDiagram/ClassDiagram.jpg?raw=true "Class Diagram")
 
-#### Implicit Invocation
-We intend to design SciBot by using the Implicit Invocation as part of the Event Systems. SciBot receives the Sprint plan from the admin, parses it and stores it into the database. Once the plan is obtained, it notifies the users based on the time and plan implicitely without any external invocation.
+#### Implicit and Explicit Invocation
+We intend to design SciBot by using a hybrid of both Explict and the Implicit Invocations as part of the Event Systems. SciBot receives the plan from the admin, parses it and stores it into the database. Once the plan is obtained, it notifies the users based on the time and plan implicitely without any external invocation. But the admin can also configure the notification times of the SciBot which requires the functionality of explict invocation.
