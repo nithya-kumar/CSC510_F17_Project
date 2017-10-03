@@ -21,15 +21,15 @@ The SciBot belongs to the category of Responders. It keeps track of the tasks to
 ```
 USECASE 1: Pinging a user for daily updates
 
-The first use case is to ask users for questions regarding the work done to get daily updates.
+The first use case is to schedule a daily scrum and ask the users questions regarding the work done to get daily updates.
 1 Preconditions
   User must have a GitHub account to push all the work done on a daily basis
   User must have a Slack account and be member of the team they are working with
 2 Main Flow
-  At the end of the day the bot will remind the user to update his daily status[S1], Then bot will ask the user what he completed that day at work [S2]. Then this information will be saved in their status update [S3].
+  At the end of the day the bot will remind the user to update his daily status[S1] at a particular time of the day, Then bot will ask the user daily scrum meeting questions [S2], like what he did yesterday, what he will be doing today and if he faced any obstacles. Then this information will be saved in database as their status update [S3].
 3 Sub Flow
   [S1] The bot will remind the user to update his daily status
-  [S2] Then bot will ask the user what he completed that day at work
+  [S2] Then bot will ask the user daily scrum meeting questions
   [S3] This information will be saved in their status update
 4 Alternative Flows
   [E1] No team members available
