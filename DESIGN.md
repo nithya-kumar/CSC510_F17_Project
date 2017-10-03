@@ -143,7 +143,7 @@ The following constraints can be observed in the Scibot:
 
 #### Blackboard
 We intend to design SciBot by using the Blackboard pattern as part of the Data Centered Patterns. Below is the interaction of clients with the centralized database. SciBot interacts with all the clients and collects the daily statuses from the users and stores it in the database. All the users acting as knowledge sources can concurrently post their updates to the SciBot which will be collected and saved to the database. All these updates from the team members is later used to generate the summary report. The functionalities of the SciBot depend on the data stored in the central repository.
-![Blackboard Model](Repository/BlackboardModel.png?raw=true "Blackboard Model")
+![Blackboard Model](Blackboard/BlackboardModel.png?raw=true "Blackboard Model")
 
 #### Object Oriented  
 We intend to design SciBot by using the object-oriented pattern as part of the Call and Return patterns. On a high level, the class diagram for the bot is as shown below. *BotEngine* is the main class for the bot functioning and it interacts with rest of the components/classes (*SlackApiManager*, *GithubApiManager*, *EventManager*, and *ParserEngine*) via aggregation.
