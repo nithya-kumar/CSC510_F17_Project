@@ -36,7 +36,7 @@ class ParserEngine {
 
     messageForSignOff(message){
       //  var obj = new RegExp('report', 'i');
-        var action = new RegExp('sign(ing) in', 'i');
+        var action = new RegExp('sign in|signing in', 'i');
 
         if(action.test(message)){
             // Question for status
@@ -51,13 +51,20 @@ class ParserEngine {
 	
 	checkDailyStatus(message){
           var obj = new RegExp('yes|no', 'i');
-          var action = new RegExp('updated|not updated', 'i');
+          var action1 = new RegExp('updated|not updated', 'i');
+          var action2 = new RegExp('off|absent', 'i');
   
-          if(obj.test(message) && action.test(message)){
+          if(obj.test(message) && action1.test(message)){
               // Reply for status
               var yesReply = new RegExp('yes', 'i');
               this.output_message = yesReply.test(message) ? 'Okay, thank you! You may sign off.' : 'Please update your daily status.';
   
+              return true;
+          }
+          if (obj.test(message) && action2.test(message)){
+              // Reply for absence of work
+              var noReply = new RegExp('no', 'i');
+              this.updateStatus('absent');
               return true;
           }
   
@@ -66,11 +73,17 @@ class ParserEngine {
 	  
 	updateStatus(message){
 		var action = new RegExp('add daily status', 'i');
-		
+		var action2 = new RegExp('off|absent', 'i');
 		if(action.test(message)){
 			//Scrum Questions
-			this.output_message = DatabaseManager.getScrumQuestions();
-		}
+            this.output_message = DatabaseManager.getScrumQuestions('all');
+            return true;
+		} else if (action2.test(message)) {
+            //today alone
+            this.output_message = DatabaseManager.getScrumQuestions('today');
+            return true;
+        }
+        return false;
 	}
 	
 	addUpdateStatus(message){
@@ -81,8 +94,14 @@ class ParserEngine {
 		
 		if(obj.test(message) && action1.test(message) && action2.test(message) && action3.test(message)){
 			DatabaseManager.saveDailyStatus(message);
-			this.output_message = 'Your daily status has been saved!';
-		}
+            this.output_message = 'Your daily status has been saved!';
+            return true;
+		} else if (action2.test(message)){
+            DatabaseManager.saveDailyStatus('Yesterday:Absent' + message + 'Obstacles:Absent');
+            this.output_message = 'Your daily status has been saved!';
+            return true;
+        }
+        return false;
 	}
 
     checkIfReportToBeGenerated(message){
