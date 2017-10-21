@@ -20,6 +20,9 @@ class ParserEngine {
         if(!resolved && this.checkDailyStatus(message))
             resolved = true;
         //daily status - usecase1
+        if(!resolved && this.updateStatus(message))
+            resolved = true;
+		//daily status reply - usecase1
         if(!resolved && this.addUpdateStatus(message))
             resolved = true;
         //generate reports - usecase2
@@ -33,7 +36,7 @@ class ParserEngine {
 
     messageForSignOff(message){
       //  var obj = new RegExp('report', 'i');
-        var action = new RegExp('sign(ing) off', 'i');
+        var action = new RegExp('sign(ing) in', 'i');
 
         if(action.test(message)){
             // Question for status
@@ -45,8 +48,8 @@ class ParserEngine {
 
         return false;
     }
-
-    checkDailyStatus(message){
+	
+	checkDailyStatus(message){
           var obj = new RegExp('yes|no', 'i');
           var action = new RegExp('updated|not updated', 'i');
   
@@ -60,6 +63,27 @@ class ParserEngine {
   
           return false;
       }
+	  
+	updateStatus(message){
+		var action = new RegExp('add daily status', 'i');
+		
+		if(action.test(message)){
+			//Scrum Questions
+			this.output_message = DatabaseManager.getScrumQuestions();
+		}
+	}
+	
+	addUpdateStatus(message){
+		var obj = new RegExp('daily status', 'i');
+		var action1 = new RegExp('Yesterday:', 'i');
+		var action2 = new RegExp('Today:', 'i');
+		var action3 = new RegExp('Obstacles:', 'i');
+		
+		if(obj.test(message) && action1.test(message) && action2.test(message) && action3.test(message)){
+			DatabaseManager.saveDailyStatus(message);
+			this.output_message = 'Your daily status has been saved!';
+		}
+	}
 
     checkIfReportToBeGenerated(message){
         var obj = new RegExp('report', 'i');
@@ -77,6 +101,7 @@ class ParserEngine {
 
         return false;
     }
+	
 }
 
 module.exports.ParserEngine = ParserEngine;

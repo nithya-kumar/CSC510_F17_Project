@@ -13,6 +13,14 @@ class DatabaseManager {
             return "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md";
         }
     }
+	
+	getScrumQuestions(){
+		return "1. What did you do yesterday?\n 2. What will you do today?\n 3. What obstacles came in your way?"
+	}
+	
+	saveDailyStatus(message){
+		//TODO: Save into database
+	}
 }
 
 var db = new DatabaseManager();
