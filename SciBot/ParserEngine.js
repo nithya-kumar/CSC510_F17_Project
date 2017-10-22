@@ -149,7 +149,6 @@ class ParserEngine {
           }
 
           return true;
-
         }
 
         return false;
