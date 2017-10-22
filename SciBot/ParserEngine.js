@@ -147,12 +147,9 @@ class ParserEngine {
             this.output_message = "Not a valid request to ping";
             return false;
           }
-
           return true;
         }
-
         return false;
-        
     }
 
 }
