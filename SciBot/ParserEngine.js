@@ -76,7 +76,8 @@ class ParserEngine {
                     {
                         pattern: 'off|absent',
                         callback: function (response, convo) {
-                            convo.say('Please update your daily status.');
+                            var msg = DatabaseManager.getScrumQuestions('today')
+                            convo.say('Please update your daily status.' + msg);
                             convo.next();
                         }
                     },
