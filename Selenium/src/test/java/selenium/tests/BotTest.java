@@ -25,6 +25,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 public class BotTest
 {
 	private static WebDriver driver;
+	private static WebDriverWait wait;
 	
 	@BeforeClass
 	public static void setUp() throws Exception 
@@ -32,23 +33,15 @@ public class BotTest
 		//driver = new HtmlUnitDriver();
 		ChromeDriverManager.getInstance().setup();
 		driver = new ChromeDriver();
+		initPage();
 	}
 	
-	@AfterClass
-	public static void  tearDown() throws Exception
-	{
-		driver.close();
-		driver.quit();
-	}
-
-	
-	@Test
-	public void postMessage()
+	public static void initPage()
 	{
 		driver.get("https://csc510-projectgroup.slack.com/");
 
 		// Wait until page loads and we can see a sign in button.
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("signin_btn")));
 
 		// Find email and password fields.
@@ -71,10 +64,21 @@ public class BotTest
 		driver.get("https://csc510-projectgroup.slack.com/messages/SciBot");
 		wait.until(ExpectedConditions.titleContains("SciBot"));
 
+		
+	}
+	
+	@AfterClass
+	public static void  tearDown() throws Exception
+	{
+		driver.close();
+		driver.quit();
+	}
+	
+	@Test
+	public void signin() {
 		// Type something
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
 		assertNotNull(messageBot);
-			
 		Actions actions = new Actions(driver);
 		actions.moveToElement(messageBot);
 		actions.click();
@@ -87,6 +91,8 @@ public class BotTest
 		WebElement msg = driver.findElement(
 				By.xpath("//span[@class='message_body' and text() = 'Signing in']"));
 		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'Signing in']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Have you updated your daily status?");
 	}
 
 }
