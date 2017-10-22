@@ -31,4 +31,5 @@ var db = new DatabaseManager();
 
 Object.freeze(db);
 
+// Export the singleton object
 module.exports.DatabaseManager = db;
