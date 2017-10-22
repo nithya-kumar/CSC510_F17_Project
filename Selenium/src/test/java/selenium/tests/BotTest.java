@@ -140,6 +140,59 @@ public class BotTest
 	}
 	
 	@Test
+	public void noIwasOff_AlternateFlow() {
+		// Type something
+		wait.withTimeout(50, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("no I was off yesterday");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+		
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']")));
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Please update your daily status.\nWhat will you do today?");
+	}
+	
+	@Test
+	public void addStatus() {
+		// Type something
+		wait.withTimeout(50, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("here's my daily status" + 
+				"1. yesterday: i completed the issue on replicating production servers" + 
+				"2. today: i am planning to look into the feature documentation" + 
+				"3. obstacles: not all requirements are in place");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+		
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='message_body' and text() = 'here's my daily status" + 
+        		"1. yesterday: i completed the issue on replicating production servers" + 
+        		"2. today: i am planning to look into the feature documentation" + 
+        		"3. obstacles: not all requirements are in place']")));
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'here's my daily status" + 
+				"1. yesterday: i completed the issue on replicating production servers" + 
+				"2. today: i am planning to look into the feature documentation" + 
+				"3. obstacles: not all requirements are in place']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Your daily status has been saved!");
+	}
+	
+	@Test
 	public void generateSummaryReport() {
 		// Type something
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
