@@ -93,6 +93,50 @@ public class BotTest
 		assertNotNull(msg);
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'Signing in']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Have you updated your daily status?");
+		wait.withTimeout(10, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+	}
+	
+	/*@Test
+	public void yesUpdated() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("yes updated");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'yes updated']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'yes updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Okay, thank you! You may sign off.");
+		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+	}*/
+	
+	@Test
+	public void noNotUpdated() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("no not updated");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'no not updated']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no not updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Please update your daily status. 1. What did you do yesterday? 2. What will you do today? 3. What obstacles came in your way?");
 	}
 
 }

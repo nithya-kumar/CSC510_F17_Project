@@ -59,14 +59,14 @@ class ParserEngine {
             var callback = function (err, con) {
                 con.addQuestion('Have you updated your daily status?', [
                     {
-                        pattern: bot.utterances.yes,
+                        pattern: 'yes updated',
                         callback: function (response, convo) {
                             convo.say('Okay, thank you! You may sign off.');
                             convo.next();
                         }
                     },
                     {
-                        pattern: bot.utterances.no,
+                        pattern: 'no not updated',
                         callback: function (response, convo) {
                             var msg = DatabaseManager.getScrumQuestions('all')
                             convo.say('Please update your daily status. ' + msg);

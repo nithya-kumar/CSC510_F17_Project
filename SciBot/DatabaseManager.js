@@ -16,7 +16,7 @@ class DatabaseManager {
 	
 	getScrumQuestions(flag){
         if (flag == 'all') {
-            return "1. What did you do yesterday?\n 2. What will you do today?\n 3. What obstacles came in your way?";
+            return "\n1. What did you do yesterday?\n 2. What will you do today?\n 3. What obstacles came in your way?";
         } else {
             return "What will you do today?";
         }
