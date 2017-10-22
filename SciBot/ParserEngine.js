@@ -120,7 +120,42 @@ class ParserEngine {
 
         return false;
     }
-	
+
+    createPingEvent(message){
+      //ping user USERNAME at 1pm everyday
+      //ping user USERNAME at 1pm on 1/11/17
+        var obj = new RegExp('ping','i');
+        var user = new RegExp('user (.*)? ','i');
+        var time = new RegExp('at (.*)');
+
+        if(obj.test(message) && user.test(message) && time.test(message))
+        {
+          //parse day
+          var day = new RegExp('tomorrow|today|everyday');
+          var date = new RegExp('on (.*)');
+          if(day.test(time))
+          {
+            //ping user USERNAME at 1pm everyday|today|tomorrow
+          }
+          else if(date.test(time))
+          {
+            //ping user USERNAME at 1pm on 11/11/17
+
+          }
+          else
+          {
+            this.output_message = "Not a valid request to ping";
+            return false;
+          }
+
+          return true;
+
+        }
+
+        return false;
+        
+    }
+
 }
 
 module.exports.ParserEngine = ParserEngine;
