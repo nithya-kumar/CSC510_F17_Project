@@ -74,7 +74,7 @@ public class BotTest
 		driver.quit();
 	}
 	
-	@Test
+	/*@Test
 	public void signin() {
 		// Type something
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
@@ -94,7 +94,7 @@ public class BotTest
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'Signing in']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Have you updated your daily status?");
 		wait.withTimeout(10, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
-	}
+	}*/
 	
 	/*@Test
 	public void yesUpdated() {
@@ -116,7 +116,7 @@ public class BotTest
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'yes updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Okay, thank you! You may sign off.");
 		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
-	}*/
+	}
 	
 	@Test
 	public void noNotUpdated() {
@@ -137,6 +137,49 @@ public class BotTest
 		assertNotNull(msg);
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no not updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Please update your daily status. 1. What did you do yesterday? 2. What will you do today? 3. What obstacles came in your way?");
+	}
+	
+	@Test
+	public void generateSummaryReport() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("report generated for previous sprint?");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md");
+	}*/
+
+	
+	@Test
+	public void generateSummaryReport_alternate() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("report generated for current sprint?");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "The report for the current sprint cannot be generated at the moment as users have not updated their work yet.");
 	}
 
 }
