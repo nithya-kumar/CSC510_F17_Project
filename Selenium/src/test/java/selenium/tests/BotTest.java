@@ -74,7 +74,7 @@ public class BotTest
 		driver.quit();
 	}
 	
-	/*@Test
+	@Test
 	public void signin() {
 		// Type something
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
@@ -94,9 +94,9 @@ public class BotTest
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'Signing in']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Have you updated your daily status?");
 		wait.withTimeout(10, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void yesUpdated() {
 		// Type something
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
@@ -157,8 +157,8 @@ public class BotTest
 				By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']"));
 		assertNotNull(msg);
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
-		assertEquals(checkMessage.getText(), "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md");
-	}*/
+		assertEquals(checkMessage.getText(), "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md\nGitHub\nBuild software better, together\nGitHub is where people build software. More than 15 million people use GitHub to discover, fork, and contribute to over 38 million projects. (9kB)");
+	}
 
 	
 	@Test
