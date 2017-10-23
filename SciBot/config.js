@@ -9,4 +9,10 @@ config.messageType = {
     Notification : 2
 }
 
+// Roles available
+config.UserRoles = {
+    Admin: 0,
+    TeamMember: 1
+}
+
 module.exports.config = config;

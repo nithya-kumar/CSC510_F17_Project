@@ -1,14 +1,24 @@
 'use strict'
 
+var { config } = require('./config');
+
 class MockDatabase {
 
     constructor() {
+        // User details
+        this.userRoles = new Object();
+        this.userRoles['U72KDEH60'] = config.UserRoles.TeamMember;
+        // Add other user roles
+
+
         // The summary report
         this.summaryReport = new Object();
-        this.summaryReport['previous'] = [
+        this.summaryReport['previous'] = { filePath: "https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/TestSprintReport.xlsx",
+            reportData :[
             { user: 'User 1', statusPrevDay: 'Worked on the file download functionality', statusCurrDay: 'Still working on the file download functionality', blockers: 'None' },
             { user: 'User 2', statusPrevDay: 'absent', statusCurrDay: 'working on Payments module', blockers: 'remote machine not working' },
-            { user: 'User 3', statusPrevDay: 'absent', statusCurrDay: 'absent', blockers: 'absent' }];
+            { user: 'User 3', statusPrevDay: 'absent', statusCurrDay: 'absent', blockers: 'absent' }]
+        };
 
         // Scrum questions
         this.scrumQuestions = new Object();
@@ -16,6 +26,10 @@ class MockDatabase {
         this.scrumQuestions['today'] = ["What will you do today?"];
 
         this.reminders = new Object();
+    }
+
+    getUserRole(userId){
+        return this.userRoles[userId];
     }
 
     addSummary(date, user, prev, curr, blocker){
@@ -45,6 +59,7 @@ class MockDatabase {
     checkReminder(name){
         return this.reminders[name];
     }
+
 }
 
 var mock = new MockDatabase();
