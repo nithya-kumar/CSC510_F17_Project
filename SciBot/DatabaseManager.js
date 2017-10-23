@@ -1,4 +1,5 @@
 'use strict'
+var dateTime = require('node-datetime');
 
 /**
  * DatabaseManager class provides necessary methods for interaction with the database
@@ -24,6 +25,15 @@ class DatabaseManager {
 	
 	saveDailyStatus(message){
 		//TODO: Save into database
+	}
+	
+	createPing(user,day,time,text,category){
+		console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
+		//'status|summary|report'
+		var dt = dateTime.create();
+		if(time>dt){
+			return "\nyour ping is generated for the user :"+user+"in category: "+category;
+		}
 	}
 }
 

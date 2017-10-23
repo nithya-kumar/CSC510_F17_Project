@@ -185,18 +185,31 @@ class ParserEngine {
     createPingEvent(message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
+		
         var obj = new RegExp('ping', 'i');
-        var user = new RegExp('user (.*)? ', 'i');
-        var time = new RegExp('at (.*)');
+        var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
+        var time = new RegExp('at (.*)','i');
 
         if (obj.test(message) && user.test(message) && time.test(message)) {
+			
             //parse day
-            var day = new RegExp('tomorrow|today|everyday');
+            var day = new RegExp('tomorrow|today|everyday','i');
             var date = new RegExp('on (.*)');
-            if (day.test(time)) {
+			var category = new RegExp('status|summary|report','i');
+			var timePart = time.exec(message)[0];
+			var timeRegex = new RegExp('at (.*?) ','i');
+			console.log(timeRegex.exec(timePart)[1]);
+			
+            if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
+				var dayPart = day.exec(message)[0];
+				this.output_message = new OutputMessage({
+                message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1],dayPart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
             }
-            else if (date.test(time)) {
+            else if (date.test(timePart)) {
                 //ping user USERNAME at 1pm on 11/11/17
 
             }
@@ -210,6 +223,9 @@ class ParserEngine {
     }
 
 }
+
+//var parserObj = new ParserEngine();
+//parserObj.createPingEvent("ping user USERNAME at 1pm everyday for daily status");
 
 module.exports.ParserEngine = ParserEngine;
 
