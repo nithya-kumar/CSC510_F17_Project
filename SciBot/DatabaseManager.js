@@ -1,25 +1,40 @@
 'use strict'
 
+var { MockDatabase } = require('./MockDatabase');
+
 /**
  * DatabaseManager class provides necessary methods for interaction with the database
  */
 class DatabaseManager {
 
     generateReport(date){
-        if(date == 'this' || date == 'current'){
-            return "The report for the current sprint cannot be generated at the moment as users have not updated their work yet."
+        var report = MockDatabase.getSummaryReport(date);
+
+        if(report == null || report == undefined){
+            return "The report for the given sprint cannot be generated at the moment as users have not updated their work."
         }
         else {
-            return "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md";
+            var message = 'User\tStatus for Previous Day\tStatus for Current Day\tBlockers\n';
+            for(var i = 0; i < report.length; i++){
+                message += report[i].user + "\t" + report[i].statusPrevDay + "\t" +report[i].statusCurrDay + "\t" + report[i].blockers + "\n";
+            }
+
+            message += "\nThe generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md"
+
+            return message;
         }
     }
 	
 	getScrumQuestions(flag){
-        if (flag == 'all') {
-            return "1. What did you do yesterday?\n 2. What will you do today?\n 3. What obstacles came in your way?";
-        } else {
-            return "What will you do today?";
+        var questions = MockDatabase.getScrumQuestions();
+
+        var message = '';
+
+        for(var i = 0; i < questions.length; ++i){
+            message += "\n" + questions[i];
         }
+
+        return questions;
 	}
 	
 	saveDailyStatus(message){

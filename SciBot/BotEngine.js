@@ -35,16 +35,22 @@ class BotEngine {
 
     // Handler for direct mentions (@Scibot . . . )
     directMentions(bot, message) {
+        // Fetch the username
+        var currentUser = fetchUserName(message, bot);
+        
         // Parse the message
-        var output = this.parser.parse(message.text, bot);
+        var output = this.parser.parse(message.text, bot, currentUser);
 
         this.sendMessage(bot, message, output, false);
     }
 
     // Handler for direct messages (private message to bot)
     directMessage(bot, message) {
+        // Fetch the username
+        var currentUser = fetchUserName(message, bot);
+        
         // Parse the message
-        var output = this.parser.parse(message.text, bot);
+        var output = this.parser.parse(message.text, bot, currentUser);
 
         this.sendMessage(bot, message, output, true);
     }
@@ -70,6 +76,18 @@ class BotEngine {
         else{
             bot.reply(incomingMessage, 'An error occured!');
         }
+    }
+
+
+    fetchUserName(message, bot){
+        bot.api.users.info({user: message.user}, function(error, response){
+            if(!error){
+                var currentUser = response["user"];
+                return {id: user, name: currentUser["name"]};
+            }
+        });
+
+        return null;
     }
 
 }
