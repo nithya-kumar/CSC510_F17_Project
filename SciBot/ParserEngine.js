@@ -182,9 +182,10 @@ class ParserEngine {
         return false;
     }
 
-    createPingEvent(message) {
+    createPingEvent(user,message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
+		
 		
         var obj = new RegExp('ping', 'i');
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
