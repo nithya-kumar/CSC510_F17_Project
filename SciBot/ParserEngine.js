@@ -23,28 +23,21 @@ class ParserEngine {
     }
 
     // Method to parse the incoming message
-    parse(message, bot) {
+    parseInput(message, bot, currentUser) {
         this.output_message = null;
         var resolved = false;
 
         //signoff - usecase1
         if (!resolved && this.messageForSignOff(message, bot))
             resolved = true;
-        //daily status - usecase1
-        //if (!resolved && this.checkDailyStatus(message))
-        //resolved = true;
-        //daily status - usecase1
-        //if (!resolved && this.updateStatus(message))
-        //resolved = true;
         //daily status reply - usecase1
         if (!resolved && this.addUpdateStatus(message))
             resolved = true;
         //generate reports - usecase2
-        if (!resolved && this.checkIfReportToBeGenerated(message))
+        if (!resolved && this.checkIfReportToBeGenerated(message, currentUser))
             resolved = true;
 
-        // TODO: create other rules here
-
+        // Set default message in case of non-matching inputs
         this.setDefaultMessage();
 
         return this.output_message;
@@ -161,7 +154,7 @@ class ParserEngine {
 
     
     //Method to generate the rpeort for a given sprint
-    checkIfReportToBeGenerated(message) {
+    checkIfReportToBeGenerated(message, currentUser) {
         var obj = new RegExp('report', 'i');
         var action = new RegExp('generate(d?)', 'i');
         var time = new RegExp('(current|this|previous) sprint', 'i');
@@ -171,7 +164,7 @@ class ParserEngine {
             var currentSprint = new RegExp('(current|this) sprint', 'i');
 
             this.output_message = new OutputMessage({
-                message: currentSprint.test(message) ? DatabaseManager.generateReport('current') : DatabaseManager.generateReport('previous'),
+                message: currentSprint.test(message) ? DatabaseManager.generateReport('current', currentUser) : DatabaseManager.generateReport('previous', currentUser),
                 messageType: config.messageType.Reply,
                 conversationCallback: undefined
             });
@@ -223,9 +216,6 @@ class ParserEngine {
     }
 
 }
-
-//var parserObj = new ParserEngine();
-//parserObj.createPingEvent("ping user USERNAME at 1pm everyday for daily status");
 
 module.exports.ParserEngine = ParserEngine;
 

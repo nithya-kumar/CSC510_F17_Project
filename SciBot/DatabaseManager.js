@@ -1,33 +1,25 @@
 'use strict'
-var dateTime = require('node-datetime');
 
-var { MockDatabase } = require('./MockDatabase');
+var dateTime = require('node-datetime');
+var { MockDatabase } = require('./MockDatabaseService');
 
 /**
  * DatabaseManager class provides necessary methods for interaction with the database
  */
 class DatabaseManager {
 
+    // Method to fetch the generated report for the given date
     generateReport(date){
         var report = MockDatabase.getSummaryReport(date);
 
-        if(report == null || report == undefined){
+        if(report == null || report == undefined)
             return "The report for the given sprint cannot be generated at the moment as users have not updated their work."
-        }
-        else {
-            var message = 'User\tStatus for Previous Day\tStatus for Current Day\tBlockers\n';
-            for(var i = 0; i < report.length; i++){
-                message += report[i].user + "\t" + report[i].statusPrevDay + "\t" +report[i].statusCurrDay + "\t" + report[i].blockers + "\n";
-            }
-
-            message += "\nThe generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md"
-
-            return message;
-        }
+        else
+            return "The generated report is available at " + report.filePath;
     }
 	
 	getScrumQuestions(flag){
-        var questions = MockDatabase.getScrumQuestions();
+        var questions = MockDatabase.getScrumQuestions(flag);
 
         var message = '';
 
@@ -35,7 +27,7 @@ class DatabaseManager {
             message += "\n" + questions[i];
         }
 
-        return questions;
+        return message;
 	}
 	
 	saveDailyStatus(message){
