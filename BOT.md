@@ -80,7 +80,7 @@ Here we have tried to design the mocking service keeping in mind that no changes
 For our bot we have the following components
 ![img name](Images/Bot_Implementation_components.png)
 
-Furthermore, the [class diagram](https://raw.github.ncsu.edu/nkumar8/CSC510_F17_Project/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
+Furthermore, the [class diagram](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
 
 ### <a name="platform"></a> Bot Platform
 SciBot is a Slack chat bot hence it can be deployed to a local or a central server that can actively connect to Slack RTM API to carry out the conversations.
