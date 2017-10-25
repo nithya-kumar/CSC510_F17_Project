@@ -41,7 +41,6 @@ class DatabaseManager {
 		var hours = new RegExp('([0-9])','i');
 		var meridian = new RegExp('([a-zA-Z])(.*)','i');
 		var hrs = +hours.exec(time)[0];
-		console.log(meridian.exec(time)[0].toUpperCase());
 		if(meridian.exec(time)[0].toUpperCase() === "PM" ){
 			hrs = hrs + 12;
 		}

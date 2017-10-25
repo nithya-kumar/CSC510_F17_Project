@@ -200,32 +200,38 @@ class ParserEngine {
 			
 		}
 		
-        var obj = new RegExp('ping', 'i');
+        var obj = new RegExp('ping|generate', 'i');
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
+		var summary = new RegExp('summary','i');
         var time = new RegExp('at (.*)','i');
 
-        if (obj.test(message) && user.test(message) && time.test(message)) {
+        if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
 			
             //parse day
             var day = new RegExp('tomorrow|today|everyday','i');
             var date = new RegExp('on (.*)');
 			var category = new RegExp('status|summary|report','i');
 			var timePart = time.exec(message)[0];
-			var timeRegex = new RegExp('at (.*?) ','i');
-			console.log(timeRegex.exec(timePart)[1]);
+			var timeRegex = new RegExp('at (.*?)(\\s|$)','i');
+			var dateRegex = new RegExp('on (.*?)(\\s|$)','i');
 			
             if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
 				var dayPart = day.exec(message)[0];
 				this.output_message = new OutputMessage({
-                message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1],dayPart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
+                message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1]:""),dayPart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
                 messageType: config.messageType.Reply,
                 conversationCallback: undefined
 				});
             }
-            else if (date.test(timePart)) {
+            else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
-
+				var datePart = dateRegex.exec(date.exec(message)[0])[1];
+				this.output_message = new OutputMessage({
+                message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1],datePart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
             }
             else {
 				this.output_message = new OutputMessage({
