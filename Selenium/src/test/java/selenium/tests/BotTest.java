@@ -234,5 +234,26 @@ public class BotTest
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "The report for the current sprint cannot be generated at the moment as users have not updated their work yet.");
 	}
+	
+	@Test
+	public void createPingRequest() {
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("ping user stiruma at 1pm today for status");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		List<WebElement> msgs = driver.findElements(
+				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm today for status']"));
+		WebElement last_msg = msgs.get(msgs.size()-1);
+		assertNotNull(last_msg);
+		WebElement checkMessage = last_msg.findElement(By.xpath("../../following-sibling::ts-message//span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "your ping is generated for the user :stiruma in category: status");
+	}
+}
 
 }

@@ -38,9 +38,22 @@ class DatabaseManager {
 		console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
 		//'status|summary|report'
 		var dt = dateTime.create();
-		if(time>dt){
-			return "\nyour ping is generated for the user :"+user+"in category: "+category;
+		var hours = new RegExp('([0-9])','i');
+		var meridian = new RegExp('([a-zA-Z])(.*)','i');
+		console.log(hours.exec(time));
+		console.log(meridian.exec(time));
+		var hrs = +hours.exec(time)[0];
+		console.log(meridian.exec(time)[0].toUpperCase());
+		if(meridian.exec(time)[0].toUpperCase() === "PM" ){
+			hrs = hrs + 12;
 		}
+		console.log("DatabaseManager dt.getTime is "+dt.getTime() + " and the date is " + new Date(dt.now()).getHours());
+		console.log(hrs);
+		if(hrs>new Date(dt.now()).getHours()){
+			console.log("\nyour ping is generated for the user :"+user+" in category: "+category);
+			return "\nyour ping is generated for the user :"+user+" in category: "+category;
+		}
+		return "\n Could not process your request "
 	}
 }
 
