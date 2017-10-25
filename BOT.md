@@ -81,8 +81,10 @@ For our bot we have the following components
 ![img name](Images/Bot_Implementation_components.png)
 
 ### <a name="platform"></a> Bot Platform
+SciBot is a Slack chat bot hence it can be deployed to a local or a central server that can actively connect to Slack RTM API to carry out the conversations.
 
 ### <a name="integration"></a> Bot Integration
+SciBot has been integrated with the Slack API using [botkit](https://github.com/howdyai/botkit).
 
 ## <a name="test"></a>4. SELENIUM TESTING
 
