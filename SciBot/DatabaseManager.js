@@ -45,7 +45,9 @@ class DatabaseManager {
 			hrs = hrs + 12;
 		}
 		if(hrs>new Date(dt.now()).getHours()){
-			return "\nyour ping is generated for the user :"+user+" in category: "+category;
+			if(category.toUpperCase() === "STATUS")
+				return "\nyour ping is generated for the user :"+user+" in category: "+category;
+			return "\nThe report generation is scheduled";
 		}
 		return "\n Could not process your request "
 	}
