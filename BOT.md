@@ -68,7 +68,6 @@ One more use of this bot for the admin, i.e. the manager to configure the bot to
 4 Alternative Flows
   [E1] The admin must have a Slack account and a github account
   [E2] The admin must have permissions to configure the bot.
-  [E3] The admin has to setup and configure the bot to work.
 
 ```
 
