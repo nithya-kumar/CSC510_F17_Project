@@ -8,6 +8,7 @@ class MockDatabase {
         // User details
         this.userDetails = new Object();
         this.userDetails['U72KDEH60'] = { role: config.UserRoles.TeamMember, githubAccount: "achand13" };
+		this.userDetails['U6WEPTUH0'] = { role: config.UserRoles.Admin, githubAccount: "stiruma" };
         // Add other user roles
 
 

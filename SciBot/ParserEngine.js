@@ -1,6 +1,7 @@
 'use strict'
 
 var { DatabaseManager } = require('./DatabaseManager');
+var { MockDatabase } = require('./MockDatabaseService');
 var { OutputMessage } = require('./OutputMessage');
 var { config } = require('./config');
 
@@ -36,6 +37,8 @@ class ParserEngine {
         //generate reports - usecase2
         if (!resolved && this.checkIfReportToBeGenerated(message, currentUser))
             resolved = true;
+		if (!resolved && this.createPingEvent(currentUser,message))
+			resolved = true;
 
         // Set default message in case of non-matching inputs
         this.setDefaultMessage();
@@ -178,12 +181,12 @@ class ParserEngine {
     createPingEvent(user,message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
-		if(MockDatabase.getUserRole(userId)!="Admin"){
+		if(MockDatabase.getUserRole(user)!=0){
 			this.output_message = "Not authorised to configure pings";
 			return false;
 		}
 		
-		if(user.getGitHub(userId)===null){
+		if(MockDatabase.getUserGithubProfile(user)===null){
 			this.output_message = "Add the GitHub Id to cofigure pings"
 		}
 		
