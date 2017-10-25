@@ -1,4 +1,4 @@
-# MILESONE: BOT
+# MILESTONE: BOT
 
 ## Index
 1. [Use Cases](#usecase)
