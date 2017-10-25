@@ -237,6 +237,54 @@ All the testcases are present in the folder **Selenium** [here](https://github.n
 
 ### <a name="test3"></a> USECASE 3 - Tests
 
+#### Subflow [S1] [S2] : Test case for testing The bot creates a ping event for status pinging or summary report generation
+
+```
+@Test
+	public void createPingRequest() {
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("ping user stiruma at 1pm today for status");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		List<WebElement> msgs = driver.findElements(
+				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm today for status']"));
+		WebElement last_msg = msgs.get(msgs.size()-1);
+		assertNotNull(last_msg);
+		WebElement checkMessage = last_msg.findElement(By.xpath("../../following-sibling::ts-message//span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "your ping is generated for the user :stiruma in category: status");
+	}
+```
+
+#### Alternate Flow [E1] [E2] : Test case for checking if the current user who requested has the rights to configure the bot.
+
+```
+@Test
+	public void createPingRequest_alternate() {
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("ping user stiruma at 1pm today for status");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		List<WebElement> msgs = driver.findElements(
+				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm today for status']"));
+		WebElement last_msg = msgs.get(msgs.size()-1);
+		assertNotNull(last_msg);
+		WebElement checkMessage = last_msg.findElement(By.xpath("../../following-sibling::ts-message//span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Not authorised to configure pings");
+	}
+```
+
 
 ## <a name="track"></a> 5. TASK TRACKING
 
