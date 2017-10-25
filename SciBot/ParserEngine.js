@@ -183,6 +183,10 @@ class ParserEngine {
 			return false;
 		}
 		
+		if(user.getGitHub(userId)===null){
+			this.output_message = "Add the GitHub Id to cofigure pings"
+		}
+		
         var obj = new RegExp('ping', 'i');
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
         var time = new RegExp('at (.*)','i');
