@@ -181,6 +181,14 @@ class ParserEngine {
     createPingEvent(user,message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
+		
+        var obj = new RegExp('ping|generate', 'i');
+        var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
+		var summary = new RegExp('summary','i');
+        var time = new RegExp('at (.*)','i');
+
+        if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
+		
 		if(MockDatabase.getUserRole(user)!=0){
 			this.output_message = new OutputMessage({
                 message: "Not authorised to configure pings",
@@ -200,13 +208,6 @@ class ParserEngine {
 			
 		}
 		
-        var obj = new RegExp('ping|generate', 'i');
-        var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
-		var summary = new RegExp('summary','i');
-        var time = new RegExp('at (.*)','i');
-
-        if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-			
             //parse day
             var day = new RegExp('tomorrow|today|everyday','i');
             var date = new RegExp('on (.*)');
