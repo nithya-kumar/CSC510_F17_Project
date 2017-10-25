@@ -8,7 +8,7 @@
 2. [Mocking](#mocking)
 3. [Bot Implementation](#implement)
 	* [Bot Platform](#platform)
-	* [Bot Integration](#integrate)
+	* [Bot Integration](#integration)
 4. [Selenium Testing](#test)
 	* [Use Case 1](#test1)
 	* [Use Case 2](#test2)
@@ -73,6 +73,12 @@ One more use of this bot for the admin, i.e. the manager to configure the bot to
 ```
 
 ## <a name="mocking"></a>2. MOCKING
+
+## <a name="implement"></a> 3. BOT IMPLEMENTATION
+
+### <a name="platform"></a> Bot Platform
+
+### <a name="integration"></a> Bot Integration
 
 ## <a name="test"></a>4. SELENIUM TESTING
 
