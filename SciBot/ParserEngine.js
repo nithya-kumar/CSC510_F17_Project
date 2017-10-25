@@ -182,12 +182,22 @@ class ParserEngine {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
 		if(MockDatabase.getUserRole(user)!=0){
-			this.output_message = "Not authorised to configure pings";
+			this.output_message = new OutputMessage({
+                message: "Not authorised to configure pings",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
 			return false;
 		}
 		
 		if(MockDatabase.getUserGithubProfile(user)===null){
-			this.output_message = "Add the GitHub Id to cofigure pings"
+			this.output_message = new OutputMessage({
+                message: "Add the GitHub Id to cofigure pings",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
+			return false;
+			
 		}
 		
         var obj = new RegExp('ping', 'i');
@@ -218,7 +228,11 @@ class ParserEngine {
 
             }
             else {
-                this.output_message = "Not a valid request to ping";
+				this.output_message = new OutputMessage({
+                message: "Not a valid request to ping",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
                 return false;
             }
             return true;
