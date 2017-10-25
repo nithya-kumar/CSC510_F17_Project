@@ -6,7 +6,7 @@
 	* [Use Case 2](#usecase2)
 	* [Use Case 3](#usecase3)
 2. [Mocking](#mocking)
-3. [Bot Implementation](#imple)
+3. [Bot Implementation](#implement)
 	* [Bot Platform](#platform)
 	* [Bot Integration](#integrate)
 4. [Selenium Testing](#test)
@@ -26,18 +26,19 @@ The first use case is to schedule a daily scrum and ask the users questions rega
   User must have a GitHub account to push all the work done on a daily basis
   User must have a Slack account and be member of the team they are working with
 2 Main Flow
-  At the end of the day the bot will remind the user to update his daily status[S1] at a particular time of the day, Then bot will ask the user daily scrum meeting questions [S2], like what he did yesterday, what he will be doing today and if he faced any obstacles. Then this information will be saved in database as their status update [S3].
+  At the end of the day the bot will remind the user to update their daily status[S1] at a particular time of the day, Then bot will ask the user daily scrum meeting questions [S2], like what they did yesterday, what they will do today and if they faced any obstacles. Then this information will be saved in database as their status update [S3].
 3 Sub Flow
-  [S1] The bot will remind the user to update his daily status
-  [S2] Then bot will ask the user daily scrum meeting questions
-  [S3] This information will be saved in their status update
+  [S1] The user signs in.
+  [S2] The bot will remind the user to update their daily status. If yes it lets the user sign off.
+  [S3] If not, then bot will make sure that ask the user daily scrum meeting questions
+  [S4] This information will be saved in their status update
 4 Alternative Flows
   [E1] No team members available
   [E2] The user is not at work for that day
   
 ```
 
-### <a name="usecase1"></a> USECASE 2: Generating a summary report
+### <a name="usecase2"></a> USECASE 2: Generating a summary report
 ```
 The second use case is using the daily status collected from each user the bot will generate a summary report.
 1 Preconditions
@@ -53,7 +54,7 @@ The second use case is using the daily status collected from each user the bot w
   
 ```
 
-### <a name="usecase1"></a> USECASE 3: Providing a manager/admin the ability to confiure the setup days/times of the bot.
+### <a name="usecase3"></a> USECASE 3: Providing a manager/admin the ability to confiure the setup days/times of the bot.
 ```
 One more use of this bot for the admin, i.e. the manager to configure the bot to set up days/times of the bot's ping and summary report.
 1 Preconditions
@@ -73,11 +74,171 @@ One more use of this bot for the admin, i.e. the manager to configure the bot to
 
 ## <a name="mocking"></a>2. MOCKING
 
-## <a name="test"></a>3. SELENIUM TESTING
+## <a name="test"></a>4. SELENIUM TESTING
 
-Each USECASE has a test for the the subflows with an alternate flow.
+Each USECASE has a test for the the subflows with atleat one alternate flow per usecase.
 All the testcases are present in the folder **Selenium** [here](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/tree/master/Selenium/src/test/java/selenium/tests).
 
-###<a name="test1"></a> Use case 1 - Tests
-#### Subflow [S1] [S2]: Test case for 
+### <a name="test1"></a> USECASE 1 - Tests
+#### Subflow [S1] [S2] : Test case for testing that the user is signing in
+
+```
+@Test
+	public void signin() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("Signing in");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'Signing in']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'Signing in']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Have you updated your daily status?");
+		wait.withTimeout(10, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+	}
+```
+
+#### Subflow [S3] : If yes lets the user sign off. If not updated it reminds the user to update the status by asking the respective scrum questions.
+
+```
+@Test
+	public void yesUpdated() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("yes updated");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'yes updated']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'yes updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Okay, thank you! You may sign off.");
+		wait.withTimeout(3, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+@Test
+	public void noNotUpdated() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("no not updated");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'no not updated']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no not updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Please update your daily status. 1. What did you do yesterday? 2. What will you do today? 3. What obstacles came in your way?");
+	}
+```
+		
+#### Alternate Flow [E2] : The user is not at work for that day
+
+```
+@Test
+	public void noIwasOff_AlternateFlow() {
+		// Type something
+		wait.withTimeout(50, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("no I was off yesterday");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+		
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']")));
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "Please update your daily status.\nWhat will you do today?");
+	}
+```	
+### <a name="test2"></a> USECASE 2 - Tests
+
+
+#### Subflow [S1] [S2] : Test case for testing The bot retrieves this information and puts them together to get a summary of the work done.
+
+```
+@Test
+	public void generateSummaryReport() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("report generated for previous sprint?");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for previous sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "The generated report is available at https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md\nGitHub\nBuild software better, together\nGitHub is where people build software. More than 15 million people use GitHub to discover, fork, and contribute to over 38 million projects. (9kB)");
+	}
+```
+	
+#### Alternate Flow [E1] : User has not updated their work because it is the current sprint report which is requested.
+
+```
+@Test
+	public void generateSummaryReport_alternate() {
+		// Type something
+		WebElement messageBot = driver.findElement(By.id("msg_input"));
+		assertNotNull(messageBot);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(messageBot);
+		actions.click();
+		actions.sendKeys("report generated for current sprint?");
+		actions.sendKeys(Keys.RETURN);
+		actions.build().perform();
+
+		wait.withTimeout(5, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
+
+		WebElement msg = driver.findElement(
+				By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']"));
+		assertNotNull(msg);
+		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
+		assertEquals(checkMessage.getText(), "The report for the current sprint cannot be generated at the moment as users have not updated their work yet.");
+	}
+```
+
+### <a name="test3"></a> USECASE 3 - Tests
+
+
+## <a name="track"></a> 5. TASK TRACKING
+
+The file to track our tasks WORKSHEET.md file [here]() . Please refer to the trello cards links in the worksheet for the initial stages of our milestone which was later continued using Github Issues.
+
+## <a name="screencast"></a> 6. SCREENCAST
+
+The link to our screencast is - [link]().
+
+
 
