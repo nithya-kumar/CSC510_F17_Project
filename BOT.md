@@ -72,6 +72,9 @@ One more use of this bot for the admin, i.e. the manager to configure the bot to
 ```
 
 ## <a name="mocking"></a>2. MOCKING
+Since SciBot uses external database to store the user details as well as sprint related data like daily status etc, we have created a layer to mock the behavior of the backend database to provide the necessary interface to interact. The implementation can be checked in the [MockDatabaseService.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/MockDatabaseService.js).
+
+Here we have tried to design the mocking service keeping in mind that no changes are required to the bot implementation at the data access level.
 
 ## <a name="implement"></a> 3. BOT IMPLEMENTATION
 For our bot we have the following components
