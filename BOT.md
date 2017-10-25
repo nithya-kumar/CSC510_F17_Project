@@ -75,6 +75,8 @@ One more use of this bot for the admin, i.e. the manager to configure the bot to
 ## <a name="mocking"></a>2. MOCKING
 
 ## <a name="implement"></a> 3. BOT IMPLEMENTATION
+For our bot we have the following components
+![img name](Images/Bot_Implementation_components.png)
 
 ### <a name="platform"></a> Bot Platform
 
