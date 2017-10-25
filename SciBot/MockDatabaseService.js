@@ -6,8 +6,8 @@ class MockDatabase {
 
     constructor() {
         // User details
-        this.userRoles = new Object();
-        this.userRoles['U72KDEH60'] = config.UserRoles.TeamMember;
+        this.userDetails = new Object();
+        this.userDetails['U72KDEH60'] = { role: config.UserRoles.TeamMember, githubAccount: "achand13" };
         // Add other user roles
 
 
@@ -29,7 +29,11 @@ class MockDatabase {
     }
 
     getUserRole(userId){
-        return this.userRoles[userId];
+        return this.userDetails[userId].role;
+    }
+
+    getUserGithubProfile(userId){
+        return this.userDetails[userId].githubAccount;
     }
 
     addSummary(date, user, prev, curr, blocker){
