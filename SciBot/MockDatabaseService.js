@@ -30,11 +30,15 @@ class MockDatabase {
     }
 
     getUserRole(userId){
-        return this.userDetails[userId].role;
+		if(this.userDetails[userId])
+			return this.userDetails[userId].role;
+		return null;
     }
 
     getUserGithubProfile(userId){
-        return this.userDetails[userId].githubAccount;
+		if(this.userDetails[userId])
+			return this.userDetails[userId].githubAccount;
+		return null;
     }
 
     addSummary(date, user, prev, curr, blocker){

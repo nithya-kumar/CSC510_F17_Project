@@ -207,7 +207,7 @@ class ParserEngine {
 				return false;
 			}
 			
-			if(MockDatabase.getUserGithubProfile(user)===null){
+			if(MockDatabase.getUserGithubProfile(currentUser)===null){
 				this.output_message = new OutputMessage({
 					message: "Add the GitHub Id to cofigure pings",
 					messageType: config.messageType.Reply,
