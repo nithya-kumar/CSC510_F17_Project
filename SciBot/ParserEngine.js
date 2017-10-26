@@ -144,21 +144,33 @@ class ParserEngine {
         var action3 = new RegExp('Obstacles:', 'i');
 		var status = "";
 
-        if (obj.test(message)){
-			if(action1.test(message) && action2.test(message) && action3.test(message)) 
-            DatabaseManager.saveDailyStatus(message);
-            this.output_message = 'Your daily status has been saved!';
-            return true;
-        } else if (!action1.test(message) && !action3.test(message) && action2.test(message)) {
-            DatabaseManager.saveDailyStatus('Yesterday:Absent' + message + 'Obstacles:Absent');
-            this.output_message = 'Your daily status has been saved!';
-            return true;
-        } else if (!action1.test(message) && action3.test(message) && action2.test(message)) {
-            DatabaseManager.saveDailyStatus('Yesterday:Absent' + message);
-            this.output_message = 'Your daily status has been saved!';
-            return true;
-		}
-		
+        if (obj.test(message)) {
+			if(action1.test(message) && action2.test(message) && action3.test(message)) {
+                DatabaseManager.saveDailyStatus(message);
+                this.output_message = new OutputMessage({
+                    message: 'Your daily status has been saved!',
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
+                return true;
+            } else if (!action1.test(message) && !action3.test(message) && action2.test(message)) {
+                DatabaseManager.saveDailyStatus('Yesterday:Absent' + message + 'Obstacles:Absent');
+                this.output_message = new OutputMessage({
+                    message: 'Your daily status has been saved!',
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
+                return true;
+            } else if (!action1.test(message) && action3.test(message) && action2.test(message)) {
+                DatabaseManager.saveDailyStatus('Yesterday:Absent' + message);
+                this.output_message = new OutputMessage({
+                    message: 'Your daily status has been saved!',
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
+                return true;
+            }
+        }
         return false;
     }
 
