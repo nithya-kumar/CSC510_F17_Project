@@ -44,7 +44,6 @@ class DatabaseManager {
 		if(meridian.exec(time)[0].toUpperCase() === "PM" ){
 			hrs = hrs + 12;
 		}
-		console.log(day);
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
 				if(category.toUpperCase() === "STATUS")
