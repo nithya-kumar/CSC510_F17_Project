@@ -126,6 +126,8 @@ public class BotTest
 		Actions actions = new Actions(driver);
 		actions.moveToElement(messageBot);
 		actions.click();
+		actions.sendKeys("Signing In\n");
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		actions.sendKeys("no not updated");
 		actions.sendKeys(Keys.RETURN);
 		actions.build().perform();
@@ -148,6 +150,8 @@ public class BotTest
 		Actions actions = new Actions(driver);
 		actions.moveToElement(messageBot);
 		actions.click();
+		actions.sendKeys("Signing In\n");
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		actions.sendKeys("no I was off yesterday");
 		actions.sendKeys(Keys.RETURN);
 		actions.build().perform();
@@ -160,11 +164,10 @@ public class BotTest
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no I was off yesterday']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Please update your daily status.\nWhat will you do today?");
 	}
-	
+	/*
 	@Test
 	public void addStatus() {
 		// Type something
-		wait.withTimeout(50, TimeUnit.SECONDS).ignoring(StaleElementReferenceException.class);
 		WebElement messageBot = driver.findElement(By.id("msg_input"));
 		assertNotNull(messageBot);
 		Actions actions = new Actions(driver);
@@ -191,6 +194,7 @@ public class BotTest
 				"3. obstacles: not all requirements are in place']/../../following-sibling::ts-message/div/span[@class='message_body']"));
 		assertEquals(checkMessage.getText(), "Your daily status has been saved!");
 	}
+	*/
 	
 	@Test
 	public void generateSummaryReport() {
