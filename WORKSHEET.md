@@ -11,7 +11,7 @@ Discussion of implementation.
 
 | Deliverable   | Item/Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
-| **Bot usecase 1**   | Pinging user for daily updates / Completed | #4 #7
+| **Bot usecase 1**   | Pinging user for daily updates / Completed | (#4) #7
 | Subflow 1    | The user signs in / Completed | #4
 | Subflow 2    | The bot will remind the user to update their daily status. If yes it lets the user sign off / Completed | #4
 | Subflow 3    | If not, then bot will make sure that ask the user daily scrum meeting questions / Completed | #4
