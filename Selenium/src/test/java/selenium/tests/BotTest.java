@@ -242,13 +242,13 @@ public class BotTest
 		Actions actions = new Actions(driver);
 		actions.moveToElement(messageBot);
 		actions.click();
-		actions.sendKeys("ping user stiruma at 1pm today for status");
+		actions.sendKeys("ping user stiruma at 1pm everyday for status");
 		actions.sendKeys(Keys.RETURN);
 		actions.build().perform();
 
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		List<WebElement> msgs = driver.findElements(
-				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm today for status']"));
+				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm everyday for status']"));
 		WebElement last_msg = msgs.get(msgs.size()-1);
 		assertNotNull(last_msg);
 		WebElement checkMessage = last_msg.findElement(By.xpath("../../following-sibling::ts-message//span[@class='message_body']"));
@@ -262,13 +262,13 @@ public class BotTest
 		Actions actions = new Actions(driver);
 		actions.moveToElement(messageBot);
 		actions.click();
-		actions.sendKeys("ping user stiruma at 1pm today for status");
+		actions.sendKeys("ping user stiruma at 1pm everyday for status");
 		actions.sendKeys(Keys.RETURN);
 		actions.build().perform();
 
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		List<WebElement> msgs = driver.findElements(
-				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm today for status']"));
+				By.xpath("//span[@class='message_body' and text() = 'ping user stiruma at 1pm everyday for status']"));
 		WebElement last_msg = msgs.get(msgs.size()-1);
 		assertNotNull(last_msg);
 		WebElement checkMessage = last_msg.findElement(By.xpath("../../following-sibling::ts-message//span[@class='message_body']"));

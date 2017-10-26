@@ -44,11 +44,20 @@ class DatabaseManager {
 		if(meridian.exec(time)[0].toUpperCase() === "PM" ){
 			hrs = hrs + 12;
 		}
-		if(hrs>new Date(dt.now()).getHours()){
+		console.log(day);
+		if(day.toUpperCase() === "TODAY"){
+			if(hrs>new Date(dt.now()).getHours()){
+				if(category.toUpperCase() === "STATUS")
+					return "\nyour ping is generated for the user :"+user+" in category: "+category;
+				return "\nThe report generation is scheduled";
+			}
+		}
+		else{
 			if(category.toUpperCase() === "STATUS")
-				return "\nyour ping is generated for the user :"+user+" in category: "+category;
+					return "\nyour ping is generated for the user :"+user+" in category: "+category;
 			return "\nThe report generation is scheduled";
 		}
+			
 		return "\n Could not process your request "
 	}
 }
