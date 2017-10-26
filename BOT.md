@@ -56,7 +56,7 @@ The second use case is using the daily status collected from each user the bot w
 
 ### <a name="usecase3"></a> USECASE 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
 ```
-One more use of this bot for the admin, i.e. the manager to configure the bot to set up days/times of the bot's ping and summary report.
+One more use of this bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
 1 Preconditions
   The admin must have a Slack account and a github account
   The admin must have permissions to configure the bot.
