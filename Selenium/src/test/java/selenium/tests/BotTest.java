@@ -138,7 +138,7 @@ public class BotTest
 				By.xpath("//span[@class='message_body' and text() = 'no not updated']"));
 		assertNotNull(msg);
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'no not updated']/../../following-sibling::ts-message/div/span[@class='message_body']"));
-		assertEquals(checkMessage.getText(), "Please update your daily status. 1. What did you do yesterday? 2. What will you do today? 3. What obstacles came in your way?");
+		assertEquals(checkMessage.getText(), "Please update your daily status.\n1. What did you do yesterday?\n2. What will you do today?\n3. What obstacles came in your way?");
 	}
 	
 	@Test
@@ -236,7 +236,7 @@ public class BotTest
 				By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']"));
 		assertNotNull(msg);
 		WebElement checkMessage = driver.findElement(By.xpath("//span[@class='message_body' and text() = 'report generated for current sprint?']/../../following-sibling::ts-message/div/span[@class='message_body']"));
-		assertEquals(checkMessage.getText(), "The report for the current sprint cannot be generated at the moment as users have not updated their work yet.");
+		assertEquals(checkMessage.getText(), "The report for the given sprint cannot be generated at the moment as users have not updated their work yet.");
 	}
 	
 	@Test
