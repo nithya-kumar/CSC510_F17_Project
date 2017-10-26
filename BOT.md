@@ -295,11 +295,12 @@ All the testcases are present in the folder **Selenium** [here](https://github.n
 
 ## <a name="track"></a> 5. TASK TRACKING
 
-The file to track our tasks WORKSHEET.md file [here](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/edit/master/WORKSHEET.md) . For our milestone we used Github Issues to keep track of our tasks to be done.
+The file to track our tasks [WORKSHEET.md](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/WORKSHEET.md).  
+For our milestone we used Github Issues to keep track of our tasks to be done.
 
 ## <a name="screencast"></a> 6. SCREENCAST
 
-The link to our screencast is - [link]().
+[Screencast] () of our bot milestone.
 
 
 
