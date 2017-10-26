@@ -1,6 +1,7 @@
 'use strict'
 
 var { DatabaseManager } = require('./DatabaseManager');
+var { MockDatabase } = require('./MockDatabaseService');
 var { OutputMessage } = require('./OutputMessage');
 var { config } = require('./config');
 
@@ -23,28 +24,23 @@ class ParserEngine {
     }
 
     // Method to parse the incoming message
-    parse(message, bot) {
+    parseInput(message, bot, currentUser) {
         this.output_message = null;
         var resolved = false;
 
         //signoff - usecase1
         if (!resolved && this.messageForSignOff(message, bot))
             resolved = true;
-        //daily status - usecase1
-        //if (!resolved && this.checkDailyStatus(message))
-        //resolved = true;
-        //daily status - usecase1
-        //if (!resolved && this.updateStatus(message))
-        //resolved = true;
         //daily status reply - usecase1
         if (!resolved && this.addUpdateStatus(message))
             resolved = true;
         //generate reports - usecase2
-        if (!resolved && this.checkIfReportToBeGenerated(message))
+        if (!resolved && this.checkIfReportToBeGenerated(message, currentUser))
             resolved = true;
+		if (!resolved && this.createPingEvent(currentUser,message))
+			resolved = true;
 
-        // TODO: create other rules here
-
+        // Set default message in case of non-matching inputs
         this.setDefaultMessage();
 
         return this.output_message;
@@ -168,7 +164,7 @@ class ParserEngine {
 
     
     //Method to generate the rpeort for a given sprint
-    checkIfReportToBeGenerated(message) {
+    checkIfReportToBeGenerated(message, currentUser) {
         var obj = new RegExp('report', 'i');
         var action = new RegExp('generate(d?)', 'i');
         var time = new RegExp('(current|this|previous) sprint', 'i');
@@ -178,7 +174,7 @@ class ParserEngine {
             var currentSprint = new RegExp('(current|this) sprint', 'i');
 
             this.output_message = new OutputMessage({
-                message: currentSprint.test(message) ? DatabaseManager.generateReport('current') : DatabaseManager.generateReport('previous'),
+                message: currentSprint.test(message) ? DatabaseManager.generateReport('current', currentUser) : DatabaseManager.generateReport('previous', currentUser),
                 messageType: config.messageType.Reply,
                 conversationCallback: undefined
             });
@@ -189,26 +185,68 @@ class ParserEngine {
         return false;
     }
 
-    createPingEvent(message) {
+    createPingEvent(currentUser,message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
-        var obj = new RegExp('ping', 'i');
-        var user = new RegExp('user (.*)? ', 'i');
-        var time = new RegExp('at (.*)');
+		
+        var obj = new RegExp('ping|generate', 'i');
+        var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
+		var summary = new RegExp('summary','i');
+        var time = new RegExp('at (.*)','i');
 
-        if (obj.test(message) && user.test(message) && time.test(message)) {
+        if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
+		
+			if(MockDatabase.getUserRole(currentUser)!=0){
+				this.output_message = new OutputMessage({
+					message: "Not authorised to configure pings",
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+					});
+				return false;
+			}
+			
+			if(MockDatabase.getUserGithubProfile(currentUser)===null){
+				this.output_message = new OutputMessage({
+					message: "Add the GitHub Id to cofigure pings",
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+					});
+				return false;
+				
+			}
+			
             //parse day
-            var day = new RegExp('tomorrow|today|everyday');
+            var day = new RegExp('tomorrow|today|everyday','i');
             var date = new RegExp('on (.*)');
-            if (day.test(time)) {
+			var category = new RegExp('status|summary|report','i');
+			var timePart = time.exec(message)[0];
+			var timeRegex = new RegExp('at (.*?)(\\s|$)','i');
+			var dateRegex = new RegExp('on (.*?)(\\s|$)','i');
+			
+            if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
+				var dayPart = day.exec(message)[0];
+				this.output_message = new OutputMessage({
+                message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1]:""),dayPart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
             }
-            else if (date.test(time)) {
+            else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
-
+				var datePart = dateRegex.exec(date.exec(message)[0])[1];
+				this.output_message = new OutputMessage({
+                message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1],datePart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
             }
             else {
-                this.output_message = "Not a valid request to ping";
+				this.output_message = new OutputMessage({
+                message: "Not a valid request to ping",
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+				});
                 return false;
             }
             return true;
@@ -219,4 +257,3 @@ class ParserEngine {
 }
 
 module.exports.ParserEngine = ParserEngine;
-
