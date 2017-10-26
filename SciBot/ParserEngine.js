@@ -145,11 +145,20 @@ class ParserEngine {
 
         if (obj.test(message) && action1.test(message) && action2.test(message) && action3.test(message)) {
             DatabaseManager.saveDailyStatus(message);
-            this.output_message = 'Your daily status has been saved!';
+	
+		this.output_message = new OutputMessage({
+                message: 'Your daily status has been saved!',
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
             return true;
         } else if (action2.test(message)) {
             DatabaseManager.saveDailyStatus('Yesterday:Absent' + message + 'Obstacles:Absent');
-            this.output_message = 'Your daily status has been saved!';
+			this.output_message = new OutputMessage({
+                message: 'Your daily status has been saved!',
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
             return true;
         }
         return false;
@@ -178,7 +187,7 @@ class ParserEngine {
         return false;
     }
 
-    createPingEvent(user,message) {
+    createPingEvent(currentUser,message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
 		
@@ -189,25 +198,25 @@ class ParserEngine {
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
 		
-		if(MockDatabase.getUserRole(user)!=0){
-			this.output_message = new OutputMessage({
-                message: "Not authorised to configure pings",
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-				});
-			return false;
-		}
-		
-		if(MockDatabase.getUserGithubProfile(user)===null){
-			this.output_message = new OutputMessage({
-                message: "Add the GitHub Id to cofigure pings",
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-				});
-			return false;
+			if(MockDatabase.getUserRole(currentUser)!=0){
+				this.output_message = new OutputMessage({
+					message: "Not authorised to configure pings",
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+					});
+				return false;
+			}
 			
-		}
-		
+			if(MockDatabase.getUserGithubProfile(user)===null){
+				this.output_message = new OutputMessage({
+					message: "Add the GitHub Id to cofigure pings",
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+					});
+				return false;
+				
+			}
+			
             //parse day
             var day = new RegExp('tomorrow|today|everyday','i');
             var date = new RegExp('on (.*)');
