@@ -300,7 +300,7 @@ For our milestone we used Github Issues to keep track of our tasks to be done.
 
 ## <a name="screencast"></a> 6. SCREENCAST
 
-[Screencast] () of our bot milestone.
+[Screencast](https://youtu.be/zaFg99Vj76I) of our bot milestone.
 
 
 
