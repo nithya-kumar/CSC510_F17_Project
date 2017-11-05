@@ -26,8 +26,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
   [S3] If not, then bot will make sure that ask the user daily scrum meeting questions
   [S4] This information will be saved in their status update
 4 Alternative Flows
-  [E1] No team members available
-  [E2] The user is not at work for that day
+  [E1] The user is not at work for that day
   
 ```
 
@@ -59,8 +58,8 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
   [S1] The admin can configure this bot's timings for pinging
   [S2] The admin can also decide and accordingly configure the bot as to how often they want the summary report to be generated
 4 Alternative Flows
-  [E1] The admin must have a Slack account and a github account
-  [E2] The admin must have permissions to configure the bot.
+  [E1] The admin must have a Slack account
+  [E2] The user should not have permissions to configure the bot.
 
 ```
 ## <a name="implement"></a> 2. USECASE IMPLEMENTATION
