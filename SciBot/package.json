@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "botkit": "^0.6.4",
-    "node-datetime": "latest"
+    "node-datetime": "latest",
+    "pg": "^7.4.0",
+    "pg-format": "latest",
+    "pg-query": "^0.11.0",
+    "when": "^3.7.8"
   }
 }

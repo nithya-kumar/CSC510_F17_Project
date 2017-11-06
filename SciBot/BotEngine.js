@@ -10,12 +10,12 @@ var { ParserEngine } = require('./ParserEngine');
 class BotEngine {
     constructor() {
         this.bot = new SlackApiManager(config.SLACK_TOKEN);
-        this.parser = new ParserEngine();
+        this.parser = new ParserEngine(this.sendMessage);
     }
 
     // Method to start the bot
     startBot() {
-        console.log("Bot started");
+        console.log("Scibot started");
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
     }
@@ -29,7 +29,7 @@ class BotEngine {
 
         // TODO: Parse the message here
 
-        if(message.text == 'scrum')
+        if (message.text == 'scrum')
             bot.reply(message, "Heard '" + message.text + "' from message received");
     }
 
@@ -37,11 +37,15 @@ class BotEngine {
     directMentions(bot, message) {
         // Fetch the username
         var currentUser = this.fetchUserName(message, bot);
-        
-        // Parse the message
-        var output = this.parser.parseInput(message.text, bot, currentUser);
 
-        this.sendMessage(bot, message, output, false);
+        var slackDetails = {
+            bot: bot,
+            incomingMessage: message,
+            isPrivate: false
+        }
+
+        // Parse the message
+        this.parser.parseInput(message.text, bot, currentUser);
     }
 
     // Handler for direct messages (private message to bot)
@@ -49,50 +53,42 @@ class BotEngine {
         // Fetch the username
         var currentUser = message.user;
 
-        // Parse the message
-        var output = this.parser.parseInput(message.text, bot, currentUser);
+        var slackDetails = {
+            bot: bot,
+            incomingMessage: message,
+            isPrivate: true
+        }
 
-        this.sendMessage(bot, message, output, true);
+        // Parse the message
+        this.parser.parseInput(message.text, slackDetails, currentUser);
     }
 
     /*
-    [Helper method for sending message]
+        [Helper method for sending message] - used as a callback for database
     -----------------------------------------------*/
-    sendMessage(bot, incomingMessage, outputMessage, isPrivate){
-        if(outputMessage != null && outputMessage != undefined){
-            if(outputMessage.messageType == config.messageType.Reply){
+    sendMessage(slackDetails, outputMessage) {
+        var bot = slackDetails.bot;
+        var incomingMessage = slackDetails.incomingMessage;
+        var isPrivate = slackDetails.isPrivate;
+
+        if (outputMessage != null && outputMessage != undefined) {
+            if (outputMessage.messageType == config.messageType.Reply) {
                 bot.reply(incomingMessage, outputMessage.message);
             }
-            else if(outputMessage.messageType == config.messageType.Conversation){
-                if(isPrivate)
+            else if (outputMessage.messageType == config.messageType.Conversation) {
+                if (isPrivate)
                     bot.startPrivateConversation(incomingMessage, outputMessage.conversationCallback);
                 else
                     bot.startConversation(incomingMessage, outputMessage.conversationCallback);
             }
-            else if(outputMessage.messageType == config.messageType.Notification){
+            else if (outputMessage.messageType == config.messageType.Notification) {
                 bot.say(incomingMessage, outputMessage.message);
             }
         }
-        else{
+        else {
             bot.reply(incomingMessage, 'An error occured!');
         }
     }
-
-    fetchUserName(message, bot){
-        var currentUser = null;
-        
-        bot.api.users.info({user: message.user}, function(error, response){
-            if(error){
-                console.log('Error occured while fetching the username');
-                //return null;
-            }
-            
-            currentUser = response["user"];
-        });
-
-        return currentUser;
-    }
-
 }
 
 module.exports.BotEngine = BotEngine;

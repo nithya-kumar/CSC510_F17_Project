@@ -9,8 +9,9 @@ var { config } = require('./config');
  * Parser Engine for the bot
  */
 class ParserEngine {
-    constructor() {
+    constructor(messageCallback) {
         this.setDefaultMessage();
+        this.messageCallback = messageCallback;
     }
 
     // Method to set the default message
@@ -24,21 +25,21 @@ class ParserEngine {
     }
 
     // Method to parse the incoming message
-    parseInput(message, bot, currentUser) {
+    parseInput(message, slackDetails, currentUser) {
         this.output_message = null;
         var resolved = false;
 
         //signoff - usecase1
-        if (!resolved && this.messageForSignOff(message, bot))
+        if (!resolved && this.messageForSignOff(message, slackDetails))
             resolved = true;
         //daily status reply - usecase1
         if (!resolved && this.addUpdateStatus(message))
             resolved = true;
         //generate reports - usecase2
-        if (!resolved && this.checkIfReportToBeGenerated(message, currentUser))
+        if (!resolved && this.checkIfReportToBeGenerated(message, slackDetails))
             resolved = true;
-		if (!resolved && this.createPingEvent(currentUser,message))
-			resolved = true;
+        if (!resolved && this.createPingEvent(currentUser, message))
+            resolved = true;
 
         // Set default message in case of non-matching inputs
         this.setDefaultMessage();
@@ -142,10 +143,10 @@ class ParserEngine {
         var action1 = new RegExp('Yesterday:', 'i');
         var action2 = new RegExp('Today:', 'i');
         var action3 = new RegExp('Obstacles:', 'i');
-		var status = "";
+        var status = "";
 
         if (obj.test(message)) {
-			if(action1.test(message) && action2.test(message) && action3.test(message)) {
+            if (action1.test(message) && action2.test(message) && action3.test(message)) {
                 DatabaseManager.saveDailyStatus(message);
                 this.output_message = new OutputMessage({
                     message: 'Your daily status has been saved!',
@@ -174,9 +175,9 @@ class ParserEngine {
         return false;
     }
 
-    
+
     //Method to generate the rpeort for a given sprint
-    checkIfReportToBeGenerated(message, currentUser) {
+    checkIfReportToBeGenerated(message, slackDetails) {
         var obj = new RegExp('report', 'i');
         var action = new RegExp('generate(d?)', 'i');
         var time = new RegExp('(current|this|previous) sprint', 'i');
@@ -185,11 +186,10 @@ class ParserEngine {
             // Report to be generated
             var currentSprint = new RegExp('(current|this) sprint', 'i');
 
-            this.output_message = new OutputMessage({
-                message: currentSprint.test(message) ? DatabaseManager.generateReport('current', currentUser) : DatabaseManager.generateReport('previous', currentUser),
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-            });
+            if (currentSprint.test(message))
+                DatabaseManager.generateReport('current', slackDetails, this.messageCallback);
+            else
+                DatabaseManager.generateReport('previous', slackDetails, this.messageCallback);
 
             return true;
         }
@@ -197,68 +197,68 @@ class ParserEngine {
         return false;
     }
 
-    createPingEvent(currentUser,message) {
+    createPingEvent(currentUser, message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
-		
+
         var obj = new RegExp('ping|generate', 'i');
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
-		var summary = new RegExp('summary','i');
-        var time = new RegExp('at (.*)','i');
+        var summary = new RegExp('summary', 'i');
+        var time = new RegExp('at (.*)', 'i');
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-		
-			if(MockDatabase.getUserRole(currentUser)!=0){
-				this.output_message = new OutputMessage({
-					message: "Not authorised to configure pings",
-					messageType: config.messageType.Reply,
-					conversationCallback: undefined
-					});
-				return false;
-			}
-			
-			if(MockDatabase.getUserGithubProfile(currentUser)===null){
-				this.output_message = new OutputMessage({
-					message: "Add the GitHub Id to cofigure pings",
-					messageType: config.messageType.Reply,
-					conversationCallback: undefined
-					});
-				return false;
-				
-			}
-			
+
+            if (MockDatabase.getUserRole(currentUser) != 0) {
+                this.output_message = new OutputMessage({
+                    message: "Not authorised to configure pings",
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
+                return false;
+            }
+
+            if (MockDatabase.getUserGithubProfile(currentUser) === null) {
+                this.output_message = new OutputMessage({
+                    message: "Add the GitHub Id to cofigure pings",
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
+                return false;
+
+            }
+
             //parse day
-            var day = new RegExp('tomorrow|today|everyday','i');
+            var day = new RegExp('tomorrow|today|everyday', 'i');
             var date = new RegExp('on (.*)');
-			var category = new RegExp('status|summary|report','i');
-			var timePart = time.exec(message)[0];
-			var timeRegex = new RegExp('at (.*?)(\\s|$)','i');
-			var dateRegex = new RegExp('on (.*?)(\\s|$)','i');
-			
+            var category = new RegExp('status|summary|report', 'i');
+            var timePart = time.exec(message)[0];
+            var timeRegex = new RegExp('at (.*?)(\\s|$)', 'i');
+            var dateRegex = new RegExp('on (.*?)(\\s|$)', 'i');
+
             if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
-				var dayPart = day.exec(message)[0];
-				this.output_message = new OutputMessage({
-                message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1]:""),dayPart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-				});
+                var dayPart = day.exec(message)[0];
+                this.output_message = new OutputMessage({
+                    message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), dayPart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
             }
             else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
-				var datePart = dateRegex.exec(date.exec(message)[0])[1];
-				this.output_message = new OutputMessage({
-                message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1],datePart,timeRegex.exec(timePart)[1],message,category.exec(message)[0]) : "Invalid category",
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-				});
+                var datePart = dateRegex.exec(date.exec(message)[0])[1];
+                this.output_message = new OutputMessage({
+                    message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1], datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
             }
             else {
-				this.output_message = new OutputMessage({
-                message: "Not a valid request to ping",
-                messageType: config.messageType.Reply,
-                conversationCallback: undefined
-				});
+                this.output_message = new OutputMessage({
+                    message: "Not a valid request to ping",
+                    messageType: config.messageType.Reply,
+                    conversationCallback: undefined
+                });
                 return false;
             }
             return true;

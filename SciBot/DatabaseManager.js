@@ -2,6 +2,9 @@
 
 var dateTime = require('node-datetime');
 var { MockDatabase } = require('./MockDatabaseService');
+var { DataAccess } = require('./DataAccess');
+var { OutputMessage } = require('./OutputMessage');
+var { config } = require('./config');
 
 /**
  * DatabaseManager class provides necessary methods for interaction with the database
@@ -9,13 +12,28 @@ var { MockDatabase } = require('./MockDatabaseService');
 class DatabaseManager {
 
     // Method to fetch the generated report for the given date
-    generateReport(date){
-        var report = MockDatabase.getSummaryReport(date);
+    generateReport(date, slackDetails, messageCallback){
+		// Create database callback
+		var dbCallback = function(err, data){
+			if(err){
+				console.log(err);
+			}
+			else {
+				var output_message = new OutputMessage({
+					message: data.rows[0]['userid'],
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+				});
+	
+				messageCallback(slackDetails, output_message);
+			}
+		}
 
-        if(report == null || report == undefined)
-            return "The report for the given sprint cannot be generated at the moment as users have not updated their work."
-        else
-            return "The generated report is available at " + report.filePath;
+		// Build the query
+		var query = 'select * from userdetails';
+
+		// Fetch data from database
+		DataAccess.select(query, dbCallback);
     }
 	
 	getScrumQuestions(flag){
