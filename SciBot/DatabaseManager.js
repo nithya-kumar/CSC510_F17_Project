@@ -12,15 +12,23 @@ var { config } = require('./config');
 class DatabaseManager {
 
     // Method to fetch the generated report for the given date
-    generateReport(date, slackDetails, messageCallback){
+    generateReport(startDate, endDate, slackDetails, messageCallback){
 		// Create database callback
 		var dbCallback = function(err, data){
 			if(err){
 				console.log(err);
 			}
 			else {
+				var strMessage = 'Username\t\t\tStatus for current day\t\t\t\tStatus for previous day\t\t\t\tObstacles\t\t\tDate\n';
+				strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
+
+				for(var i = 0; i < data.rows.length; ++i){
+					strMessage += data.rows[i]['full_name'] + '\t\t\t' + data.rows[i]['status_today'] + '\t\t\t\t' + data.rows[i]['status_yesterday'] + '\t\t\t\t' + data.rows[0]['status_obstacles'] + '\t\t\t' + data.rows[i]['status_date'] + '\n';
+					strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
+				}
+
 				var output_message = new OutputMessage({
-					message: data.rows[0]['userid'],
+					message: strMessage,
 					messageType: config.messageType.Reply,
 					conversationCallback: undefined
 				});
@@ -29,8 +37,19 @@ class DatabaseManager {
 			}
 		}
 
-		// Build the query
-		var query = 'select * from userdetails';
+		var query = '';
+
+		if(endDate != null){
+			query = "select a.full_name, b.* from (select * from status where status_date >= '" + startDate + "' and status_date <= '" + endDate + "') b inner join users a on (a.username = b.username)";
+		}
+		else if(startDate == 'today'){
+			// Today
+			query = "select a.full_name, b.* from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username)";
+		}
+		else{
+			// yesterday
+			query = "select a.full_name, b.* from (select * from status where status_date = current_date - 1) b inner join users a on (a.username = b.username)";
+		}
 
 		// Fetch data from database
 		DataAccess.select(query, dbCallback);

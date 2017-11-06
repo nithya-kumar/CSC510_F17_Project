@@ -180,16 +180,42 @@ class ParserEngine {
     checkIfReportToBeGenerated(message, slackDetails) {
         var obj = new RegExp('report', 'i');
         var action = new RegExp('generate(d?)', 'i');
-        var time = new RegExp('(current|this|previous) sprint', 'i');
+        var time = new RegExp('sprint', 'i');
 
         if (obj.test(message) && action.test(message) && time.test(message)) {
-            // Report to be generated
-            var currentSprint = new RegExp('(current|this) sprint', 'i');
+            var start = new RegExp('starting', 'i');
+            var end = new RegExp('ending', 'i');
+            var day = new RegExp('(today|yesterday)', 'i');
 
-            if (currentSprint.test(message))
-                DatabaseManager.generateReport('current', slackDetails, this.messageCallback);
-            else
-                DatabaseManager.generateReport('previous', slackDetails, this.messageCallback);
+            if(start.test(message) && end.test(message)){
+                // Fetch the start time
+                var startIndex = message.indexOf('starting') + 9; 
+                var endIndex = startIndex + 11;
+                var startTime = message.substring(startIndex, endIndex);
+
+                // Fetch the end time
+                startIndex = message.indexOf('ending') + 9;
+                endIndex = startIndex + 11;
+                var endTime = message.substring(startIndex, endIndex);
+
+                console.log("Start time = " + startTime);
+                console.log("End time = " + endTime);
+                
+                DatabaseManager.generateReport(startTime, endTime, slackDetails, this.messageCallback);
+            }
+            else if(day.test(message)){
+                // day is 'today' or 'yesterday'
+                var index = message.indexOf('today');
+
+                if(index > -1){
+                    // Today
+                    DatabaseManager.generateReport('today', null, slackDetails, this.messageCallback);
+                }
+                else {
+                    // Yesterday
+                    DatabaseManager.generateReport('yesterday', null, slackDetails, this.messageCallback);
+                }
+            }
 
             return true;
         }
