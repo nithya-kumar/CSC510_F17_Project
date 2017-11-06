@@ -3,7 +3,7 @@
 ## Index
 1. [MILESTONE: DESIGN](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md)
 2. [MILESTONE: BOT](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/BOT.md)
-3. [MILESTONE: SERVICE](#service)
+3. [MILESTONE: SERVICE](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SERVICE.md)
 4. [MILESTONE: DEPLOY](#deploy)
 5. [MILESTONE: REPORT](#report)
 
