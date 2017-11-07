@@ -19,11 +19,11 @@ class DatabaseManager {
 				console.log(err);
 			}
 			else {
-				var strMessage = 'Username\t\t\tStatus for current day\t\t\t\tStatus for previous day\t\t\t\tObstacles\t\t\tDate\n';
+				var strMessage = 'Username\t\tStatus for current day\t\t\t\t\t\tStatus for previous day\t\t\t\t\t\tObstacles\t\t\t\t\t\tDate\n';
 				strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
 
 				for(var i = 0; i < data.rows.length; ++i){
-					strMessage += data.rows[i]['full_name'] + '\t\t\t' + data.rows[i]['status_today'] + '\t\t\t\t' + data.rows[i]['status_yesterday'] + '\t\t\t\t' + data.rows[0]['status_obstacles'] + '\t\t\t' + data.rows[i]['status_date'] + '\n';
+					strMessage += data.rows[i]['full_name'] + '\t\t' + data.rows[i]['status_today'] + '\t\t\t\t\t\t' + data.rows[i]['status_yesterday'] + '\t\t\t\t\t\t' + data.rows[0]['status_obstacles'] + '\t\t\t\t\t\t' + data.rows[i]['status_date'] + '\n';
 					strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
 				}
 
@@ -40,15 +40,15 @@ class DatabaseManager {
 		var query = '';
 
 		if(endDate != null){
-			query = "select a.full_name, b.* from (select * from status where status_date >= '" + startDate + "' and status_date <= '" + endDate + "') b inner join users a on (a.username = b.username)";
+			query = "select a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date >= '" + startDate + "' and status_date <= '" + endDate + "') b inner join users a on (a.username = b.username)";
 		}
 		else if(startDate == 'today'){
 			// Today
-			query = "select a.full_name, b.* from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username)";
+			query = "select a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username)";
 		}
 		else{
 			// yesterday
-			query = "select a.full_name, b.* from (select * from status where status_date = current_date - 1) b inner join users a on (a.username = b.username)";
+			query = "select a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date - 1) b inner join users a on (a.username = b.username)";
 		}
 
 		// Fetch data from database
@@ -67,9 +67,44 @@ class DatabaseManager {
         return message;
 	}
 	
-	saveDailyStatus(currentUser, message, timeOfMessage){
+	saveDailyStatus(message, slackDetails, messageCallback){
 		var msgArr = message.split("\n");
-		var query = 'insert into status (status_username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(currentUser, msgArr[1], msgArr[0], msgArr[2], timeOfMessage)';
+
+		//var timeOfMessage = slackDetails.incommingMessage.timestamp;
+		var username = slackDetails.incomingMessage.user;
+
+		var dbCallback = function(err, data, rowCount){
+			if(err){
+				console.log(err);
+				var output_message = new OutputMessage({
+					message: "I'm unable to save your daily status!",
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+				});
+	
+				messageCallback(slackDetails, output_message);
+			}
+			else {
+				// Match the rowcount
+				if(data.rowCount == rowCount){
+					var output_message = new OutputMessage({
+						message: "Your daily status has been saved!",
+						messageType: config.messageType.Reply,
+						conversationCallback: undefined
+					});
+		
+					messageCallback(slackDetails, output_message);
+				}
+				else {
+
+				}
+			}
+		}
+
+		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(" + username + ", msgArr[1], msgArr[0], msgArr[2], timeOfMessage)";
+		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('Anshul', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
+
+		DataAccess.insert(query, dbCallback, 1);
 	}
 	
 	createPing(user,day,time,text,category){
@@ -100,6 +135,7 @@ class DatabaseManager {
 			
 		return "\n Could not process your request "
 	}
+
 	getPingsForNow(){
 		var configuredPings = null;
 		var query = 'select * from users where timeStamp='+dt.now();

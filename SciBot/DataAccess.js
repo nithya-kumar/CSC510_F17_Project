@@ -16,9 +16,17 @@ class DataAccess {
         this.pool = new Pool(dbOptions);
     }
 
+    // Method to run select queries, pass rowCount to match the number of rows affected by the query
     select(query, callback){
         this.pool.query(query, function(err, res){
             callback(err, res);
+        })
+    }
+
+    // Method to run insert queries, pass rowCount to match the number of rows affected by the query
+    insert(query, callback, rowCount){
+        this.pool.query(query, function(err, res){
+            callback(err, res, rowCount);
         })
     }
 }

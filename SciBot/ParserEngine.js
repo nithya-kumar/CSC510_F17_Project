@@ -25,7 +25,7 @@ class ParserEngine {
     }
 
     // Method to parse the incoming message
-    parseInput(message, slackDetails, currentUser, timeOfMessage) {
+    parseInput(message, slackDetails) {
         this.output_message = null;
         var resolved = false;
 
@@ -33,12 +33,12 @@ class ParserEngine {
         if (!resolved && this.messageForSignOff(message, slackDetails))
             resolved = true;
         //daily status reply - usecase1
-        if (!resolved && this.addUpdateStatus(currentUser, message, timeOfMessage))
+        if (!resolved && this.addUpdateStatus(message, slackDetails))
             resolved = true;
         //generate reports - usecase2
         if (!resolved && this.checkIfReportToBeGenerated(message, slackDetails))
             resolved = true;
-        if (!resolved && this.createPingEvent(currentUser, message))
+        if (!resolved && this.createPingEvent(slackDetails, message))
             resolved = true;
 
         // Set default message in case of non-matching inputs
@@ -47,8 +47,7 @@ class ParserEngine {
         return this.output_message;
     }
 
-    messageForSignOff(message, bot) {
-        //  var obj = new RegExp('report', 'i');
+    messageForSignOff(message, slackDetails) {
         var action = new RegExp('sign in|signing in', 'i');
 
         if (action.test(message)) {
@@ -95,13 +94,15 @@ class ParserEngine {
                 conversationCallback: callback
             });
 
+            this.messageCallback(slackDetails, this.output_message);
+
             return true;
         }
 
         return false;
     }
 
-    checkDailyStatus(message) {
+    /*checkDailyStatus(message) {
         var obj = new RegExp('yes|no', 'i');
         var action1 = new RegExp('updated|not updated', 'i');
         var action2 = new RegExp('off|absent', 'i');
@@ -121,7 +122,7 @@ class ParserEngine {
         }
 
         return false;
-    }
+    }*/
 
     updateStatus(message) {
         var action = new RegExp('add daily status', 'i');
@@ -138,14 +139,14 @@ class ParserEngine {
         return false;
     }
 
-    addUpdateStatus(currentUser, message, timeOfMessage) {
+    addUpdateStatus(message, slackDetails) {
         var action1 = new RegExp('Yesterday:', 'i');
         var action2 = new RegExp('Today:', 'i');
         var action3 = new RegExp('Obstacles:', 'i');
         var status = "";
 
         if (action1.test(message) && action2.test(message) && action3.test(message)) {
-            DatabaseManager.saveDailyStatus(currentUser, message, timeOfMessage);
+            DatabaseManager.saveDailyStatus(message, slackDetails, this.messageCallback);
             this.output_message = new OutputMessage({
                 message: 'Your daily status has been saved!',
                 messageType: config.messageType.Reply,
@@ -153,7 +154,7 @@ class ParserEngine {
             });
             return true;
         } else if (!action1.test(message) && !action3.test(message) && action2.test(message)) {
-            DatabaseManager.saveDailyStatus(currentUser, 'Yesterday:Absent' + '\n' + message + '\n' + 'Obstacles:Absent', timeOfMessage);
+            DatabaseManager.saveDailyStatus('Yesterday:Absent' + '\n' + message + '\n' + 'Obstacles:Absent', slackDetails, this.messageCallback);
             this.output_message = new OutputMessage({
                 message: 'Your daily status has been saved!',
                 messageType: config.messageType.Reply,
@@ -161,7 +162,7 @@ class ParserEngine {
             });
             return true;
         } else if (!action1.test(message) && action3.test(message) && action2.test(message)) {
-            DatabaseManager.saveDailyStatus(currentUser, 'Yesterday:Absent' + '\n' + message, timeOfMessage);
+            DatabaseManager.saveDailyStatus('Yesterday:Absent' + '\n' + message, slackDetails, this.messageCallback);
             this.output_message = new OutputMessage({
                 message: 'Your daily status has been saved!',
                 messageType: config.messageType.Reply,
@@ -172,8 +173,9 @@ class ParserEngine {
         return false;
     }
 
-
-    //Method to generate the rpeort for a given sprint
+    /*
+        Method to generate sprint report for the given time durations
+    */
     checkIfReportToBeGenerated(message, slackDetails) {
         var obj = new RegExp('report', 'i');
         var action = new RegExp('generate(d?)', 'i');
@@ -185,33 +187,25 @@ class ParserEngine {
             var day = new RegExp('(today|yesterday)', 'i');
 
             if(start.test(message) && end.test(message)){
+                // e.g. "Generate report for the sprint starting 11-04-2017 and ending 11-07-2017"
+
                 // Fetch the start time
                 var startIndex = message.indexOf('starting') + 9; 
                 var endIndex = startIndex + 11;
                 var startTime = message.substring(startIndex, endIndex);
 
                 // Fetch the end time
-                startIndex = message.indexOf('ending') + 9;
+                startIndex = message.indexOf('ending') + 7;
                 endIndex = startIndex + 11;
                 var endTime = message.substring(startIndex, endIndex);
-
-                console.log("Start time = " + startTime);
-                console.log("End time = " + endTime);
                 
                 DatabaseManager.generateReport(startTime, endTime, slackDetails, this.messageCallback);
             }
             else if(day.test(message)){
-                // day is 'today' or 'yesterday'
+                // e.g. "Generate sprint report for today/yesterday"
                 var index = message.indexOf('today');
 
-                if(index > -1){
-                    // Today
-                    DatabaseManager.generateReport('today', null, slackDetails, this.messageCallback);
-                }
-                else {
-                    // Yesterday
-                    DatabaseManager.generateReport('yesterday', null, slackDetails, this.messageCallback);
-                }
+                DatabaseManager.generateReport(index > -1 ? 'today' : 'yesterday', null, slackDetails, this.messageCallback);
             }
 
             return true;
@@ -220,9 +214,11 @@ class ParserEngine {
         return false;
     }
 
-    createPingEvent(currentUser, message) {
+    createPingEvent(slackDetails, message) {
         //ping user USERNAME at 1pm everyday
         //ping user USERNAME at 1pm on 1/11/17
+
+        var currentUser = slackDetails.incomingMessage.user;
 
         var obj = new RegExp('ping|generate', 'i');
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');

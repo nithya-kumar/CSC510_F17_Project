@@ -39,9 +39,7 @@ class BotEngine {
 
     // Handler for direct mentions (@Scibot . . . )
     directMentions(bot, message) {
-        // Fetch the username
-        var currentUser = this.fetchUserName(message, bot);
-        var timeOfMessage = message.timestamp;
+        // Slack details object that consists of incoming message and the bot object
         var slackDetails = {
             bot: bot,
             incomingMessage: message,
@@ -49,15 +47,12 @@ class BotEngine {
         }
 
         // Parse the message
-        this.parser.parseInput(message.text, bot, currentUser, timeOfMessage);
+        this.parser.parseInput(message.text, slackDetails);
     }
 
     // Handler for direct messages (private message to bot)
     directMessage(bot, message) {
-        // Fetch the username
-        var currentUser = message.user;
-        var timeOfMessage = message.timestamp;
-
+        // Slack details object that consists of incoming message and the bot object
         var slackDetails = {
             bot: bot,
             incomingMessage: message,
@@ -65,7 +60,7 @@ class BotEngine {
         }
 
         // Parse the message
-        this.parser.parseInput(message.text, slackDetails, currentUser, timeOfMessage);
+        this.parser.parseInput(message.text, slackDetails);
     }
 
     /*
@@ -103,8 +98,9 @@ app.listen(3000, function () {
 
 new CronJob('0 * * * * *', function() {
     
-    // console.log('Hello puppies!')
-	var pingUsers = DatabaseManager.getPingsForNow();
+    console.log('Hello puppies!')
+
+	//var pingUsers = DatabaseManager.getPingsForNow();
 	
 }, null, true, 'America/Los_Angeles');
 
