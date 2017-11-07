@@ -103,6 +103,7 @@ class DatabaseManager {
 	getPingsForNow(){
 		var configuredPings = null;
 		var query = 'select * from users where timeStamp='+dt.now();
+		configuredPings = DataAccess.select(query, callback);
 		return configuredPings;
 	}
 }
