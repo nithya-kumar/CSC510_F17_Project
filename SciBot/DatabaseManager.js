@@ -67,8 +67,9 @@ class DatabaseManager {
         return message;
 	}
 	
-	saveDailyStatus(message){
-		//TODO: Save into database
+	saveDailyStatus(currentUser, message, timeOfMessage){
+		var msgArr = message.split("\n");
+		var query = 'insert into status (status_username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(currentUser, msgArr[1], msgArr[0], msgArr[2], timeOfMessage)';
 	}
 	
 	createPing(user,day,time,text,category){

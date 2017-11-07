@@ -37,7 +37,7 @@ class BotEngine {
     directMentions(bot, message) {
         // Fetch the username
         var currentUser = this.fetchUserName(message, bot);
-
+        var timeOfMessage = message.timestamp;
         var slackDetails = {
             bot: bot,
             incomingMessage: message,
@@ -45,13 +45,14 @@ class BotEngine {
         }
 
         // Parse the message
-        this.parser.parseInput(message.text, bot, currentUser);
+        this.parser.parseInput(message.text, bot, currentUser, timeOfMessage);
     }
 
     // Handler for direct messages (private message to bot)
     directMessage(bot, message) {
         // Fetch the username
         var currentUser = message.user;
+        var timeOfMessage = message.timestamp;
 
         var slackDetails = {
             bot: bot,
@@ -60,7 +61,7 @@ class BotEngine {
         }
 
         // Parse the message
-        this.parser.parseInput(message.text, slackDetails, currentUser);
+        this.parser.parseInput(message.text, slackDetails, currentUser, timeOfMessage);
     }
 
     /*

@@ -25,7 +25,7 @@ class ParserEngine {
     }
 
     // Method to parse the incoming message
-    parseInput(message, slackDetails, currentUser) {
+    parseInput(message, slackDetails, currentUser, timeOfMessage) {
         this.output_message = null;
         var resolved = false;
 
@@ -33,7 +33,7 @@ class ParserEngine {
         if (!resolved && this.messageForSignOff(message, slackDetails))
             resolved = true;
         //daily status reply - usecase1
-        if (!resolved && this.addUpdateStatus(message))
+        if (!resolved && this.addUpdateStatus(currentUser, message, timeOfMessage))
             resolved = true;
         //generate reports - usecase2
         if (!resolved && this.checkIfReportToBeGenerated(message, slackDetails))
@@ -138,39 +138,36 @@ class ParserEngine {
         return false;
     }
 
-    addUpdateStatus(message) {
-        var obj = new RegExp('daily status', 'i');
+    addUpdateStatus(currentUser, message, timeOfMessage) {
         var action1 = new RegExp('Yesterday:', 'i');
         var action2 = new RegExp('Today:', 'i');
         var action3 = new RegExp('Obstacles:', 'i');
         var status = "";
 
-        if (obj.test(message)) {
-            if (action1.test(message) && action2.test(message) && action3.test(message)) {
-                DatabaseManager.saveDailyStatus(message);
-                this.output_message = new OutputMessage({
-                    message: 'Your daily status has been saved!',
-                    messageType: config.messageType.Reply,
-                    conversationCallback: undefined
-                });
-                return true;
-            } else if (!action1.test(message) && !action3.test(message) && action2.test(message)) {
-                DatabaseManager.saveDailyStatus('Yesterday:Absent' + message + 'Obstacles:Absent');
-                this.output_message = new OutputMessage({
-                    message: 'Your daily status has been saved!',
-                    messageType: config.messageType.Reply,
-                    conversationCallback: undefined
-                });
-                return true;
-            } else if (!action1.test(message) && action3.test(message) && action2.test(message)) {
-                DatabaseManager.saveDailyStatus('Yesterday:Absent' + message);
-                this.output_message = new OutputMessage({
-                    message: 'Your daily status has been saved!',
-                    messageType: config.messageType.Reply,
-                    conversationCallback: undefined
-                });
-                return true;
-            }
+        if (action1.test(message) && action2.test(message) && action3.test(message)) {
+            DatabaseManager.saveDailyStatus(currentUser, message, timeOfMessage);
+            this.output_message = new OutputMessage({
+                message: 'Your daily status has been saved!',
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
+            return true;
+        } else if (!action1.test(message) && !action3.test(message) && action2.test(message)) {
+            DatabaseManager.saveDailyStatus(currentUser, 'Yesterday:Absent' + '\n' + message + '\n' + 'Obstacles:Absent', timeOfMessage);
+            this.output_message = new OutputMessage({
+                message: 'Your daily status has been saved!',
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
+            return true;
+        } else if (!action1.test(message) && action3.test(message) && action2.test(message)) {
+            DatabaseManager.saveDailyStatus(currentUser, 'Yesterday:Absent' + '\n' + message, timeOfMessage);
+            this.output_message = new OutputMessage({
+                message: 'Your daily status has been saved!',
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
+            return true;
         }
         return false;
     }
