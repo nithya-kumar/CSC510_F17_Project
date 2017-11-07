@@ -3,6 +3,10 @@
 var { config } = require('./config');
 var { SlackApiManager } = require('./SlackApiManager');
 var { ParserEngine } = require('./ParserEngine');
+var { DatabaseManager } = require('./DatabaseManager');
+var CronJob = require('cron').CronJob;
+var express = require('express');
+var app = express();
 
 /**
  * Bot Engine class to handle and interact with Slack and Github Api tasks
@@ -91,5 +95,17 @@ class BotEngine {
         }
     }
 }
+
+var portNum = 3000;
+app.listen(3000, function () {
+    //console.log('Making some pancakes on port:', portNum);
+});
+
+new CronJob('0 * * * * *', function() {
+    
+    // console.log('Hello puppies!')
+	var pingUsers = DatabaseManager.getPingsForNow();
+	
+}, null, true, 'America/Los_Angeles');
 
 module.exports.BotEngine = BotEngine;

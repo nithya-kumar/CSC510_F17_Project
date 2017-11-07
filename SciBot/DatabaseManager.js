@@ -84,18 +84,26 @@ class DatabaseManager {
 		}
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
-				if(category.toUpperCase() === "STATUS")
+				if(category.toUpperCase() === "STATUS"){
+					var query = 'insert into users (username,ping_timestamp) values('
 					return "\nyour ping is generated for the user :"+user+" in category: "+category;
+				}
 				return "\nThe report generation is scheduled";
 			}
 		}
 		else{
-			if(category.toUpperCase() === "STATUS")
+			if(category.toUpperCase() === "STATUS"){
 					return "\nyour ping is generated for the user :"+user+" in category: "+category;
+			}
 			return "\nThe report generation is scheduled";
 		}
 			
 		return "\n Could not process your request "
+	}
+	getPingsForNow(){
+		var configuredPings = null;
+		var query = 'select * from users where timeStamp='+dt.now();
+		return configuredPings;
 	}
 }
 
