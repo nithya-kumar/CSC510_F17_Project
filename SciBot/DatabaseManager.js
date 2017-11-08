@@ -144,7 +144,7 @@ class DatabaseManager {
 			
 		return "\n Could not process your request ";
 	}
-	
+	// Used to get the configured pings that are scheduled for the current time
 	getPingsForNow(messageCallback){
 		var dt = dateTime.create();
 		var query = 'select * from users where timeStamp='+dt.now();
