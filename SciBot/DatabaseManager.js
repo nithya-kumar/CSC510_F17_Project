@@ -139,7 +139,7 @@ class DatabaseManager {
 			}
 		}
 		else{
-			return insertPing(category,user,hrs,day);
+			return this.insertPing(category,user,hrs,day);
 		}
 			
 		return "\n Could not process your request ";
