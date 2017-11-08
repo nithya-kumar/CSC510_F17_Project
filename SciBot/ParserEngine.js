@@ -284,7 +284,10 @@ class ParserEngine {
         }
         return false;
     }
-
+	createPingsForNow(){
+		var users = DatabaseManager.getPingsForNow(this.messageCallback);
+		
+	}
 }
 
 module.exports.ParserEngine = ParserEngine;

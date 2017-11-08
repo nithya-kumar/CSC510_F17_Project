@@ -120,7 +120,8 @@ class DatabaseManager {
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
 				if(category.toUpperCase() === "STATUS"){
-					var query = 'insert into users (username,ping_timestamp) values('
+					var query = 'insert into users (username,ping_time,ping_day) values('+user+','+hrs+','+day+')';
+					
 					return "\nyour ping is generated for the user :"+user+" in category: "+category;
 				}
 				return "\nThe report generation is scheduled";
@@ -136,11 +137,20 @@ class DatabaseManager {
 		return "\n Could not process your request "
 	}
 
-	getPingsForNow(){
-		var configuredPings = null;
+	getPingsForNow(messageCallback){
 		var query = 'select * from users where timeStamp='+dt.now();
-		configuredPings = DataAccess.select(query, callback);
-		return configuredPings;
+		var users = [];
+		var getUsers = function(err, data){
+			if (err) {
+				console.log(err);
+			}
+			for (var i in rows) {
+				console.log(rows[i]);
+				users.addRow(rows[i]);
+			}
+		}
+		DataAccess.select(query, getUsers);
+		return users;
 	}
 }
 
