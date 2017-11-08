@@ -1,3 +1,12 @@
+#Create table to track user, user roles, configured pings
+create table users (
+	username  varchar(25) primary key,
+	Full_name varchar(100) not null,
+	is_admin boolean not null,
+	ping_time time,
+	ping_day varchar
+);
+
 #Create table for tracking status
 create table status (
   username varchar(25) references users(username),
@@ -8,12 +17,4 @@ create table status (
   status_time time
 );
 
-#Create table to track user, user roles, configured pings
-create table users (
-	username  varchar(25) primary key,
-	Full_name varchar(100) not null,
-	is_admin boolean not null,
-	ping_time time,
-	ping_day varchar
-);
 
