@@ -267,7 +267,7 @@ class ParserEngine {
                 //ping user USERNAME at 1pm on 11/11/17
                 var datePart = dateRegex.exec(date.exec(message)[0])[1];
                 this.output_message = new OutputMessage({
-                    message: category.test(message) ? DatabaseManager.createPing(user.exec(message)[1], datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
+                    message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });

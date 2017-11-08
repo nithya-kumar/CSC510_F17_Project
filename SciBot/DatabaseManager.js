@@ -107,6 +107,22 @@ class DatabaseManager {
 		DataAccess.insert(query, dbCallback, 1);
 	}
 	
+	
+	insertPing(category,user,hrs,day){
+		if(category.toUpperCase() === "STATUS"){
+			var query = 'insert into users (username,ping_time,ping_day) values('+user+','+hrs+','+day+')';
+			var callback = function(err,res){
+				if(err){
+					console.log(err);
+					return;
+				}
+			}
+			DataAccess.insert(query,callback);
+			return "\nyour ping is generated for the user :"+user+" in category: "+category;
+		}
+		return "\nThe report generation is scheduled";
+	}
+	
 	createPing(user,day,time,text,category){
 		//console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
 		//'status|summary|report'
@@ -119,30 +135,24 @@ class DatabaseManager {
 		}
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
-				if(category.toUpperCase() === "STATUS"){
-					var query = 'insert into users (username,ping_time,ping_day) values('+user+','+hrs+','+day+')';
-					
-					return "\nyour ping is generated for the user :"+user+" in category: "+category;
-				}
-				return "\nThe report generation is scheduled";
+				return this.insertPing(category,user,hrs,day);
 			}
 		}
 		else{
-			if(category.toUpperCase() === "STATUS"){
-					return "\nyour ping is generated for the user :"+user+" in category: "+category;
-			}
-			return "\nThe report generation is scheduled";
+			return insertPing(category,user,hrs,day);
 		}
 			
-		return "\n Could not process your request "
+		return "\n Could not process your request ";
 	}
-
+	
 	getPingsForNow(messageCallback){
+		var dt = dateTime.create();
 		var query = 'select * from users where timeStamp='+dt.now();
 		var users = [];
 		var getUsers = function(err, data){
 			if (err) {
 				console.log(err);
+				return;
 			}
 			for (var i in rows) {
 				console.log(rows[i]);

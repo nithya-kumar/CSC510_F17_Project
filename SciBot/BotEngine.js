@@ -100,7 +100,7 @@ new CronJob('0 * * * * *', function() {
     
     //console.log('Hello puppies!')
 
-	var pingUsers = ParserEngine.createPingsForNow();
+	var pingUsers = new ParserEngine().createPingsForNow();
 	
 }, null, true, 'America/Los_Angeles');
 
