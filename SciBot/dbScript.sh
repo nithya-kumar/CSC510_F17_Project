@@ -13,6 +13,7 @@ create table users (
 	username  varchar(25) primary key,
 	Full_name varchar(100) not null,
 	is_admin boolean not null,
-	ping_timestamp time
+	ping_time time,
+	ping_day varchar
 );
 

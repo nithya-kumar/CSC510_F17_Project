@@ -98,9 +98,9 @@ app.listen(3000, function () {
 
 new CronJob('0 * * * * *', function() {
     
-    console.log('Hello puppies!')
+    //console.log('Hello puppies!')
 
-	//var pingUsers = DatabaseManager.getPingsForNow();
+	var pingUsers = ParserEngine.createPingsForNow();
 	
 }, null, true, 'America/Los_Angeles');
 
