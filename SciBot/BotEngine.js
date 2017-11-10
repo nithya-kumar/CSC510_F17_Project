@@ -102,6 +102,6 @@ new CronJob('0 * * * * *', function() {
 
 	var pingUsers = new ParserEngine().createPingsForNow();
 	
-}, null, true, 'America/Los_Angeles');
+}, null, true, 'America/New_York');
 
 module.exports.BotEngine = BotEngine;
