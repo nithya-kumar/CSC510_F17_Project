@@ -284,10 +284,15 @@ class ParserEngine {
         }
         return false;
     }
+	
 	createPingsForNow(){
 		var users = DatabaseManager.getPingsForNow(this.messageCallback);
-		
+		var i;
+		for(i in users){
+			this.messageForSignOff(users.username,'sign off');
+		}
 	}
+	
 }
 
 module.exports.ParserEngine = ParserEngine;

@@ -17,4 +17,5 @@ create table status (
   status_time time
 );
 
+insert into users values ('test','test1','true','1:00:00','everyday');
 
