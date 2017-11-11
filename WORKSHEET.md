@@ -1,6 +1,5 @@
 # WORKSHEET
 
-# MILESTONE BOT
 ## <a name="bot"></a>MILESTONE: BOT
 
 All our tasks were created and assigned in github.
@@ -48,8 +47,6 @@ All our tasks were created and assigned in github.
 | Bot documentation | Completed | [#12](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/12)
 | Worksheet updation | Completed | [#13](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/13)
 | Screencast | Completed | [#14](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/14)
-
-# MILESTONE SERVICE
 
 ## <a name="service"></a>MILESTONE: SERVICE
 
