@@ -87,7 +87,7 @@ All our tasks were created and assigned in github.
 | **Use Case 2**| Generating a summary report | 
 | Alternative [E1]  | Started| &nbsp;      
 | **Use Case 3**| Providing a manager/admin the ability to configure the setup days/times of the bot | 
-| Alternative [E1]  | Started| &nbsp; 
+| Alternative [E1]  | Started| &nbsp;
 | Service documentation | Started | &nbsp;
 | Worksheet updation | Started | &nbsp;
 
