@@ -15,9 +15,11 @@ class SlackApiManager extends ApiManager {
 
     startListening(messageReceived, directMentions, directMessage) {
         // connect the bot to a stream of messages
-        this.botController.spawn({
+        this.bot = this.botController.spawn({
             token: this.token,
-        }).startRTM();
+        });
+
+        this.bot.startRTM();
 
         // Generic handler for all the messages
         this.botController.on('message_received', messageReceived);
