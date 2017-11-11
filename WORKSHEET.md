@@ -1,6 +1,5 @@
 # WORKSHEET
 
-# MILESTONE BOT
 ## <a name="bot"></a>MILESTONE: BOT
 
 All our tasks were created and assigned in github.
@@ -49,8 +48,6 @@ All our tasks were created and assigned in github.
 | Worksheet updation | Completed | [#13](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/13)
 | Screencast | Completed | [#14](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/14)
 
-# MILESTONE SERVICE
-
 ## <a name="service"></a>MILESTONE: SERVICE
 
 #### Week 4
@@ -87,7 +84,7 @@ All our tasks were created and assigned in github.
 | **Use Case 2**| Generating a summary report | 
 | Alternative [E1]  | Started| &nbsp;      
 | **Use Case 3**| Providing a manager/admin the ability to configure the setup days/times of the bot | 
-| Alternative [E1]  | Started| &nbsp; 
+| Alternative [E1]  | Started| &nbsp;
 | Service documentation | Started | &nbsp;
 | Worksheet updation | Started | &nbsp;
 

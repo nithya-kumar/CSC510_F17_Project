@@ -260,22 +260,34 @@ class ParserEngine {
             if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
                 var dayPart = day.exec(message)[0];
-                this.output_message = new OutputMessage({
-                    message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), dayPart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
+                if(category.test(message))
+                {
+                  DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), dayPart, timeRegex.exec(timePart)[1], message, category.exec(message)[0],slackDetails,this.messageCallback);
+                }  
+                else{
+                   this.output_message = new OutputMessage({
+                    message:  "Invalid category",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
 				this.messageCallback(slackDetails,this.output_message);
+                }
             }
             else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
                 var datePart = dateRegex.exec(date.exec(message)[0])[1];
-                this.output_message = new OutputMessage({
-                    message: category.test(message) ? DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0]) : "Invalid category",
+                if(category.test(message))
+                {
+                  DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0],slackDetails,this.messageCallback);
+                }  
+                else{
+                   this.output_message = new OutputMessage({
+                    message:  "Invalid category",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
 				this.messageCallback(slackDetails,this.output_message);
+                }
             }
             else {
                 this.output_message = new OutputMessage({
