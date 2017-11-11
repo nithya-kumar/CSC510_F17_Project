@@ -108,7 +108,7 @@ class DatabaseManager {
 	}
 	
 	
-	updatePing(category,user,hrs,day){
+	updatePing(category,user,hrs,day,slackDetails,messageCallback){
 		if(category.toUpperCase() === "STATUS"){
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
 			var hour = ''+hrs+':00:00';
@@ -119,14 +119,26 @@ class DatabaseManager {
 					console.log(err);
 					return;
 				}
+				var output_message = new OutputMessage({
+					message: "\nyour ping is generated for the user : <@"+user+"> in category: "+category,
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+				});
+				messageCallback(slackDetails, output_message);
 			}
 			DataAccess.insert(query,callback);
-			return "\nyour ping is generated for the user :"+user+" in category: "+category;
+			return;
 		}
-		return "\nThe report generation is scheduled";
+		var output_message = new OutputMessage({
+			message: "\nThe report generation is scheduled",
+			messageType: config.messageType.Reply,
+			conversationCallback: undefined
+		});
+		messageCallback(slackDetails, output_message);
+		return;
 	}
 	
-	createPing(user,day,time,text,category){
+	createPing(user,day,time,text,category,slackDetails,messageCallback){
 		//console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
 		//'status|summary|report'
 		var dt = dateTime.create();
@@ -138,28 +150,36 @@ class DatabaseManager {
 		}
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
-				return this.updatePing(category,user,hrs,day);
+				return this.updatePing(category,user,hrs,day,slackDetails,messageCallback);
 			}
 		}
 		else{
-			return this.updatePing(category,user,hrs,day);
+			return this.updatePing(category,user,hrs,day,slackDetails,messageCallback);
 		}
-			
-		return "\n Could not process your request ";
+		
+		var output_message = new OutputMessage({
+			message: "\n Could not process your request ",
+			messageType: config.messageType.Reply,
+			conversationCallback: undefined
+		});
+		return messageCallback(slackDetails, output_message);
 	}
 	// Used to get the configured pings that are scheduled for the current time
-	getPingsForNow(messageCallback){
+	getPingsForNow(slackDetails,messageCallback){
 		var dt = dateTime.create();
-		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ping_day = 'TODAY' or ping_day = '"+new Date(dt.now).+"'";
+		var today = new Date(dt.now);
+		var today_datestring = ''+today.getMonth()+'/'+today.getDay+'/'+today.getYear();
+		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and (ping_day = 'TODAY' or ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
+		
 		var users = [];
 		var getUsers = function(err, data){
 			if (err) {
 				console.log(err);
 				return;
 			}
-			for (var i in rows) {
-				console.log(rows[i]);
-				users.addRow(rows[i]);
+			for (var i in data.rows) {
+				console.log(data.rows[i]['username']);
+				//users.addRow(data[i]);
 			}
 		}
 		DataAccess.select(query, getUsers);
