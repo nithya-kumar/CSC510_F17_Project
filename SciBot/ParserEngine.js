@@ -226,7 +226,8 @@ class ParserEngine {
         var time = new RegExp('at (.*)', 'i');
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-
+			
+			var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
             if (MockDatabase.getUserRole(currentUser) != 0) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
@@ -236,7 +237,7 @@ class ParserEngine {
                 return false;
             }
 
-            if (MockDatabase.getUserGithubProfile(currentUser) === null) {
+            /*if (MockDatabase.getUserGithubProfile(currentUser) === null) {
                 this.output_message = new OutputMessage({
                     message: "Add the GitHub Id to cofigure pings",
                     messageType: config.messageType.Reply,
@@ -244,7 +245,7 @@ class ParserEngine {
                 });
                 return false;
 
-            }
+            }*/
 
             //parse day
             var day = new RegExp('tomorrow|today|everyday', 'i');

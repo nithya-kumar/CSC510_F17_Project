@@ -96,7 +96,7 @@ app.listen(3000, function () {
     //console.log('Making some pancakes on port:', portNum);
 });
 
-/*new CronJob('0 * * * * *', function() {
+/*new CronJob('0 0 * * * *', function() {
     
     //console.log('Hello puppies!')
 
