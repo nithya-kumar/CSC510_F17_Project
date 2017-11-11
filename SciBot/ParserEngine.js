@@ -229,14 +229,15 @@ class ParserEngine {
 			
 			var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
 			
-            /*if (MockDatabase.getUserRole(currentUser) != 0) {
+            if (slackDetails.role != Config.UserRole.Admin) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 return false;
-            }*/
+            }
 
             /*if (MockDatabase.getUserGithubProfile(currentUser) === null) {
                 this.output_message = new OutputMessage({
@@ -264,6 +265,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
             }
             else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
@@ -273,6 +275,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
             }
             else {
                 this.output_message = new OutputMessage({
@@ -280,6 +283,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 return false;
             }
             return true;
@@ -291,7 +295,7 @@ class ParserEngine {
 		var users = DatabaseManager.getPingsForNow(this.messageCallback);
 		var i;
 		for(i in users){
-			this.messageForSignOff(users.username,'sign in');
+			//this.messageForSignOff(users.username,'sign in');
 		}
 	}
 	
