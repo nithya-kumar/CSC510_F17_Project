@@ -22,6 +22,8 @@ class BotEngine {
         console.log("Scibot started");
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
+
+        this.cronjob = new CronJob('* * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
@@ -89,18 +91,34 @@ class BotEngine {
             bot.reply(incomingMessage, 'An error occured!');
         }
     }
+
+    cronjobCallback() {
+        console.log('initiating message');
+        var message = { user: 'U72KDEH60', text: 'Hello there!' }
+        //this.bot.bot.say(message);
+
+        this.bot.bot.startPrivateConversation({ user: 'U72KDEH60' }, function (err, convo) {
+            if (err) {
+                console.log(err);
+            } else {
+                convo.say('Hello there! Time for your daily status.');
+            }
+        });
+    }
 }
 
-var portNum = 3000;
+/*var portNum = 3000;
 app.listen(3000, function () {
     //console.log('Making some pancakes on port:', portNum);
-});
+});*/
 
 /*new CronJob('0 * * * * *', function() {
     
     //console.log('Hello puppies!')
 
-	var pingUsers = new ParserEngine().createPingsForNow();
+    //var pingUsers = new ParserEngine().createPingsForNow();
+    
+
 	
 }, null, true, 'America/New_York');*/
 
