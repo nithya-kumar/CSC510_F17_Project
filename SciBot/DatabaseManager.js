@@ -111,7 +111,8 @@ class DatabaseManager {
 	updatePing(category,user,hrs,day){
 		if(category.toUpperCase() === "STATUS"){
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
-			var query = "update users set ping_time  = '4:00:00', ping_day = '"+day+"' where username = '"+user+"' "
+			var hour = ''+hrs+':00:00';
+			var query = "update users set ping_time  = '"+hour+"', ping_day = '"+day+"' where username = '"+user+"' "
 			console.log(query);
 			var callback = function(err,res){
 				if(err){
