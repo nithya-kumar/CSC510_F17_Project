@@ -91,7 +91,6 @@ class BotEngine {
     }
 }
 
-/*
 var portNum = 3000;
 app.listen(3000, function () {
     //console.log('Making some pancakes on port:', portNum);
@@ -103,6 +102,6 @@ new CronJob('0 * * * * *', function() {
 
 	var pingUsers = new ParserEngine().createPingsForNow();
 	
-}, null, true, 'America/New_York'); */
+}, null, true, 'America/New_York');
 
 module.exports.BotEngine = BotEngine;

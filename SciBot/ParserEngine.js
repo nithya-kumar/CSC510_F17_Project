@@ -190,7 +190,7 @@ class ParserEngine {
                 // e.g. "Generate report for the sprint starting 11-04-2017 and ending 11-07-2017"
 
                 // Fetch the start time
-                var startIndex = message.indexOf('starting') + 9;
+                var startIndex = message.indexOf('starting') + 9; 
                 var endIndex = startIndex + 11;
                 var startTime = message.substring(startIndex, endIndex);
 
@@ -198,7 +198,7 @@ class ParserEngine {
                 startIndex = message.indexOf('ending') + 7;
                 endIndex = startIndex + 11;
                 var endTime = message.substring(startIndex, endIndex);
-
+                
                 DatabaseManager.generateReport(startTime, endTime, slackDetails, this.messageCallback);
             }
             else if(day.test(message)){
@@ -224,11 +224,8 @@ class ParserEngine {
         var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
         var summary = new RegExp('summary', 'i');
         var time = new RegExp('at (.*)', 'i');
-		
-		console.log("Debut log 0\n");
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-			
 
             if (MockDatabase.getUserRole(currentUser) != 0) {
                 this.output_message = new OutputMessage({
@@ -248,8 +245,7 @@ class ParserEngine {
                 return false;
 
             }
-	
-			
+
             //parse day
             var day = new RegExp('tomorrow|today|everyday', 'i');
             var date = new RegExp('on (.*)');
@@ -288,7 +284,7 @@ class ParserEngine {
         }
         return false;
     }
-
+	
 	createPingsForNow(){
 		var users = DatabaseManager.getPingsForNow(this.messageCallback);
 		var i;
@@ -296,7 +292,7 @@ class ParserEngine {
 			this.messageForSignOff(users.username,'sign in');
 		}
 	}
-
+	
 }
 
 module.exports.ParserEngine = ParserEngine;

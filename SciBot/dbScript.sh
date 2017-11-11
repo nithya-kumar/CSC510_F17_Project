@@ -7,7 +7,6 @@ create table users (
 	ping_day varchar
 );
 
-
 #Create table for tracking status
 create table status (
   username varchar(25) references users(username),
@@ -17,4 +16,6 @@ create table status (
   status_date date,
   status_time time
 );
+
+insert into users values ('test','test1','true','1:00:00','everyday');
 
