@@ -289,7 +289,7 @@ class ParserEngine {
 		var users = DatabaseManager.getPingsForNow(this.messageCallback);
 		var i;
 		for(i in users){
-			this.messageForSignOff(users.username,'sign off');
+			this.messageForSignOff(users.username,'sign in');
 		}
 	}
 	
