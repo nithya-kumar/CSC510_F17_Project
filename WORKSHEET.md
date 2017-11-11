@@ -1,5 +1,8 @@
 # WORKSHEET
 
+# MILESTONE BOT
+## <a name="bot"></a>MILESTONE: BOT
+
 All our tasks were created and assigned in github.
 
 #### Week 1
@@ -45,3 +48,73 @@ All our tasks were created and assigned in github.
 | Bot documentation | Completed | [#12](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/12)
 | Worksheet updation | Completed | [#13](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/13)
 | Screencast | Completed | [#14](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/14)
+
+# MILESTONE SERVICE
+
+## <a name="service"></a>MILESTONE: SERVICE
+
+#### Week 4
+
+| Deliverable   | Item / Status   |  Issues/Tasks
+| ------------- | ------------  |  ------------
+| Database (POSTGRESQL) table with data      |  Made Schema and decided on tables | &nbsp;
+| **Use Case 1**| Pinging user for daily updates | 
+| Subflow  [S1]     | Started| &nbsp;      
+| Subflow  [S2]     | Started| &nbsp; 
+| Subflow  [S3]     | Started| &nbsp;      
+| Subflow  [S4]     | Started| &nbsp;
+| **Use Case 2**| Generating a summary report | 
+| Subflow  [S1]     | Started| &nbsp;      
+| Subflow  [S2]     | Started| &nbsp; 
+| Subflow  [S3]     | Started| &nbsp;
+| **Use Case 3**| Providing a manager/admin the ability to configure the setup days/times of the bot | 
+| Subflow  [S1]     | Started| &nbsp;      
+| Subflow  [S2]     | Started| &nbsp; 
+
+
+
+| Alternative Flow Code/Logic| [E1](#usecase1)  / Completed| &nbsp;
+| Verification using Selenium Tests| Completed| &nbsp;
+
+
+#### Week 5
+
+| Deliverable   | Item / Status   |  Issues/Tasks
+| ------------- | ------------  |  ------------
+| Database (POSTGRESQL) table with data      |  Created / Active | &nbsp;
+| **Use Case 1**| Pinging user for daily updates | 
+| Alternative [E1]  | Started| &nbsp;      
+| **Use Case 2**| Generating a summary report | 
+| Alternative [E1]  | Started| &nbsp;      
+| **Use Case 3**| Providing a manager/admin the ability to configure the setup days/times of the bot | 
+| Alternative [E1]  | Started| &nbsp; 
+| Service documentation | Started | &nbsp;
+| Worksheet updation | Started | &nbsp;
+
+
+
+| Verification using Selenium Tests| Completed | &nbsp;
+
+#### Week 6
+
+| Deliverable   | Item / Status   |  Issues/Tasks
+| ------------- | ------------  |  ------------
+| Database (POSTGRESQL) table      |  Created / Active | &nbsp;
+| **Use Case 1**| Pinging user for daily updates | 
+| Subflow  [S1]     | Completed| &nbsp;      
+| Subflow  [S2]     | Completed| &nbsp; 
+| Subflow  [S3]     | Completed| &nbsp;      
+| Subflow  [S4]     | Completed| &nbsp;
+| Alternative [E1]  | Completed| &nbsp;      
+| **Use Case 2**| Generating a summary report | 
+| Subflow  [S1]     | Completed| &nbsp;      
+| Subflow  [S2]     | Completed| &nbsp; 
+| Subflow  [S3]     | Completed| &nbsp;
+| Alternative [E1]  | Completed| &nbsp;      
+| **Use Case 3**| Providing a manager/admin the ability to configure the setup days/times of the bot | 
+| Subflow  [S1]     | Completed| &nbsp;      
+| Subflow  [S2]     | Completed| &nbsp; 
+| Alternative [E1]  | Completed| &nbsp;
+| Service documentation | Completed | &nbsp;
+| Worksheet updation | Completed | &nbsp;
+| Screencast | Completed | &nbsp;
