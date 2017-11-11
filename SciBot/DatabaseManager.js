@@ -101,8 +101,8 @@ class DatabaseManager {
 			}
 		}
 
-		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(" + username + ", msgArr[1], msgArr[0], msgArr[2], timeOfMessage)";
-		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('Anshul', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
+		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(" + username + ", msgArr[1], msgArr[0], msgArr[2], timeOfMessage)";
+		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('U72KDEH60', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
 
 		DataAccess.insert(query, dbCallback, 1);
 	}
@@ -124,6 +124,12 @@ class DatabaseManager {
 			return "\nyour ping is generated for the user :"+user+" in category: "+category;
 		}
 		return "\nThe report generation is scheduled";
+	}
+
+	getUserDetails(callback){
+		var query = "select username, is_admin, ping_time, ping_day from users"
+
+		DataAccess.select(query, callback);
 	}
 	
 	createPing(user,day,time,text,category){
@@ -148,7 +154,7 @@ class DatabaseManager {
 		return "\n Could not process your request ";
 	}
 	// Used to get the configured pings that are scheduled for the current time
-	getPingsForNow(messageCallback){
+	/*getPingsForNow(messageCallback){
 		var dt = dateTime.create();
 		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ping_day = 'TODAY' or ping_day = '"+new Date(dt.now).+"'";
 		var users = [];
@@ -164,7 +170,7 @@ class DatabaseManager {
 		}
 		DataAccess.select(query, getUsers);
 		return users;
-	}
+	}*/
 }
 
 var db = new DatabaseManager();

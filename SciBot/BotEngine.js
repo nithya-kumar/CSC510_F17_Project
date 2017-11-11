@@ -15,15 +15,20 @@ class BotEngine {
     constructor() {
         this.bot = new SlackApiManager(config.SLACK_TOKEN);
         this.parser = new ParserEngine(this.sendMessage);
+
+        this.userDetails = new Object();
     }
 
     // Method to start the bot
     startBot() {
+        // Get all the user details
+        DatabaseManager.getUserDetails(this.updateUserDetails.bind(this));
+
         console.log("Scibot started");
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
-        this.cronjob = new CronJob('* * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
+        //this.cronjob = new CronJob('* * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
@@ -31,10 +36,6 @@ class BotEngine {
     -----------------------------------------------*/
     // handler for message received
     messageReceived(bot, message) {
-        console.log(message);
-
-        // TODO: Parse the message here
-
         if (message.text == 'scrum')
             bot.reply(message, "Heard '" + message.text + "' from message received");
     }
@@ -58,7 +59,8 @@ class BotEngine {
         var slackDetails = {
             bot: bot,
             incomingMessage: message,
-            isPrivate: true
+            isPrivate: true,
+            role: this.userDetails[message.user]
         }
 
         // Parse the message
@@ -101,9 +103,24 @@ class BotEngine {
             if (err) {
                 console.log(err);
             } else {
-                convo.say('Hello there! Time for your daily status.');
+                convo.say('Hello there! Time for your daily status. <@U72KDEH60>');
             }
         });
+    }
+
+    updateUserDetails(err, data){
+        for(var i in data.rows){
+            var userRole = data.rows[i]['is_admin'] == '0' ? config.UserRoles.TeamMember : config.UserRoles.Admin
+
+            this.userDetails[data.rows[i]['username']] = {
+                role: userRole,
+                pingTime: data.rows[i]['ping_time'],
+                pingDay: data.rows[i]['ping_day']
+            }
+
+            console.log(this.userDetails[data.rows[i]['username']]);
+        }
+
     }
 }
 
@@ -118,8 +135,6 @@ app.listen(3000, function () {
 
     //var pingUsers = new ParserEngine().createPingsForNow();
     
-
-	
 }, null, true, 'America/New_York');*/
 
 module.exports.BotEngine = BotEngine;
