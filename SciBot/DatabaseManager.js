@@ -112,7 +112,7 @@ class DatabaseManager {
 		if(category.toUpperCase() === "STATUS"){
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
 			var hour = ''+hrs+':00:00';
-			var query = "update users set ping_time  = '"+hour+"', ping_day = '"+day+"' where username = '"+user+"' "
+			var query = "update users set ping_time  = '"+hour+"', ping_day = '"+day.toUpperCase()+"' where username = '"+user+"' "
 			console.log(query);
 			var callback = function(err,res){
 				if(err){
@@ -150,7 +150,7 @@ class DatabaseManager {
 	// Used to get the configured pings that are scheduled for the current time
 	getPingsForNow(messageCallback){
 		var dt = dateTime.create();
-		var query = 'select * from users where timeStamp='+dt.now();
+		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ping_day = 'TODAY' or ping_day = '"+new Date(dt.now).+"'";
 		var users = [];
 		var getUsers = function(err, data){
 			if (err) {
