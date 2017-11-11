@@ -221,7 +221,7 @@ class ParserEngine {
         var currentUser = slackDetails.incomingMessage.user;
 
         var obj = new RegExp('ping|generate', 'i');
-        var user = new RegExp('user ([a-zA-Z0-9]+)', 'i');
+        var user = new RegExp('<@([a-zA-Z0-9]+)>', 'i');
         var summary = new RegExp('summary', 'i');
         var time = new RegExp('at (.*)', 'i');
 
