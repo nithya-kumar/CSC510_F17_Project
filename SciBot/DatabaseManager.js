@@ -108,9 +108,11 @@ class DatabaseManager {
 	}
 	
 	
-	insertPing(category,user,hrs,day){
+	updatePing(category,user,hrs,day){
 		if(category.toUpperCase() === "STATUS"){
-			var query = 'insert into users (username,ping_time,ping_day) values('+user+','+hrs+','+day+')';
+			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
+			var query = "update users set ping_time  = '4:00:00', ping_day = '"+day+"' where username = '"+user+"' "
+			console.log(query);
 			var callback = function(err,res){
 				if(err){
 					console.log(err);
@@ -135,11 +137,11 @@ class DatabaseManager {
 		}
 		if(day.toUpperCase() === "TODAY"){
 			if(hrs>new Date(dt.now()).getHours()){
-				return this.insertPing(category,user,hrs,day);
+				return this.updatePing(category,user,hrs,day);
 			}
 		}
 		else{
-			return this.insertPing(category,user,hrs,day);
+			return this.updatePing(category,user,hrs,day);
 		}
 			
 		return "\n Could not process your request ";
