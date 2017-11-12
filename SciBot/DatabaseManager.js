@@ -101,7 +101,7 @@ class DatabaseManager {
 			}
 		}
 
-		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(" + username + ", msgArr[1], msgArr[0], msgArr[2], timeOfMessage)";
+		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('"+username+"','"+msgArr[1]+"','"+msgArr[0]+"','"+msgArr[2]+"','"+current_date+"','"+current_timestamp+"')'";
 		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('U72KDEH60', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
 
 		DataAccess.insert(query, dbCallback, 1);
