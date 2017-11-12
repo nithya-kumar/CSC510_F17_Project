@@ -109,6 +109,10 @@ class BotEngine {
     }
 
     updateUserDetails(err, data){
+        if(data == null || data == undefined){
+            console.log("No user data present");
+            return;
+        }
         for(var i in data.rows){
             var userRole = data.rows[i]['is_admin'] == '0' ? config.UserRoles.TeamMember : config.UserRoles.Admin
 
