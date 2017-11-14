@@ -95,13 +95,15 @@ class DatabaseManager {
 		
 					messageCallback(slackDetails, output_message);
 				}
-				else {
-
-				}
 			}
 		}
 
-		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('"+username+"','"+msgArr[1]+"','"+msgArr[0]+"','"+msgArr[2]+"', current_date, current_time)";
+		var yes_status = msgArr[0].split(":");
+		var today_status = msgArr[1].split(":");
+		var obstacles = msgArr[2].split(":");
+		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('"+username+"','"+today_status[1]+"','"+yes_status[1]+"','"+obstacles[1]+"', current_date, current_time)";
+		
+		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('"+username+"','"+msgArr[1]+"','"+msgArr[0]+"','"+msgArr[2]+"', current_date, current_time)";
 		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('U72KDEH60', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
 
 		DataAccess.insert(query, dbCallback, 1);
