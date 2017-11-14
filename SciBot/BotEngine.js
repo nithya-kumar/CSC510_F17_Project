@@ -28,7 +28,7 @@ class BotEngine {
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
-        //this.cronjob = new CronJob('* * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
+        this.cronjob = new CronJob('0 * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
@@ -46,7 +46,8 @@ class BotEngine {
         var slackDetails = {
             bot: bot,
             incomingMessage: message,
-            isPrivate: false
+            isPrivate: false,
+			role: this.userDetails[message.user] ? 1 : 0
         }
 
         // Parse the message
@@ -60,7 +61,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: true,
-            role: this.userDetails[message.user]
+            role: this.userDetails[message.user] ?  1: 0
         }
 
         // Parse the message
@@ -95,17 +96,16 @@ class BotEngine {
     }
 
     cronjobCallback() {
-        console.log('initiating message');
         var message = { user: 'U72KDEH60', text: 'Hello there!' }
         //this.bot.bot.say(message);
-
-        this.bot.bot.startPrivateConversation({ user: 'U72KDEH60' }, function (err, convo) {
+		new ParserEngine().createPingsForNow(this.bot);
+        /*this.bot.bot.startPrivateConversation({ user: 'U72KDEH60' }, function (err, convo) {
             if (err) {
                 console.log(err);
             } else {
                 convo.say('Hello there! Time for your daily status. <@U72KDEH60>');
             }
-        });
+        });*/
     }
 
     updateUserDetails(err, data){

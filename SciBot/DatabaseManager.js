@@ -172,10 +172,11 @@ class DatabaseManager {
 	}
 
 	// Used to get the configured pings that are scheduled for the current time
-	getPingsForNow(slackDetails,messageCallback){
+	getPingsForNow(bot){
 		var dt = dateTime.create();
-		var today = new Date(dt.now);
+		var today = new Date(dt.now());
 		var today_datestring = ''+today.getMonth()+'/'+today.getDay+'/'+today.getYear();
+		console.log(today_datestring);
 		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and (ping_day = 'TODAY' or ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
 		
 		var users = [];
@@ -186,6 +187,14 @@ class DatabaseManager {
 			}
 			for (var i in data.rows) {
 				console.log(data.rows[i]['username']);
+				bot.bot.startPrivateConversation({ user: data.rows[i]['username'] }, function (err, convo) {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log("Inside convo");
+						convo.say("Hello there!  <@"+data.rows[i]['username']+">");
+					}
+				});
 				//users.addRow(data[i]);
 			}
 		}

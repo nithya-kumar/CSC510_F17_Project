@@ -48,7 +48,8 @@ class ParserEngine {
     }
 
     messageForSignOff(message, slackDetails) {
-        var action = new RegExp('sign in|signing in', 'i');
+        //var action = new RegExp('sign in|signing in', 'i');
+		var action = new RegExp('hi|hey|hello', 'i');
 
         if (action.test(message)) {
             // Question for status
@@ -228,8 +229,8 @@ class ParserEngine {
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
 			
 			var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
-			
-            if (slackDetails.role != Config.UserRole.Admin) {
+			console.log(slackDetails);
+            if (slackDetails.role != config.UserRoles.Admin) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
                     messageType: config.messageType.Reply,
@@ -303,12 +304,12 @@ class ParserEngine {
         return false;
     }
 	
-	createPingsForNow(){
-		var users = DatabaseManager.getPingsForNow(this.messageCallback);
+	createPingsForNow(bot){
+		var users = DatabaseManager.getPingsForNow(bot);
 		var i;
-		for(i in users){
+		/*for(i in users){
 			//this.messageForSignOff(users.username,'sign in');
-		}
+		}*/
 	}
 	
 }
