@@ -228,12 +228,14 @@ class ParserEngine {
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
 			
 			var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
-            if (MockDatabase.getUserRole(currentUser) != 0) {
+			
+            if (slackDetails.role != Config.UserRole.Admin) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 return false;
             }
 

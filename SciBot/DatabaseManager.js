@@ -101,8 +101,8 @@ class DatabaseManager {
 			}
 		}
 
-		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values(" + username + ", msgArr[1], msgArr[0], msgArr[2], timeOfMessage)";
-		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('Anshul', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
+		var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('"+username+"','"+msgArr[1]+"','"+msgArr[0]+"','"+msgArr[2]+"', current_date, current_time)";
+		//var query = "insert into status (username, status_today, status_yesterday, status_obstacles, status_date, status_time) values('U72KDEH60', 'sample today', 'sample yesterday', 'sample obstacle', current_date, current_time)";
 
 		DataAccess.insert(query, dbCallback, 1);
 	}
@@ -137,6 +137,12 @@ class DatabaseManager {
 		messageCallback(slackDetails, output_message);
 		return;
 	}
+
+	getUserDetails(callback){
+		var query = "select username, is_admin, ping_time, ping_day from users"
+
+		DataAccess.select(query, callback);
+	}
 	
 	createPing(user,day,time,text,category,slackDetails,messageCallback){
 		//console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
@@ -164,6 +170,7 @@ class DatabaseManager {
 		});
 		return messageCallback(slackDetails, output_message);
 	}
+
 	// Used to get the configured pings that are scheduled for the current time
 	getPingsForNow(slackDetails,messageCallback){
 		var dt = dateTime.create();
