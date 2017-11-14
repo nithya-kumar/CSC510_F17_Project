@@ -49,7 +49,7 @@ class ParserEngine {
 
     messageForSignOff(message, slackDetails) {
         //var action = new RegExp('sign in|signing in', 'i');
-		var action = new RegExp('hi|hey|hello', 'i');
+		var action = new RegExp('hi|hey|hello|sign in|signing in', 'i');
 
         if (action.test(message)) {
             // Question for status

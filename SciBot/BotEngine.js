@@ -115,7 +115,7 @@ class BotEngine {
                 pingDay: data.rows[i]['ping_day']
             }
 
-            console.log(this.userDetails[data.rows[i]['username']]);
+            //console.log(this.userDetails[data.rows[i]['username']]);
         }
 
     }
