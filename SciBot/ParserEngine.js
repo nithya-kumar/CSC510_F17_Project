@@ -268,6 +268,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 }
             }
             else if (date.test(message)) {
@@ -283,6 +284,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 }
             }
             else {
@@ -291,6 +293,7 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
+				this.messageCallback(slackDetails,this.output_message);
                 return false;
             }
             return true;
@@ -302,7 +305,7 @@ class ParserEngine {
 		var users = DatabaseManager.getPingsForNow(this.messageCallback);
 		var i;
 		for(i in users){
-			this.messageForSignOff(users.username,'sign in');
+			//this.messageForSignOff(users.username,'sign in');
 		}
 	}
 	
