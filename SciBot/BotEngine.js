@@ -47,7 +47,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: false,
-			role: this.userDetails[message.user] ? 1 : 0
+			role: this.userDetails[message.user] ? 0 : 1
         }
 
         // Parse the message
@@ -61,7 +61,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: true,
-            role: this.userDetails[message.user] ?  1: 0
+            role: this.userDetails[message.user] ?  0: 1
         }
 
         // Parse the message

@@ -229,7 +229,6 @@ class ParserEngine {
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
 			
 			var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
-			console.log(slackDetails);
             if (slackDetails.role != config.UserRoles.Admin) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
