@@ -305,11 +305,8 @@ class ParserEngine {
     }
 	
 	createPingsForNow(bot){
-		var users = DatabaseManager.getPingsForNow(bot);
-		var i;
-		/*for(i in users){
-			//this.messageForSignOff(users.username,'sign in');
-		}*/
+		DatabaseManager.getPingsForNow(bot);
+		
 	}
 	
 }
