@@ -1,10 +1,22 @@
 # WORKSHEET
 
+## Index
+
+1. **MILESTONE: BOT**
+   * [Week 1](#week1)
+   * [Week 2](#week2)
+   * [Week 3](#week3)
+2. **MILESTONE: SERVICE**
+   * [Week 4](#week4)
+   * [Week 5](#week5)
+   * [Week 6](#week6)
+
 ## <a name="bot"></a>MILESTONE: BOT
 
 All our tasks were created and assigned in github.
 
-#### Week 1
+## <a name="week1"></a>Week 1
+
 | Deliverable   | Item/Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
 | Platform discussion   | Completed | Group Meeting
@@ -12,7 +24,8 @@ All our tasks were created and assigned in github.
 | Mocking discussion    | Completed | Group Meeting
 | Selenium testing discussion    | Completed | Group Meeting
 
-#### Week 2
+
+## <a name="week2"></a>Week 2
 
 | Deliverable    | Item/Status   |  Issues/Tasks
 | -------------  | ------------  |  ------------
@@ -33,7 +46,8 @@ All our tasks were created and assigned in github.
 | Alternate case| The admin must have permissions to configure the bot. / In-progress | [#6](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/6)
 | Worksheet updation | Completed | [#6](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/6)
 
-#### Week 3
+
+## <a name="week3"></a>Week 3
 
 | Deliverable   | Item/Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
@@ -50,7 +64,8 @@ All our tasks were created and assigned in github.
 
 ## <a name="service"></a>MILESTONE: SERVICE
 
-#### Week 4
+
+## <a name="week4"></a>Week 4
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
@@ -69,8 +84,7 @@ All our tasks were created and assigned in github.
 | Subflow  [S2]     | Started| [#22](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/22)
 
 
-
-#### Week 5
+## <a name="week5"></a>Week 5
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
@@ -85,7 +99,7 @@ All our tasks were created and assigned in github.
 | **Worksheet updation** | Started | [#19](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/19)
 
 
-#### Week 6
+## <a name="week6"></a>Week 6
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
