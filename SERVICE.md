@@ -77,4 +77,4 @@ For our milestone we used Github Issues to keep track of our tasks to be done.
 
 ## <a name="screencast"></a> 4. SCREENCAST
 
-[Screencast]() of our service milestone.
+[Screencast](https://goo.gl/wXkosF) of our service milestone.
