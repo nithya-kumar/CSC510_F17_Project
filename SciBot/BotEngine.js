@@ -28,7 +28,7 @@ class BotEngine {
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
-        this.cronjob = new CronJob('*/2 * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
+        this.cronjob = new CronJob('0 0 * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
@@ -61,7 +61,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: true,
-            role: this.userDetails[message.user] ?  0: 1
+            role: this.userDetails[message.user]['is_admin'] ?  0: 1
         }
 
         // Parse the message
