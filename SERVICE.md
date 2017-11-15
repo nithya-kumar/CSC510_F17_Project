@@ -66,6 +66,8 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 For our bot we have the following components
 ![img name](Images/module_list.JPG)
 
+We have created and used a PostgreSQL Database to store and retrieve all the user and status information - The tables with its respective attributes which are present can be seen in the file dbScript.
+
 The code for the usecase implementation can be seen in the package [SciBot](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/tree/master/SciBot)
 
 Furthermore, the [class diagram](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
