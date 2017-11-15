@@ -47,7 +47,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: false,
-			role: this.userDetails[message.user] ? 0 : 1
+			role: this.userDetails[message.user]['is_admin'] ? 0 : 1
         }
 
         // Parse the message
