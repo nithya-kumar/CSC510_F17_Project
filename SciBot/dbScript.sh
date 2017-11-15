@@ -1,3 +1,4 @@
+#!/bin/sh
 #Create table to track user, user roles, configured pings
 create table users (
 	username  varchar(25) primary key,
