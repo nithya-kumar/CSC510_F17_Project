@@ -64,7 +64,7 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 ```
 ## <a name="implement"></a> 2. USECASE IMPLEMENTATION
 For our bot we have the following components
-![img name](Images/Bot_Implementation_components.png)
+![img name](Images/module_list.JPG)
 
 The code for the usecase implementation can be seen in the package [SciBot](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/tree/master/SciBot)
 
