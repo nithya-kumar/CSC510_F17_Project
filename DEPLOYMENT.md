@@ -21,7 +21,7 @@ We have the following ansible playbooks:
 ## <a name="rules"></a> Acceptance Test Instructions
 
 ### 1. To initiate conversation with scibot,
-    	1. Log-in to 
+	1. Log-in to 
 	2. Enter "" as the mail-ID and use "" as the password for logging in.
 	3. After sucessfully logging-in navigate to "general" channel and execute the test cases given in the acceptance test plan below.
 
@@ -36,12 +36,12 @@ The first use case is to schedule a daily scrum and ask the users questions rega
     	
 	For this module, we ask initiate a conversation with the Scibot asking the user whether they have updated the daily status
 	    	
-	        Input:
+	       	Input:
 	        @scibot Hi
 	        
 	```
-	Expected Output:
-	    Have you updated your daily status?
+		Expected Output:
+	    	Have you updated your daily status?
 	```
 	Screenshot:
 	![1]()
@@ -54,8 +54,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	        @scibot yes I have updated my daily status
 	
 	```
-	Expected Output:
-	    Okay, Thank you! You may signoff.
+		Expected Output:
+	   	Okay, Thank you! You may signoff.
 	```
 	Screenshot:
 	![2]()
@@ -68,8 +68,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	        @scibot no I have not updated my daily status
 	
 	```
-	Expected Output:
-	    Please update your daily status
+		Expected Output:
+	    	Please update your daily status
 		1. What did you do yesterday?
 		2. What will you do today?
 		3. What are the obstacles came in your way?
@@ -88,8 +88,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 			Obstacles: I was not able to clone the git repo
 	
 	```
-	Expected Output:
-	    Your daily status has been saved!
+		Expected Output:
+	    	Your daily status has been saved!
 	```
 	Screenshot:
 	![4]()
@@ -102,8 +102,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	        @scibot No I was off yesterday
 	
 	```
-	Expected Output:
-	    Please update your daily status
+		Expected Output:
+	    	Please update your daily status
 		1. What will you do today?
 
 	```
@@ -118,8 +118,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	        @scibot Today: I will implement Usecase 1
 	
 	```
-	Expected Output:
-	    Your daily status has been saved!
+		Expected Output:
+	    	Your daily status has been saved!
 	```
 	Screenshot:
 	![6]()
@@ -127,12 +127,12 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 7. When the user is not entering the right information according to the guidelines
 	
-			Input:
+		Input:
 	        @scibot What do I have to do today?
 	
 	```
-	Expected Output:
-	    Sorry, I don't understand that
+		Expected Output:
+	    	Sorry, I don't understand that
 	```
 	Screenshot:
 	
@@ -176,7 +176,7 @@ The second use case is using the daily status collected from each user the bot w
 	        @scibot generate a sprint report starting at "your date" and ending "your date"
 	
 	```
-	Expected Output:
+		Expected Output:
 		Report generated on slack as in screenshot below
 	    
 	```
@@ -189,8 +189,8 @@ The second use case is using the daily status collected from each user the bot w
 	        @scibot What do I have to do today?
 	
 	```
-	Expected Output:
-	    Sorry, I don't understand that
+		Expected Output:
+	    	Sorry, I don't understand that
 	```
 	Screenshot:
 	
