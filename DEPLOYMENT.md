@@ -2,14 +2,14 @@
 
 1. [Deployment Procedure](#deploy)
 2. [Acceptance Test Instruction](#rules)
-	* [Use Case #1](#usecase1)
-	* [Use Case #2](#usecase2)
-	* [Use Case #3](#usecase3)
+	* [Use Case 1](#usecase1)
+	* [Use Case 2](#usecase2)
+	* [Use Case 3](#usecase3)
 3. [Code Inspection](#inspect)    
 4. [Task Tracking](#track)
 5. [Screencast](#screencast)
 
-##<a name="deploy"></a> Deployment Procedure
+## <a name="deploy"></a> Deployment Procedure
 
 We have the following ansible playbooks: 
 
@@ -17,17 +17,17 @@ We have the following ansible playbooks:
     
 2. [database.yml]() - This playbook is responsible to install and create the database that is required. 
     
-##<a name="rules"></a> Acceptance Test Instructions
+## <a name="rules"></a> Acceptance Test Instructions
 
-1. To initiate conversation with ,
-    1. Log-in to 
+### 1. To initiate conversation with ,
+    	1. Log-in to 
 	2. Enter "" as the mail-ID and use"ncsu@2016" as the password for logging in.
 	3. After sucessfully logging-in navigate to "general" channel and execute the test cases given in the acceptance test plan below.
 
 
-2. Three usecases are to be tested. 
+### 2. Three usecases are to be tested. 
 	 
-###<a name="usecase1"></a> Usecase 1: Pinging a user for daily updates
+### <a name="usecase1"></a> Usecase 1: Pinging a user for daily updates
 
 The first use case is to schedule a daily scrum and ask the users questions regarding the work done to get daily updates.
 
@@ -138,11 +138,9 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	
 	![1]()
 
-###<a name="usecase2"></a> Usecase 2: Generating a summary report
+### <a name="usecase2"></a> Usecase 2: Generating a summary report
 
 The second use case is using the daily status collected from each user the bot will generate a summary report.
-
-**Note:** 
 
 1. In this particular part of testcase, the user initiates the conversation for the bot to generate a sprint report for yesterday
     	
@@ -200,7 +198,7 @@ The second use case is using the daily status collected from each user the bot w
 	![13]()
 
 
-###<a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
+### <a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
 
 One more use of this bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
 
@@ -209,15 +207,15 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 #### Edge Cases
 
 
-##<a name="inspect"></a> Code Inspection
+## <a name="inspect"></a> Code Inspection
 
 The implementation of all use-cases in scibot in the [bot.js file](). Code inspection can be on this file. Test cases that test for edge cases and invalid input data were part of the acceptance test plan.
 
-##<a name="track"></a>Task Tracking
+## a name="track"></a>Task Tracking
 
 WORKSHEET.md file has been updated to this milestone which can be found [here]() . We have used github issues to keep track of all our tasks.
 
-##<a name="screencast"></a>Screencast
+## <a name="screencast"></a>Screencast
 
 The link to the screencast for the deployment milestone is - [here]() . 
 Explaination and testing the bot for each use cases can be referred to [here](link to service screencast).
