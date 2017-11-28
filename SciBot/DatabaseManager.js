@@ -114,14 +114,14 @@ class DatabaseManager {
 		if (day.toUpperCase() == 'TODAY') {
 			var dt = dateTime.create();
 			var today = new Date(dt.now());
-			var today_datestring = '' + (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+			var today_datestring = '' + (today.getUTCMonth() + 1) + '/' + today.getUTCDate() + '/' + today.getUTCFullYear();
 			day = today_datestring;
 		}
 		else if (day.toUpperCase() == 'TOMORROW') {
 			var dt = dateTime.create();
 			var tomorrow = new Date(dt.now());
 			tomorrow.setDate(tomorrow.getDate() + 1);
-			var tomorrow_datestring = '' + (tomorrow.getMonth() + 1) + '/' + tomorrow.getDate() + '/' + tomorrow.getFullYear();
+			var tomorrow_datestring = '' + (tomorrow.getUTCMonth() + 1) + '/' + tomorrow.getUTCDate() + '/' + tomorrow.getUTCFullYear();
 			day = tomorrow_datestring;
 		}
 		if (category.toUpperCase() === "STATUS") {
@@ -208,7 +208,7 @@ class DatabaseManager {
 	getPingsForNow(bot) {
 		var dt = dateTime.create();
 		var today = new Date(dt.now());
-		var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+		var today_datestring = ''+(today.getUTCMonth()+1)+'/'+today.getUTCDate()+'/'+today.getUTCFullYear();
 		//var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ( ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
 		var query = "select u.username from team t inner join users u on (t.t_id = u.t_id) where ((u.ping_day = '"+today_datestring+"' or u.ping_day = 'EVERYDAY') and u.ping_time = '" + new Date(dt.now()).getHours() + ":00:00')"
 			+ " OR u.ping_day != '"+today_datestring+"' and u.ping_day != 'EVERYDAY' and t.ping_time = '" + new Date(dt.now()).getHours() + ":00:00'";
