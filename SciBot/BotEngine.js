@@ -29,7 +29,7 @@ class BotEngine {
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
-        this.cronjob = new CronJob('0 0 * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
+        this.cronjob = new CronJob('0 * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
@@ -48,7 +48,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: false,
-			role: this.userDetails[message.user]['is_admin'] ? 0 : 1
+			role: this.userDetails[message.user]['role']
         }
 
         // Parse the message
@@ -62,7 +62,7 @@ class BotEngine {
             bot: bot,
             incomingMessage: message,
             isPrivate: true,
-            role: this.userDetails[message.user]['is_admin'] ?  0: 1
+            role: this.userDetails[message.user]['role']
         }
 
         // Parse the message
@@ -98,7 +98,7 @@ class BotEngine {
 
     cronjobCallback() {
         this.parser.createPingsForNow(this.bot);
-        this.parser.generateReportForNow(this.bot, this.userDetails);
+        //this.parser.generateReportForNow(this.bot, this.userDetails);
     }
 
     updateUserDetails(err, data){
@@ -116,6 +116,7 @@ class BotEngine {
                 team: data.rows[i]['t_id']
             }
         }
+		console.log(this.userDetails);
     }
 }
 

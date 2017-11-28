@@ -143,9 +143,10 @@ class DatabaseManager {
 			DataAccess.insert(query, callback);
 			return;
 		}
-		else if (category.toUpperCase() === "REPORT") {
+		else if (category.toUpperCase() === "REPORT" || category.toUpperCase() === "SUMMARY") {
 			var hour = '' + hrs + ':00:00';
-			var query = "update team set report_time = '" + hour + "', report_day = '" + day.toUpperCase() + "' where t_id = (select t_id from users where username = '" + slackDetails.user + "')";
+			var query = "update team set report_time = '" + hour + "', report_day = '" + day.toUpperCase() + "' where t_id = (select t_id from users where username = '" + slackDetails.incomingMessage.user + "')";
+			console.log(query);
 			var callback = function (err, res) {
 				if (err) {
 					console.log(err);
@@ -162,7 +163,7 @@ class DatabaseManager {
 			return;
 		}
 		var output_message = new OutputMessage({
-			message: "\nThe report generation is scheduled",
+			message: "Unable to configure your request",
 			messageType: config.messageType.Reply,
 			conversationCallback: undefined
 		});
@@ -206,11 +207,12 @@ class DatabaseManager {
 	// Used to get the configured pings that are scheduled for the current time
 	getPingsForNow(bot) {
 		var dt = dateTime.create();
-		//var today = new Date(dt.now());
-		//var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+		var today = new Date(dt.now());
+		var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
 		//var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ( ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
-		var query = "select u.username from team t inner join users u on (t.t_id = u.t_id) where ((u.ping_date = current_date or u.ping_day = 'EVERYDAY') and u.ping_time = '" + new Date(dt.now()).getHours() + ":00:00')"
-			+ " OR u.ping_date != current_date and u.ping_day != 'EVERYDAY' and t.ping_time = '" + new Date(dt.now()).getHours() + ":00:00'";
+		var query = "select u.username from team t inner join users u on (t.t_id = u.t_id) where ((u.ping_day = '"+today_datestring+"' or u.ping_day = 'EVERYDAY') and u.ping_time = '" + new Date(dt.now()).getHours() + ":00:00')"
+			+ " OR u.ping_day != '"+today_datestring+"' and u.ping_day != 'EVERYDAY' and t.ping_time = '" + new Date(dt.now()).getHours() + ":00:00'";
+		console.log(query);
 		var users = [];
 		var getUsers = function (err, data) {
 			if (err) {
@@ -232,7 +234,7 @@ class DatabaseManager {
 		return users;
 	}
 
-	generateReportsForNow(bot) {
+	generateReportsForNow(bot,userDetails) {
 		var dt = dateTime.create();
 
 		// Create database callback
@@ -265,7 +267,7 @@ class DatabaseManager {
 		}
 
 		var query = "select a.username, a.is_admin, a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username) inner join team t on (t.t_id = a.t_id) where t.t_id = " + t_id + " and '" + new Date(dt.now()).getHours() + ":00:00'";
-
+		console.log(query);
 		// Fetch data from database
 		DataAccess.select(query, dbCallback);
 	}

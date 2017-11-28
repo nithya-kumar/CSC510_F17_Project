@@ -227,7 +227,7 @@ class ParserEngine {
         var time = new RegExp('at (.*)', 'i');
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-			
+			console.log(slackDetails.role);
 			//var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
             if (slackDetails.role != config.UserRoles.Admin) {
                 this.output_message = new OutputMessage({
@@ -308,7 +308,7 @@ class ParserEngine {
 	}
     
     generateReportForNow(bot, userDetails){
-		DatabaseManager.generateReportForNow(bot, userDetails);	
+		DatabaseManager.generateReportsForNow(bot, userDetails);	
 	}
 }
 

@@ -9,7 +9,7 @@ class DataAccess {
         var dbOptions = {
             user: 'postgres',
             host: 'localhost',
-            database: 'scibot',
+            database: 'postgres',
             port: 5432
         };
 
