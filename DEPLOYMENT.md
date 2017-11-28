@@ -21,8 +21,8 @@ We have the following ansible playbooks:
 ## <a name="rules"></a> Acceptance Test Instructions
 
 ### 1. To initiate conversation with scibot,
-	1. Log-in to 
-	2. Enter "" as the mail-ID and use "" as the password for logging in.
+	1. Log-in to slack
+	2. Enter "seproject17@gmail.com" as the mail-ID with "SEProject2017" as the password for logging in.
 	3. After sucessfully logging-in navigate to "general" channel and execute the test cases given in the acceptance test plan below.
 
 
