@@ -36,8 +36,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
     	
 	For this module, we ask initiate a conversation with the Scibot asking the user whether they have updated the daily status
 	    	
-	       	Input:
-	        @scibot Hi
+	       Input:
+	       @scibot Hi
 	        
 	```
 		Expected Output:
@@ -48,7 +48,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 2. The user has already updated their status
 
-	For this module, the user has already updated the daily status so scibot lets the user sign off.
+	For this module, the user has already updated the daily status so scibot lets the user sign off.  
+	**Note** - Key words are "yes" ; "updated"
 	
 	        Input:
 	        @scibot yes I have updated my daily status
@@ -62,7 +63,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 3. The user has not updated their status
 
-	For this module, the user has not updated their daily status so scibot asks the user regular scrum questions to update status
+	For this module, the user has not updated their daily status so scibot asks the user regular scrum questions to update status  
+	**Note** - Key words are "no" ; "not" ; "updated"
 	
 	        Input:
 	        @scibot no I have not updated my daily status
@@ -79,7 +81,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 4. Save the daily status of users
 
-	For this module, once the user enters the daily status, scibot saves it into the database.
+	For this module, once the user enters the daily status, scibot saves it into the database.  
+	**Note** - There should be a space after colon but no space before as given below. 
 	
 	        Input:
 	        @scibot 
@@ -96,10 +99,12 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 5. If the user was off the previous day and has not updated the daily status
 
-	For this module, the user tells scibot they were absent the previous day, so scibot asks the user only what the user plans on doing today.
+	For this module, the user tells scibot they were absent the previous day, so scibot asks the user only what the user plans on doing today.  
+	**Note** - Key words are "no" ; "off" ; "yesterday" ; "absent"
 	
 	        Input:
-	        @scibot No I was off yesterday
+	        @scibot No I was off yesterday or
+		@scibot No I was absent yesterday
 	
 	```
 		Expected Output:
@@ -111,7 +116,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	![5]()
 
 6. When the user was absent the previous day.
-	For this module, The user was off yesterday so the other two scrum question answers are set to absent when only this question is asked - "What will you do today?" 
+	For this module, The user was off yesterday so the other two scrum question answers are set to absent when only this question is asked - "What will you do today?"   
+	**Note** - There should be a space after colon but no space before as given below.
 
 		
 	        Input:
@@ -142,8 +148,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 The second use case is using the daily status collected from each user the bot will generate a summary report.
 
-1. For this part in the module, the user initiates the conversation for the bot to generate a sprint report for yesterday
-    	
+1. For this part in the module, the user initiates the conversation for the bot to generate a sprint report for yesterday.      	
 		    	
 	        Input:
 	        @scibot generate sprint report for yesterday
@@ -182,8 +187,22 @@ The second use case is using the daily status collected from each user the bot w
 	```
 	Screenshot:
 	![3]() 
+	
+4. When the date is entered is not correct or there is no data for that date in the database
+		
+		Input:
+	        @scibot generate a sprint report starting at "invalid date" and ending "invalid date"
+	
+	```
+		Expected Output:
+	    	Sorry report cannot be generated.
+	```
+		
+	Screenshot:
+	
+	![4]()
 
-4. When the user is not entering the right information according to the guidelines
+5. When the user is not entering the right information according to the guidelines
 	
 		Input:
 	        @scibot What do I have to do today?
@@ -203,7 +222,6 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 
 1. 
 
-#### Edge Cases
 
 
 ## <a name="inspect"></a> Code Inspection
