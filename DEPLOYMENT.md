@@ -12,9 +12,9 @@
 ## <a name="deploy"></a> Deployment Procedure
 
 We have the following ansible playbooks: 
-1. [provision.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/provision.yml) - 
+1. [provision.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/provision.yml) - Provisions a EC2 instance on Amazon Web Services (AWS) and generates ssh key to use as deploy key to help clone the github repo
 
-2. [install_packages.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/install_packages.yml) - This playbook is responsible for the tasks related to setting up Scibot. This installs all the required modules and packages to run the bot. 
+2. [install_packages.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/install_packages.yml) - This playbook is responsible for the tasks related to setting up Scibot. This installs all the required modules and packages to run the bot, clones the github respository and runs the bot
     
 3. [database.yml]() - This playbook is responsible to install and create the database that is required. 
     
