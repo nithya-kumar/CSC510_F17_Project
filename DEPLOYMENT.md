@@ -44,9 +44,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		Expected Output:
 	    	Have you updated your daily status?
 	```
-	Screenshot:
-	![1]()
-
+	
 2. The user has already updated their status
 
 	For this module, the user has already updated the daily status so scibot lets the user sign off.  
@@ -59,9 +57,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		Expected Output:
 	   	Okay, Thank you! You may signoff.
 	```
-	Screenshot:
-	![2]()
-
+	
 3. The user has not updated their status
 
 	For this module, the user has not updated their daily status so scibot asks the user regular scrum questions to update status  
@@ -77,9 +73,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		2. What will you do today?
 		3. What are the obstacles came in your way?
 	```
-	Screenshot:
-	![3]() 
-
+	
 4. Save the daily status of users
 
 	For this module, once the user enters the daily status, scibot saves it into the database.  
@@ -94,9 +88,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		Expected Output:
 	    	Your daily status has been saved!
 	```
-	Screenshot:
-	![4]()
-
+	
 5. If the user was off the previous day and has not updated the daily status
 
 	For this module, the user tells scibot they were absent the previous day, so scibot asks the user only what the user plans on doing today.  
@@ -112,9 +104,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		1. What will you do today?
 
 	```
-	Screenshot:
-	![5]()
-
+	
 6. When the user was absent the previous day.
 	For this module, The user was off yesterday so the other two scrum question answers are set to absent when only this question is asked - "What will you do today?"   
 			
@@ -125,10 +115,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		Expected Output:
 	    	Your daily status has been saved!
 	```
-	Screenshot:
-	![6]()
-
-
+	
 7. When the user is not entering the right information according to the guidelines
 	
 		Input:
@@ -138,10 +125,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 		Expected Output:
 	    	Sorry, I don't understand that
 	```
-	Screenshot:
 	
-	![7]()
-
 ### <a name="usecase2"></a> Usecase 2: Generating a summary report
 
 The second use case is using the daily status collected from each user the bot will generate a summary report.
@@ -156,9 +140,7 @@ The second use case is using the daily status collected from each user the bot w
 		Report generated on slack as in screenshot below
 	    
 	```
-	Screenshot:
-	![1]()
-
+	
 2. For this part in the module, the user initiates the conversation for the bot to generate a sprint report for today.
 
 		
@@ -169,9 +151,7 @@ The second use case is using the daily status collected from each user the bot w
 		Expected Output:
 	    
 	```
-	Screenshot:
-	![2]()
-
+	
 3. For this part in the module, the user initiates the conversation for the bot to generate a sprint report by giving dates.
 
 		
@@ -183,9 +163,7 @@ The second use case is using the daily status collected from each user the bot w
 		Report generated on slack as in screenshot below
 	    
 	```
-	Screenshot:
-	![3]() 
-	
+		
 4. When the date is entered is not correct or there is no data for that date in the database
 		
 		Input:
@@ -196,10 +174,7 @@ The second use case is using the daily status collected from each user the bot w
 	    	Sorry report cannot be generated.
 	```
 		
-	Screenshot:
 	
-	![4]()
-
 5. When the user is not entering the right information according to the guidelines
 	
 		Input:
@@ -209,11 +184,7 @@ The second use case is using the daily status collected from each user the bot w
 		Expected Output:
 	    	Sorry, I don't understand that
 	```
-	Screenshot:
 	
-	![5]()
-
-
 ### <a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
 
 Another use of the bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
