@@ -128,7 +128,7 @@ All our tasks were created and assigned in github.
 | **Screencast** | Completed | [#25](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/25)
 
 ## <a name="deploy"></a>MILESTONE: DEPLOYMENT
-## <a name="week8"></a>Week 7
+## <a name="week7"></a>Week 7
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------    |  ------------
@@ -136,9 +136,10 @@ All our tasks were created and assigned in github.
 | Ansible Playbook for installation of packages| Started| [#28](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/28)
 | Ansible Playbook for database    |  Started | [#29](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/29)
 | Ansible Playbook for integration  |  Started | [#30](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/30)
+| Ansible Playbook for provisioning AWS instance |  Started | [#33](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/33)
 | **Discussion of acceptance testing** |  Started | [#31](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/31) 
 
-## <a name="week7"></a>Week 8
+## <a name="week8"></a>Week 8
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------    |  ------------
@@ -146,8 +147,9 @@ All our tasks were created and assigned in github.
 | Ansible Playbook for installation of packages| Completed| [#28](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/28)
 | Ansible Playbook for database    |  Completed | [#29](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/29)
 | Ansible Playbook for integration  |  Completed | [#30](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/30)
+| Ansible Playbook for provisioning AWS instance |  Completed | [#33](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/33)
 | **Acceptance testing** |  Completed | [#31](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/31)
-| **Deployment of scibot on AWS**  |  Completed | [#33](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/33)   
+| **Deployment of scibot on AWS**  |  Completed | [#34](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/34)   
 | Integration of Ansible Playbooks |  Completed| [#30](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/30)
 | **Deployment documentation** | Completed | [#32](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/32)
 | **Worksheet updation** | Completed | [#26](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/26)
