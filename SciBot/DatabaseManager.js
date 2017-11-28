@@ -111,6 +111,21 @@ class DatabaseManager {
 	
 	
 	updatePing(category,user,hrs,day,slackDetails,messageCallback){
+		if(day.toUpperCase() == 'TODAY')
+		{
+			var dt = dateTime.create();
+			var today = new Date(dt.now());
+			var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+			day = today_datestring;
+		}
+		else if(day.toUpperCase() == 'TOMORROW')
+		{
+			var dt = dateTime.create();
+			var tomorrow = new Date(dt.now());
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			var tomorrow_datestring = ''+(tomorrow.getMonth()+1)+'/'+tomorrow.getDate()+'/'+tomorrow.getFullYear();
+			day = tomorrow_datestring;
+		}
 		if(category.toUpperCase() === "STATUS"){
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
 			var hour = ''+hrs+':00:00';
@@ -121,7 +136,25 @@ class DatabaseManager {
 					return;
 				}
 				var output_message = new OutputMessage({
-					message: "\nyour ping is generated for the user : <@"+user+"> in category: "+category,
+					message: "Your ping is generated for the user : <@"+user+"> in category: "+category,
+					messageType: config.messageType.Reply,
+					conversationCallback: undefined
+				});
+				messageCallback(slackDetails, output_message);
+			}
+			DataAccess.insert(query,callback);
+			return;
+		}
+		else if(category.toUpperCase() === "REPORT"){
+			var hour = ''+hrs+':00:00';
+			var query = "update team set report_time = '"+hour+"', report_day = '"+day.toUpperCase()+"' where t_id = (select t_id from users where username = '"+slackDetails.user+"')";
+			var callback = function(err,res){
+				if(err){
+					console.log(err);
+					return;
+				}
+				var output_message = new OutputMessage({
+					message: "Report generation time successfully configured",
 					messageType: config.messageType.Reply,
 					conversationCallback: undefined
 				});
@@ -175,10 +208,11 @@ class DatabaseManager {
 	// Used to get the configured pings that are scheduled for the current time
 	getPingsForNow(bot){
 		var dt = dateTime.create();
-		var today = new Date(dt.now());
-		var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
-		var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and (ping_day = 'TODAY' or ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
-		
+		//var today = new Date(dt.now());
+		//var today_datestring = ''+(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+		//var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ( ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
+		var query = "select u.username from team t inner join users u on (t.t_id = u.t_id) where ((u.ping_date = current_date or u.ping_day = 'EVERYDAY') and u.ping_time = '"+new Date(dt.now()).getHours()+":00:00')"
+		+ " OR u.ping_date != current_date and u.ping_day != 'EVERYDAY' and t.ping_time = '"+new Date(dt.now()).getHours()+":00:00'";
 		var users = [];
 		var getUsers = function(err, data){
 			if (err) {
@@ -197,6 +231,68 @@ class DatabaseManager {
 			}
 		}
 		DataAccess.select(query, getUsers);
+		return users;
+	}
+	generateReportsForNow(bot){
+		var dt = dateTime.create();
+		var query = "select * from team where  report_time = '"+new Date(dt.now()).getHours()+":00:00' and report_day = current_date";
+		var users = [];
+		var genReport = function(err, data){
+			if (err) {
+				console.log(err);
+				return;
+			}
+			for (var i in data.rows) {
+				// Create database callback
+				var dbCallback = function(err, data){
+					if(err){
+						console.log(err);
+					}
+					else {
+						var strMessage = 'Username\t\tStatus for current day\t\t\t\t\t\tStatus for previous day\t\t\t\t\t\tObstacles\t\t\t\t\t\tDate\n';
+						strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
+
+						for(var i = 0; i < data.rows.length; ++i){
+							strMessage += data.rows[i]['full_name'] + '\t\t' + data.rows[i]['status_today'] + '\t\t\t\t\t\t' + data.rows[i]['status_yesterday'] + '\t\t\t\t\t\t' + data.rows[0]['status_obstacles'] + '\t\t\t\t\t\t' + data.rows[i]['status_date'] + '\n';
+							strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
+						}
+
+						var output_message = new OutputMessage({
+							message: strMessage,
+							messageType: config.messageType.Reply,
+							conversationCallback: undefined
+						});
+			
+						messageCallback(slackDetails, output_message);
+					}
+				}
+
+				var query = '';
+				else if(startDate == 'today'){
+					// Today
+					query = "select a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username)";
+				}
+				else{
+					// yesterday
+					query = "select a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date - 1) b inner join users a on (a.username = b.username)";
+				}
+
+				// Fetch data from database
+				DataAccess.select(query, dbCallback);
+				
+				
+				
+				bot.bot.startPrivateConversation({ user: data.rows[i]['username'] }, function (err, convo) {
+					if (err) {
+						console.log(err);
+					} else {
+						convo.say("Hello there!  <@"+data.rows[i]['username']+">");
+					}
+				});
+				//users.addRow(data[i]);
+			}
+		}
+		DataAccess.select(query, genReport);
 		return users;
 	}
 }

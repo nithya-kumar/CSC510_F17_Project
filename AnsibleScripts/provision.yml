@@ -3,11 +3,11 @@
   connection: local
   vars:
       instance_type: t2.micro
-      security_group: sg_scibot_vir
+      security_group: Sci
       image: ami-da05a4a0                         # Ubuntu Server 16.04 LTS (HVM), SSD Volume Type
       region: us-east-1
       keypair: scibot-prod-key
-      subnet: subnet-84ea71cf
+      subnet: subnet-6eef820a
       user: "ubuntu"
   tasks:
     - name: Create an EC2 key
