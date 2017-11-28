@@ -208,10 +208,15 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 
 ## <a name="inspect"></a> Code Inspection
 
-The implementation of all use-cases in scibot can be inspected in
-1. [ParserEngine.js file](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/ParserEngine.js), 
-2. [DatabaseManager.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/DatabaseManager.js),
-3. [BotEngine.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/BotEngine.js)
+The implementation of all use-cases in scibot can be inspected in  
+1. [BotEngine.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/BotEngine.js)  
+Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine.  
+
+2. [ParserEngine.js file](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/ParserEngine.js)  
+Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components
+
+3. [DatabaseManager.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/DatabaseManager.js)  
+Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
 
 ## <a name="track"></a>Task Tracking
 
