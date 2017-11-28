@@ -304,10 +304,12 @@ class ParserEngine {
     }
 	
 	createPingsForNow(bot){
-		DatabaseManager.getPingsForNow(bot);
-		
+		DatabaseManager.getPingsForNow(bot);	
 	}
-	
+    
+    generateReportForNow(bot, userDetails){
+		DatabaseManager.generateReportForNow(bot, userDetails);	
+	}
 }
 
 module.exports.ParserEngine = ParserEngine;

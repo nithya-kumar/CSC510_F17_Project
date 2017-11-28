@@ -25,6 +25,7 @@ class BotEngine {
         DatabaseManager.getUserDetails(this.updateUserDetails.bind(this));
 
         console.log("Scibot started");
+
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
@@ -96,9 +97,8 @@ class BotEngine {
     }
 
     cronjobCallback() {
-        var message = { user: 'U72KDEH60', text: 'Hello there!' }
-        //this.bot.bot.say(message);
-		new ParserEngine().createPingsForNow(this.bot);
+        this.parser.createPingsForNow(this.bot);
+        this.parser.generateReportForNow(this.bot, this.userDetails);
     }
 
     updateUserDetails(err, data){
@@ -112,26 +112,11 @@ class BotEngine {
             this.userDetails[data.rows[i]['username']] = {
                 role: userRole,
                 pingTime: data.rows[i]['ping_time'],
-                pingDay: data.rows[i]['ping_day']
+                pingDay: data.rows[i]['ping_day'],
+                team: data.rows[i]['t_id']
             }
-
-            //console.log(this.userDetails[data.rows[i]['username']]);
         }
-
     }
 }
-
-/*var portNum = 3000;
-app.listen(3000, function () {
-    //console.log('Making some pancakes on port:', portNum);
-});*/
-
-/*new CronJob('0 0 * * * *', function() {
-    
-    //console.log('Hello puppies!')
-
-    //var pingUsers = new ParserEngine().createPingsForNow();
-    
-}, null, true, 'America/New_York');*/
 
 module.exports.BotEngine = BotEngine;
