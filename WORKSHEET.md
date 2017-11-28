@@ -2,14 +2,18 @@
 
 ## Index
 
-1. **MILESTONE: BOT**
+1. **MILESTONE: BOT** 
    * [Week 1](#week1)
    * [Week 2](#week2)
    * [Week 3](#week3)
-2. **MILESTONE: SERVICE**
+2. **MILESTONE: SERVICE** 
    * [Week 4](#week4)
    * [Week 5](#week5)
    * [Week 6](#week6)
+3. **MILESTONE: DEPLOYMENT** 
+   * [Week 7](#week7)
+   * [Week 8](#week8)
+
 
 ## <a name="bot"></a>MILESTONE: BOT
 
@@ -102,8 +106,8 @@ All our tasks were created and assigned in github.
 ## <a name="week6"></a>Week 6
 
 | Deliverable   | Item / Status   |  Issues/Tasks
-| ------------- | ------------  |  ------------
-| Database (POSTGRESQL) table      |  Created / Active | [#18](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/18)
+| ------------- | ------------    |  ------------
+| Database (POSTGRESQL) table     |  Created / Active | [#18](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/18)
 | **Use Case 1**| Pinging user for daily updates | 
 | Subflow  [S1]     | Completed| [#24](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/24)  
 | Subflow  [S2]     | Completed| [#24](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/24)
@@ -122,3 +126,33 @@ All our tasks were created and assigned in github.
 | **Service documentation** | Completed | [#17](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/17)
 | **Worksheet updation** | Completed | [#19](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/19)
 | **Screencast** | Completed | [#25](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/25)
+
+## <a name="deploy"></a>MILESTONE: DEPLOYMENT
+## <a name="week8"></a>Week 7
+
+| Deliverable   | Item / Status   |  Issues/Tasks
+| ------------- | ------------    |  ------------
+| **Ansible Playbooks for Deployment**| &nbsp; | &nbsp;
+| Ansible Playbook for installation of packages| Started| &nbsp;
+| Ansible Playbook for database    |  Started | &nbsp;
+| Ansible Playbook for provisions  |  Started | &nbsp;
+| **Discussion of acceptance testing** |  Started | &nbsp;
+| **Deployment of scibot on AWS**  |  Started | &nbsp;
+ 
+
+## <a name="week7"></a>Week 8
+
+| Deliverable   | Item / Status   |  Issues/Tasks
+| ------------- | ------------    |  ------------
+| **Deployment of scibot on AWS**| Continued and completed | &nbsp;
+| Ansible Playbook for installation of packages| Started| &nbsp;
+| Ansible Playbook for database    |  Completed | &nbsp;
+| Ansible Playbook for provisions  |  Completed | &nbsp;
+| **Acceptance testing** |  Completed | &nbsp;
+| Remote server creation using AWS | Completed| &nbsp;      
+| Integretion of Ansible Playbooks |  Completed| &nbsp; 
+| **Deployment documentation** | Completed | [#]()
+| **Worksheet updation** | Completed | [#]()
+| **Screencast** | Completed | [#]()
+
+
