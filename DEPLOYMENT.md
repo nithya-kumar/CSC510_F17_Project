@@ -5,7 +5,7 @@
 	* [Use Case 1](#usecase1)
 	* [Use Case 2](#usecase2)
 	* [Use Case 3](#usecase3)
-3. [Code Inspection](#inspect)    
+3. [Exploratory Testing and Code Inspection](#inspect)    
 4. [Task Tracking](#track)
 5. [Screencast](#screencast)
 
@@ -83,8 +83,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 4. Save the daily status of users
 
 	For this module, once the user enters the daily status, scibot saves it into the database.  
-	**Note** - There should be a space after colon but no space before as given below. 
-	
+		
 	        Input:
 	        @scibot 
 			Yesterday: I worked on acceptance testing
@@ -104,7 +103,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	**Note** - Key words are "no" ; "off" ; "yesterday" ; "absent"
 	
 	        Input:
-	        @scibot No I was off yesterday or
+	        @scibot No I was off yesterday
 		@scibot No I was absent yesterday
 	
 	```
@@ -118,9 +117,7 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 
 6. When the user was absent the previous day.
 	For this module, The user was off yesterday so the other two scrum question answers are set to absent when only this question is asked - "What will you do today?"   
-	**Note** - There should be a space after colon but no space before as given below.
-
-		
+			
 	        Input:
 	        @scibot Today: I will implement Usecase 1
 	
@@ -225,7 +222,7 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 
 
 
-## <a name="inspect"></a> Code Inspection
+## <a name="inspect"></a> Exploratory Testing and Code Inspection
 
 The implementation of all use-cases in scibot can be inspected in  
 1. [BotEngine.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/BotEngine.js)  
