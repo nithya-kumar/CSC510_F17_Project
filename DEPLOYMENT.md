@@ -216,9 +216,37 @@ The second use case is using the daily status collected from each user the bot w
 
 ### <a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
 
-One more use of this bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
+Another use of the bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
 
-1. 
+1. The admin pings the bot with the targetted user and the configured ping time. This is received by the bot and a configured ping time is generated.  
+	```
+	 Input:
+		Ping @nknagasi at 5pm everyday for status.
+	```
+	```
+	 Expected output:
+		Your ping is generated for the user: @nknagasi in category: status
+	```
+2. A user gets a ping according to the configured time.  
+The bot runs a scheduler that checks all upcoming pings and pings the repective user for the categories and begins the conversation.  
+	```
+	 Expected output  
+		Hello there @nknagasi
+	```
+	```
+	 Expected input  
+		hi/hello
+	```
+3. A user who is not an admin pings the bot to configure ping time for a targetted user.  
+For this module, the bot gives the reply to the user stating that the user is not authorized to configure ping timings.  
+	```
+	 Input  
+		Ping @stiruma at 5pm everyday for status.
+	```
+	```
+	 Expected output  
+		Not authorized to configure pings
+	```
 
 
 
