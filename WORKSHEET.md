@@ -143,6 +143,7 @@ All our tasks were created and assigned in github.
 
 | Deliverable   | Item / Status   |  Issues/Tasks
 | ------------- | ------------    |  ------------
+| **Ansible Playbooks for Deployment**| &nbsp; | &nbsp;
 | Ansible Playbook for installation of packages| Completed| [#28](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/28)
 | Ansible Playbook for database    |  Completed | [#29](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/29)
 | Ansible Playbook for integration  |  Completed | [#30](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/issues/30)
