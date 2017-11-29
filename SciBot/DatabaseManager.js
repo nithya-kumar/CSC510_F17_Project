@@ -111,24 +111,22 @@ class DatabaseManager {
 
 
 	updatePing(category, user, hrs, day, slackDetails, messageCallback) {
+		var dt = dateTime.create();
+		var today = new Date(dt.now());
 		if (day.toUpperCase() == 'TODAY') {
-			var dt = dateTime.create();
-			var today = new Date(dt.now());
 			var today_datestring = '' + (today.getUTCMonth() + 1) + '/' + today.getUTCDate() + '/' + today.getUTCFullYear();
 			day = today_datestring;
 		}
 		else if (day.toUpperCase() == 'TOMORROW') {
-			var dt = dateTime.create();
-			var tomorrow = new Date(dt.now());
-			tomorrow.setDate(tomorrow.getDate() + 1);
-			var tomorrow_datestring = '' + (tomorrow.getUTCMonth() + 1) + '/' + tomorrow.getUTCDate() + '/' + tomorrow.getUTCFullYear();
+			today.setDate(today.getDate() + 1);
+			var tomorrow_datestring = '' + (today.getUTCMonth() + 1) + '/' + today.getUTCDate() + '/' + today.getUTCFullYear();
 			day = tomorrow_datestring;
 		}
 		var offset = today.getTimezoneOffset();
-		var offest_hrs = offset/60;
+		var offset_hrs = offset/60;
 		if (category.toUpperCase() === "STATUS") {
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
-			var hour = '' + hrs+offset_hrs + ':00:00';
+			var hour = '' + (parseInt(hrs)+offset_hrs) + ':00:00';
 			var query = "update users set ping_time  = '" + hour + "', ping_day = '" + day.toUpperCase() + "' where username = '" + user + "' "
 			var callback = function (err, res) {
 				if (err) {

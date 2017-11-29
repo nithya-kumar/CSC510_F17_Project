@@ -225,9 +225,19 @@ class ParserEngine {
         var user = new RegExp('<@([a-zA-Z0-9]+)>', 'i');
         var summary = new RegExp('summary', 'i');
         var time = new RegExp('at (.*)', 'i');
+		var timezone = new RegExp('UTC');
+		if(time.test(message) && !timezone.test(message))
+		{
+			this.output_message = new OutputMessage({
+                message: "Please use UTC time zone to specify time",
+				messageType: config.messageType.Reply,
+				conversationCallback: undefined
+			});
+			this.messageCallback(slackDetails,this.output_message);
+			return false;
+		}
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-			console.log(slackDetails.role);
 			//var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
             if (slackDetails.role != config.UserRoles.Admin) {
                 this.output_message = new OutputMessage({
