@@ -220,6 +220,33 @@ For this module, the bot gives the reply to the user stating that the user is no
 	```
 	 Expected output  
 		Not authorized to configure pings
+	```  
+4. A user can configure the timings for report generation by the bot. The bot will provide the summary report to the user at the configured time in the same format as stated above (a tabular representation).  
+	```
+	Input  
+		Generate summary report at 5pm UTC everyday
+	```
+	```
+	Expected output
+		Report generation time successfully configured.
+	```  
+5. If a user does not specify the timezone as UTC in the message to the bot then the bot replies with the message to provide the UTC timezone time.  
+	```
+	Input  
+		Generate summary report at 5pm everyday
+	```
+	```
+	Expected output  
+		Please use UTC timezone to specify time
+	```  
+6. If the admin tries to generate a configured ping for a member who is not a part of the team, the bot replies stating that user is not part of the team.  
+	```
+	Input  
+		Ping @abc at 5pm UTC everyday
+	```
+	```
+	Expected output
+		Cannot configure ping request. User is not part of the team.
 	```
 
 
