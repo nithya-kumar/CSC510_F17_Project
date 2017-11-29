@@ -202,17 +202,17 @@ Another use of the bot is for the admin, i.e. the manager is to configure the bo
 The bot runs a scheduler that checks all upcoming pings and pings the repective user for the categories and begins the conversation.  
 	```
 	 Expected output  
-		Hello there @nknagasi
+		Hello @nknagasi
 	```
 	```
 	 Expected input  
-		hi/hello
+		hi/hey/hello
 	```
 3. A user who is not an admin pings the bot to configure ping time for a targetted user.  
 For this module, the bot gives the reply to the user stating that the user is not authorized to configure ping timings.  
 	```
 	 Input  
-		Ping @stiruma at 5pm everyday for status.
+		Ping @stiruma at 5pm UTC everyday for status.
 	```
 	```
 	 Expected output  
