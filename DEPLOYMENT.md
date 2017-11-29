@@ -202,7 +202,7 @@ Another use of the bot is for the admin, i.e. the manager is to configure the bo
 The bot runs a scheduler that checks all upcoming pings and pings the repective user for the categories and begins the conversation.  
 	```
 	 Expected output  
-		Hello @nknagasi
+		Hello there! @nknagasi
 	```
 	```
 	 Expected input  
