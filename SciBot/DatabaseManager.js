@@ -27,6 +27,10 @@ class DatabaseManager {
 					strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
 				}
 
+				if(data.rows.length == 0){
+					strMessage = "Sorry report cannot be generated.";
+				}
+
 				var output_message = new OutputMessage({
 					message: strMessage,
 					messageType: config.messageType.Reply,
