@@ -126,7 +126,9 @@ class DatabaseManager {
 		var offset_hrs = offset/60;
 		if (category.toUpperCase() === "STATUS") {
 			//var query = "insert into users(username,full_name,is_admin,ping_time,ping_day) values('"+user+"','"+user+"','true','5:00:00','"+day+"')";
-			var hour = '' + (parseInt(hrs)+offset_hrs) + ':00:00';
+			hrs = parseInt(hrs)+offset_hrs;
+			hrs = hrs%24;
+			var hour = '' + hrs + ':00:00';
 			var query = "update users set ping_time  = '" + hour + "', ping_day = '" + day.toUpperCase() + "' where username = '" + user + "' "
 			var callback = function (err, res) {
 				if (err) {
@@ -146,7 +148,6 @@ class DatabaseManager {
 		else if (category.toUpperCase() === "REPORT" || category.toUpperCase() === "SUMMARY") {
 			var hour = '' + hrs + ':00:00';
 			var query = "update team set report_time = '" + hour + "', report_day = '" + day.toUpperCase() + "' where t_id = (select t_id from users where username = '" + slackDetails.incomingMessage.user + "')";
-			console.log(query);
 			var callback = function (err, res) {
 				if (err) {
 					console.log(err);
@@ -212,7 +213,6 @@ class DatabaseManager {
 		//var query = "select * from users where ping_time = '"+new Date(dt.now()).getHours()+":00:00' and ( ping_day = 'EVERYDAY' or ping_day = '"+today_datestring+"')";
 		var query = "select u.username from team t inner join users u on (t.t_id = u.t_id) where ((u.ping_day = '"+today_datestring+"' or u.ping_day = 'EVERYDAY') and u.ping_time = '" + new Date(dt.now()).getHours() + ":00:00')"
 			+ " OR u.ping_day != '"+today_datestring+"' and u.ping_day != 'EVERYDAY' and t.ping_time = '" + new Date(dt.now()).getHours() + ":00:00'";
-		console.log(query);
 		var users = [];
 		var getUsers = function (err, data) {
 			if (err) {
@@ -236,6 +236,8 @@ class DatabaseManager {
 
 	generateReportsForNow(bot,userDetails) {
 		var dt = dateTime.create();
+		var today = new Date(dt.now());
+		var today_datestring = ''+(today.getUTCMonth()+1)+'/'+today.getUTCDate()+'/'+today.getUTCFullYear();
 
 		// Create database callback
 		var dbCallback = function (err, data) {
@@ -255,19 +257,24 @@ class DatabaseManager {
 					strMessage += data.rows[i]['full_name'] + '\t\t' + data.rows[i]['status_today'] + '\t\t\t\t\t\t' + data.rows[i]['status_yesterday'] + '\t\t\t\t\t\t' + data.rows[0]['status_obstacles'] + '\t\t\t\t\t\t' + data.rows[i]['status_date'] + '\n';
 					strMessage += '-------------------------------------------------------------------------------------------------------------------------\n';
 				}
-
-				bot.bot.startPrivateConversation({ user: admin }, function (err, convo) {
-					if (err) {
-						console.log(err);
-					} else {
-						convo.say(strMessage);
-					}
-				});
+				
+				if(admin){
+					bot.bot.startPrivateConversation({ user: admin }, function (err, convo) {
+						if (err) {
+							console.log(err);
+						} else {
+							convo.say(strMessage);
+						}
+					});
+				}				
 			}
 		}
 
-		var query = "select a.username, a.is_admin, a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date from (select * from status where status_date = current_date) b inner join users a on (a.username = b.username) inner join team t on (t.t_id = a.t_id) where t.t_id = " + t_id + " and '" + new Date(dt.now()).getHours() + ":00:00'";
-		console.log(query);
+		var query = "select a.username, a.is_admin, a.full_name, b.status_today, b.status_yesterday, b.status_obstacles, to_char(b.status_date, 'Mon DD YYYY') as status_date"
+			+ " from (select * from status where status_date = '"+ today_datestring +"') b"
+			+ " inner join users a on (a.username = b.username)"
+			+ " inner join team t on (t.t_id = a.t_id)"
+			+ " where t.report_time = '" + new Date(dt.now()).getHours() + ":00:00' and (t.report_day = 'EVERYDAY' or t.report_day = '" + today_datestring + "')";
 		// Fetch data from database
 		DataAccess.select(query, dbCallback);
 	}

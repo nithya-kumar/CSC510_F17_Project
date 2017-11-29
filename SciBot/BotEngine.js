@@ -98,7 +98,7 @@ class BotEngine {
 
     cronjobCallback() {
         this.parser.createPingsForNow(this.bot);
-        //this.parser.generateReportForNow(this.bot, this.userDetails);
+        this.parser.generateReportForNow(this.bot, this.userDetails);
     }
 
     updateUserDetails(err, data){
