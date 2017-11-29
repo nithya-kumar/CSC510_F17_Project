@@ -128,7 +128,8 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	
 ### <a name="usecase2"></a> Usecase 2: Generating a summary report
 
-The second use case is using the daily status collected from each user the bot will generate a summary report.
+The second use case is using the daily status collected from each user the bot will generate a summary report.  
+The timestamps to be used should be provided in UTC timezone with the keyword 'UTC' in the message to the bot
 
 1. For this part in the module, the user initiates the conversation for the bot to generate a sprint report for yesterday.      	
 		    	
@@ -137,7 +138,7 @@ The second use case is using the daily status collected from each user the bot w
 	        
 	```
 		Expected Output:
-		Report generated on slack as in screenshot below
+		Report generated and displayed on slack in a tabular format.
 	    
 	```
 	
@@ -149,18 +150,18 @@ The second use case is using the daily status collected from each user the bot w
 	
 	```
 		Expected Output:
-	    
+	    	Report generated and displayed on slack in a tabular format.
 	```
 	
 3. For this part in the module, the user initiates the conversation for the bot to generate a sprint report by giving dates.
 
 		
 	        Input:
-	        @scibot generate a sprint report starting at "your date" and ending "your date"
+	        @scibot generate a sprint report starting at "your date" UTC and ending "your date" UTC
 	
 	```
 		Expected Output:
-		Report generated on slack as in screenshot below
+		Report generated and displayed on slack in a tabular format.
 	    
 	```
 		
@@ -188,6 +189,8 @@ The second use case is using the daily status collected from each user the bot w
 ### <a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
 
 Another use of the bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
+There are two kinds of team members in a team. A user can either be an admin or a normal team member. The ping and report generation configuring permissions are only provided to the admin members of the team.  
+Note: The time for the pings and report generation should be provided in UTC timezone and 'UTC' keyword should be specified in the message to the bot. 
 
 1. The admin pings the bot with the targetted user and the configured ping time. This is received by the bot and a configured ping time is generated.  
 	```
