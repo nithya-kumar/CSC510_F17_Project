@@ -239,16 +239,8 @@ For this module, the bot gives the reply to the user stating that the user is no
 	Expected output  
 		Please use UTC timezone to specify time
 	```  
-6. If the admin tries to generate a configured ping for a member who is not a part of the team, the bot replies stating that user is not part of the team.  
-	```
-	Input  
-		Ping @abc at 5pm UTC everyday
-	```
-	```
-	Expected output
-		Cannot configure ping request. User is not part of the team.
-	```  
-7. If the message provided to the bot for this usecase has none of the keywords summary, report, status then bot replies stating that the category of the message is invalid. 
+  
+6. If the message provided to the bot for this usecase has none of the keywords summary, report, status then bot replies stating that the category of the message is invalid. 
 	```
 	Input
 		Ping @nknagasi at 5pm UTC everyday
