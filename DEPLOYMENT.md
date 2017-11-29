@@ -192,7 +192,7 @@ Another use of the bot is for the admin, i.e. the manager is to configure the bo
 1. The admin pings the bot with the targetted user and the configured ping time. This is received by the bot and a configured ping time is generated.  
 	```
 	 Input:
-		Ping @nknagasi at 5pm everyday for status.
+		Ping @nknagasi at 5pm UTC everyday for status.
 	```
 	```
 	 Expected output:
