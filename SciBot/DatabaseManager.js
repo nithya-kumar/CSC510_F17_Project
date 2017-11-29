@@ -196,7 +196,7 @@ class DatabaseManager {
 		//console.log("Username : "+user+" day: "+day+" time: "+time+" text: "+text+" category: "+category);
 		//'status|summary|report'
 		var dt = dateTime.create();
-		var hours = new RegExp('([0-9])', 'i');
+		var hours = new RegExp('(1[012]|[1-9])', 'i');
 		var meridian = new RegExp('([a-zA-Z])(.*)', 'i');
 		var hrs = +hours.exec(time)[0];
 		if (meridian.exec(time)[0].toUpperCase() === "PM") {
