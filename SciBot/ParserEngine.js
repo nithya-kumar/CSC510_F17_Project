@@ -15,13 +15,16 @@ class ParserEngine {
     }
 
     // Method to set the default message
-    setDefaultMessage() {
-        if (this.output_message == null || this.output_message == undefined)
+    setDefaultMessage(slackDetails) {
+        if ((this.output_message == null || this.output_message == undefined) && (slackDetails != null || slackDetails != undefined)){
             this.output_message = {
                 message: "Sorry! I didn't get that.",
                 messageType: config.messageType.Reply,
                 conversationCallback: undefined
             };
+        
+            this.messageCallback(slackDetails, this.output_message);
+        }
     }
 
     // Method to parse the incoming message
@@ -42,14 +45,15 @@ class ParserEngine {
             resolved = true;
 
         // Set default message in case of non-matching inputs
-        this.setDefaultMessage();
+        if(!resolved)
+            this.setDefaultMessage(slackDetails);
 
-        return this.output_message;
+        this.output_message = null;
     }
 
     messageForSignOff(message, slackDetails) {
         //var action = new RegExp('sign in|signing in', 'i');
-		var action = new RegExp('hi|hey|hello|sign in|signing in', 'i');
+        var action = new RegExp('hi|hey|hello|sign in|signing in', 'i');
 
         if (action.test(message)) {
             // Question for status
@@ -186,12 +190,13 @@ class ParserEngine {
             var start = new RegExp('starting', 'i');
             var end = new RegExp('ending', 'i');
             var day = new RegExp('(today|yesterday)', 'i');
+            var timeZone = new RegExp('UTC', 'ig');
 
-            if(start.test(message) && end.test(message)){
+            if (start.test(message) && end.test(message) && timeZone.test(message) && !day.test(message) && message.match(timeZone).length == 2) {
                 // e.g. "Generate report for the sprint starting 11-04-2017 and ending 11-07-2017"
 
                 // Fetch the start time
-                var startIndex = message.indexOf('starting') + 9; 
+                var startIndex = message.indexOf('starting') + 9;
                 var endIndex = startIndex + 11;
                 var startTime = message.substring(startIndex, endIndex);
 
@@ -199,19 +204,21 @@ class ParserEngine {
                 startIndex = message.indexOf('ending') + 7;
                 endIndex = startIndex + 11;
                 var endTime = message.substring(startIndex, endIndex);
-                
+
                 DatabaseManager.generateReport(startTime, endTime, slackDetails, this.messageCallback);
+                return true;
             }
-            else if(day.test(message)){
+            else if (day.test(message)) {
                 // e.g. "Generate sprint report for today/yesterday"
                 var index = message.indexOf('today');
 
                 DatabaseManager.generateReport(index > -1 ? 'today' : 'yesterday', null, slackDetails, this.messageCallback);
+                return true;
             }
 
-            return true;
+            return false;
         }
-
+    
         return false;
     }
 
@@ -225,27 +232,26 @@ class ParserEngine {
         var user = new RegExp('<@([a-zA-Z0-9]+)>', 'i');
         var summary = new RegExp('summary', 'i');
         var time = new RegExp('at (.*)', 'i');
-		var timezone = new RegExp('UTC');
-		if(time.test(message) && !timezone.test(message))
-		{
-			this.output_message = new OutputMessage({
+        var timezone = new RegExp('UTC');
+        if (time.test(message) && !timezone.test(message)) {
+            this.output_message = new OutputMessage({
                 message: "Please use UTC time zone to specify time",
-				messageType: config.messageType.Reply,
-				conversationCallback: undefined
-			});
-			this.messageCallback(slackDetails,this.output_message);
-			return false;
-		}
+                messageType: config.messageType.Reply,
+                conversationCallback: undefined
+            });
+            this.messageCallback(slackDetails, this.output_message);
+            return false;
+        }
 
         if (obj.test(message) && (user.test(message) || summary.test(message)) && time.test(message)) {
-			//var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
+            //var queryCheckAdmin = "Select * from users where username='"+slackDetails.user+"'";
             if (slackDetails.role != config.UserRoles.Admin) {
                 this.output_message = new OutputMessage({
                     message: "Not authorised to configure pings",
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
-				this.messageCallback(slackDetails,this.output_message);
+                this.messageCallback(slackDetails, this.output_message);
                 return false;
             }
 
@@ -270,33 +276,31 @@ class ParserEngine {
             if (day.test(message)) {
                 //ping user USERNAME at 1pm everyday|today|tomorrow
                 var dayPart = day.exec(message)[0];
-                if(category.test(message))
-                {
-                  DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), dayPart, timeRegex.exec(timePart)[1], message, category.exec(message)[0],slackDetails,this.messageCallback);
-                }  
-                else{
-                   this.output_message = new OutputMessage({
-                    message:  "Invalid category",
-                    messageType: config.messageType.Reply,
-                    conversationCallback: undefined
-                });
-				this.messageCallback(slackDetails,this.output_message);
+                if (category.test(message)) {
+                    DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), dayPart, timeRegex.exec(timePart)[1], message, category.exec(message)[0], slackDetails, this.messageCallback);
+                }
+                else {
+                    this.output_message = new OutputMessage({
+                        message: "Invalid category",
+                        messageType: config.messageType.Reply,
+                        conversationCallback: undefined
+                    });
+                    this.messageCallback(slackDetails, this.output_message);
                 }
             }
             else if (date.test(message)) {
                 //ping user USERNAME at 1pm on 11/11/17
                 var datePart = dateRegex.exec(date.exec(message)[0])[1];
-                if(category.test(message))
-                {
-                  DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0],slackDetails,this.messageCallback);
-                }  
-                else{
-                   this.output_message = new OutputMessage({
-                    message:  "Invalid category",
-                    messageType: config.messageType.Reply,
-                    conversationCallback: undefined
-                });
-				this.messageCallback(slackDetails,this.output_message);
+                if (category.test(message)) {
+                    DatabaseManager.createPing((user.test(message) ? user.exec(message)[1] : ""), datePart, timeRegex.exec(timePart)[1], message, category.exec(message)[0], slackDetails, this.messageCallback);
+                }
+                else {
+                    this.output_message = new OutputMessage({
+                        message: "Invalid category",
+                        messageType: config.messageType.Reply,
+                        conversationCallback: undefined
+                    });
+                    this.messageCallback(slackDetails, this.output_message);
                 }
             }
             else {
@@ -305,21 +309,21 @@ class ParserEngine {
                     messageType: config.messageType.Reply,
                     conversationCallback: undefined
                 });
-				this.messageCallback(slackDetails,this.output_message);
+                this.messageCallback(slackDetails, this.output_message);
                 return false;
             }
             return true;
         }
         return false;
     }
-	
-	createPingsForNow(bot){
-		DatabaseManager.getPingsForNow(bot);	
-	}
-    
-    generateReportForNow(bot, userDetails){
-		DatabaseManager.generateReportsForNow(bot, userDetails);	
-	}
+
+    createPingsForNow(bot) {
+        DatabaseManager.getPingsForNow(bot);
+    }
+
+    generateReportForNow(bot, userDetails) {
+        DatabaseManager.generateReportsForNow(bot, userDetails);
+    }
 }
 
 module.exports.ParserEngine = ParserEngine;
