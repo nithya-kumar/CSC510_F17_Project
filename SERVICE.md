@@ -56,7 +56,7 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
   The admin can configure this bot's timings for pinging [S1] the user everyday.The admin can also decide and accordingly configure the bot as to how often they want the summary report to be generated [S2].
 3 Sub Flows
   [S1] The admin can configure this bot's timings for pinging
-  [S2] The admin can also decide and accordingly configure the bot as to how often they want the summary report to be generated
+  [S2] The admin can also decide and accordingly configure the bot as to configure summary report generation timing.
 4 Alternative Flows
   [E1] The admin must have a Slack account
   [E2] The user should not have permissions to configure the bot.
