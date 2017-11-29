@@ -123,15 +123,15 @@ The first use case is to schedule a daily scrum and ask the users questions rega
 	
 	```
 		Expected Output:
-	    	Sorry, I don't understand that
+	    	Sorry! I didn't get that.
 	```
 	
 ### <a name="usecase2"></a> Usecase 2: Generating a summary report
 
 The second use case is using the daily status collected from each user the bot will generate a summary report.  
-The timestamps to be used should be provided in UTC timezone with the keyword 'UTC' in the message to the bot
+The timestamps to be used should be provided in UTC timezone with the keyword 'UTC' in the message to the bot.
 
-1. For this part in the module, the user initiates the conversation for the bot to generate a sprint report for yesterday.      	
+1. For this part in the module, the user initiates the conversation with the bot to generate a sprint report for yesterday.      	
 		    	
 	        Input:
 	        @scibot generate sprint report for yesterday
@@ -183,7 +183,7 @@ The timestamps to be used should be provided in UTC timezone with the keyword 'U
 	
 	```
 		Expected Output:
-	    	Sorry, I don't understand that
+	    	Sorry! I didn't get that.
 	```
 	
 ### <a name="usecase3"></a> Usecase 3: Providing a manager/admin the ability to configure the setup days/times of the bot.
@@ -205,7 +205,7 @@ There are two kinds of team members in a team. A user can either be an admin or 
 The bot runs a scheduler that checks all upcoming pings and pings the repective user for the categories and begins the conversation.  
 	```
 	 Expected output  
-		Hello there! @nknagasi
+		Hello there!
 	```
 	```
 	 Expected input  
