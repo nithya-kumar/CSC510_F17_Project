@@ -129,6 +129,7 @@ class DatabaseManager {
 			hrs = parseInt(hrs)+offset_hrs;
 			hrs = hrs%24;
 			var hour = '' + hrs + ':00:00';
+			console.log(user);
 			var query = "update users set ping_time  = '" + hour + "', ping_day = '" + day.toUpperCase() + "' where username = '" + user + "' "
 			var callback = function (err, res) {
 				if (err) {

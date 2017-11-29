@@ -29,5 +29,10 @@ create table status (
 
 insert into team values(1, '11:00:00', 'EVERYDAY', '17:00:00', 'EVERYDAY');
 
-insert into users values('U72KDEH60', 1, 'Anshul Chandra', true, null, null);
+insert into users values('U72KDEH60', 1, 'Anshul Chandra', false, null, null);
 insert into users values('U6WEPTUH0', 1, 'Sameer', false, null, null);
+insert into users values('U6VUJ0QBB', 1, 'Shriya', false, null, null);
+insert into users values('U6XBLN2KW', 1, 'Nisha', false, null, null);
+insert into users values('U71U0JF6U', 1, 'Nithya', false, null, null);
+insert into users values('U861PALJC', 1, 'SEProject', false, null, null);
+insert into users values('U86K83A59', 1, 'Admin SEProject', true, null, null);
