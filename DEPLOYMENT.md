@@ -190,7 +190,7 @@ The timestamps to be used should be provided in UTC timezone with the keyword 'U
 
 Another use of the bot is for the admin, i.e. the manager is to configure the bot to set up days/times of the bot's ping and summary report.
 There are two kinds of team members in a team. A user can either be an admin or a normal team member. The ping and report generation configuring permissions are only provided to the admin members of the team.  
-### Note: The time for the pings and report generation should be provided in UTC timezone and 'UTC' keyword should be specified in the message to the bot. 
+#### Note: The time for the pings and report generation should be provided in UTC timezone and 'UTC' keyword should be specified in the message to the bot. 
 
 1. The admin pings the bot with the targetted user and the configured ping time. This is received by the bot and a configured ping time is generated.  
 	```
@@ -247,6 +247,15 @@ For this module, the bot gives the reply to the user stating that the user is no
 	```
 	Expected output
 		Cannot configure ping request. User is not part of the team.
+	```  
+7. If the message provided to the bot for this usecase has none of the keywords summary, report, status then bot replies stating that the category of the message is invalid. 
+	```
+	Input
+		Ping @nknagasi at 5pm UTC everyday
+	```
+	```
+	Expected output
+		Invalid category
 	```
 
 
