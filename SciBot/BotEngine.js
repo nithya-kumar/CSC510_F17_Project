@@ -29,7 +29,7 @@ class BotEngine {
         // Start the bot and pass the event handlers
         this.bot.startListening(this.messageReceived.bind(this), this.directMentions.bind(this), this.directMessage.bind(this));
 
-        this.cronjob = new CronJob('0 * * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
+        this.cronjob = new CronJob('0 0 * * * *', this.cronjobCallback.bind(this), null, true, 'America/New_York');
     }
 
     /*
