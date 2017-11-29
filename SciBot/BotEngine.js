@@ -116,7 +116,6 @@ class BotEngine {
                 team: data.rows[i]['t_id']
             }
         }
-		console.log(this.userDetails);
     }
 }
 

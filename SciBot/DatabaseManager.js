@@ -129,11 +129,20 @@ class DatabaseManager {
 			hrs = parseInt(hrs)+offset_hrs;
 			hrs = hrs%24;
 			var hour = '' + hrs + ':00:00';
-			console.log(user);
 			var query = "update users set ping_time  = '" + hour + "', ping_day = '" + day.toUpperCase() + "' where username = '" + user + "' "
 			var callback = function (err, res) {
 				if (err) {
 					console.log(err);
+					return;
+				}
+				if(res.rowCount == 0)
+				{
+					var output_message = new OutputMessage({
+						message: "Cannot configure ping request. User is not part of the team",
+						messageType: config.messageType.Reply,
+						conversationCallback: undefined
+					});
+					messageCallback(slackDetails, output_message);
 					return;
 				}
 				var output_message = new OutputMessage({
