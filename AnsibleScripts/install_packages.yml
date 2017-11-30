@@ -1,13 +1,22 @@
 ---
 - hosts: all
   gather_facts: no
+
+  pre_tasks:
+    - name: Install Python2
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      become: yes
   
   tasks:
   - name: Install nodejs
     apt: name=nodejs state=present update_cache=true
     become: yes
   
-  - name: Install np
+  #- name: Install node
+  #  apt: name=node state=present update_cache=true
+  #  become: yes
+  
+  - name: Install npm
     apt: name=npm state=present update_cache=true
     become: yes
   
@@ -32,6 +41,3 @@
   - name: Install npm packages
     command: npm install chdir=CSC510_F17_Project/SciBot/
     become: yes
-
-  - name: Run the app using forever and node
-    command: forever start bot.js 34567 chdir=CSC510_F17_Project/SciBot/

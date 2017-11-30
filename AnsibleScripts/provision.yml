@@ -3,11 +3,11 @@
   connection: local
   vars:
       instance_type: t2.micro
-      security_group: Sci
+      security_group: sg_scibot_vir
       image: ami-da05a4a0                         # Ubuntu Server 16.04 LTS (HVM), SSD Volume Type
       region: us-east-1
       keypair: scibot-prod-key
-      subnet: subnet-6eef820a
+      subnet: subnet-84ea71cf
       user: "ubuntu"
   tasks:
     - name: Create an EC2 key
@@ -56,6 +56,10 @@
         var: ec2Instance
 
     - name: Creat the inventory file with the public ip
-      copy: content="[webserver]{{'\n'}}{{ item.public_ip }}{{' ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=./keys/scibot-prod-key.pem\n\n'}}[dbserver]{{'\n'}}{{ item.public_ip }}{{' ansible_python_interpreter=/usr/bin/python3 ansible_ssh_private_key_file=./keys/scibot-prod-key.pem\n'}}" dest=./inventory
+      copy: content="[webserver]{{'\n'}}{{ item.public_ip }}{{' ansible_ssh_private_key_file=./keys/scibot-prod-key.pem\n'}}" dest=./inventory
+      with_items: "{{ ec2Instance.instances }}"
+    
+    - name: Create a ssh forward agent for github
+      copy: content="Host {{ item.public_ip }}{{'\n  ForwardAgent yes'}}" dest=./.ssh/config
       with_items: "{{ ec2Instance.instances }}"
 

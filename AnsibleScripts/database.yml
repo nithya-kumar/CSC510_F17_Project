@@ -1,0 +1,47 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    database: scibot
+    username: postgres
+
+  tasks:
+    - name: Install PostgreSQL
+      apt:
+        name: "{{ item }}"
+        update_cache: true
+        state: installed
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        - python-psycopg2
+      become: yes
+
+    - name: Start the PostgreSQL service
+      service:
+        name: postgresql
+        state: started
+        enabled: true
+      become: yes
+      
+    - name: Create the database
+      become: yes
+      become_user: "{{ username }}"
+      postgresql_db:
+        name: "{{ database }}"
+        encoding: "UTF-8"
+        lc_collate: "en_US.UTF-8"
+        lc_ctype: "en_US.UTF-8"
+        template: "template0"
+        state: present
+      become: yes
+
+    - name: Execute sql script
+      shell: "psql -d {{ database }} -a -f 'CSC510_F17_Project/SciBot/query.sql'"
+      become: yes
+      become_user: "{{ username }}"
+
+    # Start the app using forever
+    - name: Run the app using forever and node
+      command: forever start bot.js 34567 chdir=CSC510_F17_Project/SciBot/
