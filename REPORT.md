@@ -1,0 +1,77 @@
+# MILESONE: REPORT 
+
+## Contents
+
+1. [Problem and about SciBot](#problem)
+2. [Primary Features & Screenshots](#features)
+3. [Reflection on the development process and project](#about)
+4. [Limitations and future work](#scope)
+5. [Video Presentation](#video)
+
+## <a name="problem"></a>Problem and About Bot
+
+Our project the **SciBot** is a Slackbot, a lighter version of the Scrum master. It intends to assists the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.
+
+A major issue involved in this scenario can be identified as the daily management of the sprint tasks and their requirements. It also helps the admin to setup ping times for their teams and also keep track of all the tasks by genereating a summary report every sprint cycle. 
+
+The following are the reasons why the SciBot is of help in this situation,
+
+1. The user does not need to manually keep track of the daily sprint activities
+2. SciBot can generate reminders for the user in case the user forgets to update their daily status.
+3. The SciBot can specifically be helpful for the scrum master to keep track of the tasks for different team members and monitor their contributions by generating a summary report for every sprint cycle.
+4. It can help the scrum master to ping the team members to ensure the completion of sprint tasks.
+
+
+## <a name="features"></a>Primary Features & Screenshots
+
+Scibot is a Slackbot where the major functionality is implemented in nodejs and all the user information is stored in a PostgreSQL database which is all hosted on AWS. Anisble playbooks were used for deployment.
+
+### Features
+
+Scibot has three primary features:
+
+  1. **Pinging a user for daily updates** - It is used to schedule a daily scrum and ask the users questions regarding the work done to get daily updates.
+  2. **Generating a summary report** - Here the daily status collected from each user is used by the bot to generate a summary report.
+  3. **Providing a manager/admin the ability to configure the setup days/times of the bot** - Here the admin, i.e. the manager can configure the bot to set up days/times of the bot's ping and summary report.
+
+### Screenshots
+
+#### Feature 1
+
+
+Explanation - 
+
+#### Feature 2
+
+Explanation - 
+
+#### Feature 3
+
+Explanation - 
+
+
+## <a name="about"></a> Reflection on the development process and project
+
+We started by meeting up to discuss different ideas. After finalizing that we wanted to build an agile bot to aid managers and development teams we decided on the major functionalities of our bot. Later we narrowed down the scope the usescases so that it could be implemented in the given time as the bot was initially designed to keep track of user tasks and also assign tasks to the different users as well. Once we had our usecases in place we discussed and decided the high level architecure design of the bot and the different design patterns we could follow. We decided to build a Slackbot as we also used it for our course.
+
+We started off by implementing the bot based on the design proposal where all our usecases were tested it with mock data. We used NodeJS to implement the core logic and integrated it with Slack for UI. We used selenium tests to help us to verify our usecases. A challenge in this milestone was to mock the service and data of the bot.
+
+After this for our next milestone we implemented our bot including the internal logic required to actually perform the services via the bot. Here we integrated our project with a database created using PostgreSQL. This was a challenge as it was difficult to connect and integrate our services together.
+
+As the last step of our development process we developed a fully deployed version of the bot using ansible playbooks that could remotely configure a server and install the required modules and packages. We ran this playbook and are hosting it on an Amazon AWS EC2 instance. One of the problems here was to setup the environment for bot to run.
+
+This project helped us understand the various phases that are involved in developing an application and the possible problems that may arise while developing it. Which include integrating the different phases in the development process like the different challenges mentioned above.
+
+Building this bot overall helped us to understand how to approach a problem and critically break down the problem into different stages, focus on one stage at a time and implement it in an orderly manner. Scheduling and keeping track of the tasks and assigning different tasks helped us all to efficiently work on our project as well as manage time.
+
+
+## <a name="scope"></a>Limitations and future work ***
+
+Scope and Limitations?
+
+For **future work** we could add more user information and integrate more api services to our project like a scrum interface and other api's to generate a more intelligent report. We could also extend it to more functionalities based on different user, their taska and project requirements. 
+
+
+## <a name="video"></a>Video Presentation
+
+The link to our video presentation can be found [here]()
