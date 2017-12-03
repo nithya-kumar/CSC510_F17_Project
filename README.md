@@ -1,4 +1,5 @@
 # SciBot - SCrum Intercede Bot
+Our project the SciBot is a Slackbot, a lighter version of the Scrum master. It intends to assists the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.  
 
 ## Index
 1. [MILESTONE: DESIGN](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md)
