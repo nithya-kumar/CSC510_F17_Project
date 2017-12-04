@@ -2,13 +2,13 @@
 
 ## Contents
 
-1. [Problem and about SciBot](#problem)
-2. [Primary Features & Screenshots](#features)
+1. [Problem solved](#problem)
+2. [Primary features & screenshots](#features)
 3. [Reflection on the development process and project](#about)
 4. [Limitations and future work](#scope)
-5. [Video Presentation](#video)
+5. [Video presentation](#video)
 
-## <a name="problem"></a>Problem and About Bot
+## <a name="problem"></a>Problem solved
 
 Our project the **SciBot** is a Slackbot, a lighter version of the Scrum master. It intends to assists the product owner (or Admin) and the product dev team adhere to the Scrum framework and ease their work in accomplishing the goal.
 
@@ -38,12 +38,38 @@ Scibot has three primary features:
 
 #### Feature 1
 
+**Subflow 1**  
+![Usecase 1 Subflow 1](Images/uc1_1.JPG?raw=true "Usecase 1 Subflow 1")
 
-Explanation - 
+Explanation - User has already updated status
+
+**Subflow 2**
+![Usecase 1 Subflow 2](Images/uc1_2.JPG?raw=true "Usecase 1 Subflow 2")
+
+Explanation - User has not updated status; Bot asks scrum questions; User replies and bot saves in DB  
+
+**Alternate Flow**
+
+![Usecase 1 AlternateFlow](Images/uc1_3.JPG?raw=true "Usecase 1 Alternate Flow")
+
+Explanation - Alternate flow where user was absent the previous day; Bot asks tasks for today; User replies and bot saves in DB
 
 #### Feature 2
 
-Explanation - 
+**Subflow 1**  
+![Usecase 2 Subflow 1](Images/uc2_1.JPG?raw=true "Usecase 2 Subflow 1")
+
+Explanation - Generate sprint report for specific date intervals  
+
+**Subflow 2**  
+![Usecase 2 Subflow 2](Images/uc2_2.JPG?raw=true "Usecase 2 Subflow 2")
+
+Explanation - Generate sprint report for current day  
+
+**Alternate Flow**  
+![Usecase 2 Alternate Flow](Images/uc2_3.JPG?raw=true "Usecase 2 Alternate Flow")
+
+Explanation - Generate sprint report for specific date intervals where there is no data
 
 #### Feature 3
 
@@ -65,13 +91,15 @@ This project helped us understand the various phases that are involved in develo
 Building this bot overall helped us to understand how to approach a problem and critically break down the problem into different stages, focus on one stage at a time and implement it in an orderly manner. Scheduling and keeping track of the tasks and assigning different tasks helped us all to efficiently work on our project as well as manage time.
 
 
-## <a name="scope"></a>Limitations and future work ***
+## <a name="scope"></a>Limitations and future work
 
-Scope and Limitations?
-
-For **future work** we could add more user information and integrate more api services to our project like a scrum interface and other api's to generate a more intelligent report. We could also extend it to more functionalities based on different user, their taska and project requirements. 
+**Limitations**
+* Bot does not cover all the necessary usecases of Scrum cycle  
+**Future work**  
+* Integrate more API services like a scrum interface and other APIs to generate intelligent report  
+* Extend the bot to perform functionalities based on different user, their tasks and project requirements
 
 
 ## <a name="video"></a>Video Presentation
 
-The link to our video presentation can be found [here]()
+The link to our video presentation can be found [here](https://youtu.be/giLOVAG2xHg)
