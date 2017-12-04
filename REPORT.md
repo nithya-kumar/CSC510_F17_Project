@@ -73,7 +73,21 @@ Explanation - Generate sprint report for specific date intervals where there is 
 
 #### Feature 3
 
-Explanation - 
+**Subflow 1**  
+![Usecase 2 Subflow 1](Images/uc3_1.jpg?raw=true "Usecase 3 Subflow 1")
+
+Explanation - Generate configured pings for users by admin/manager  
+
+**Alternate Flow**  
+![Usecase 2 Alternate Flow](Images/uc3_4.jpg?raw=true "Usecase 3 Alternate Flow")
+
+Explanation - Any user toher than admin/manager is unauthorized to configure ping time  
+
+**Subflow 2**  
+![Usecase 2 Subflow 1](Images/uc3_2.jpg?raw=true "Usecase 3 Subflow 2")
+
+Explanation - Generate configured times for report generation.  
+
 
 
 ## <a name="about"></a> Reflection on the development process and project
