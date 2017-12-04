@@ -6,7 +6,7 @@
 2. [Primary features & screenshots](#features)
 3. [Reflection on the development process and project](#about)
 4. [Limitations and future work](#scope)
-5. [Video presentation](#video)
+5. [Screencast of the project](#video)
 
 ## <a name="problem"></a>Problem solved
 
@@ -116,6 +116,6 @@ Building this bot overall helped us to understand how to approach a problem and 
 * Extend the bot to perform functionalities based on different user, their tasks and project requirements
 
 
-## <a name="video"></a>Video Presentation
+## <a name="video"></a>Screencast of Project
 
-The link to our video presentation can be found [here](https://youtu.be/giLOVAG2xHg)
+The link to our project screencast can be found [here](https://youtu.be/giLOVAG2xHg)
