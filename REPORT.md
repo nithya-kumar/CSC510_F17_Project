@@ -95,6 +95,7 @@ Building this bot overall helped us to understand how to approach a problem and 
 
 **Limitations**
 * Bot does not cover all the necessary usecases of Scrum cycle  
+
 **Future work**  
 * Integrate more API services like a scrum interface and other APIs to generate intelligent report  
 * Extend the bot to perform functionalities based on different user, their tasks and project requirements
