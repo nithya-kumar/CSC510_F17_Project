@@ -94,7 +94,8 @@ Building this bot overall helped us to understand how to approach a problem and 
 ## <a name="scope"></a>Limitations and future work
 
 **Limitations**
-* Bot does not cover all the necessary usecases of Scrum cycle  
+* Scibot does not cover all the necessary usecases of Scrum cycle  
+* Github is one important CM tool in Scrum; The present version of Scibot does not have capabilities for integration with Github in order help the product dev teams
 
 **Future work**  
 * Integrate more API services like a scrum interface and other APIs to generate intelligent report  
