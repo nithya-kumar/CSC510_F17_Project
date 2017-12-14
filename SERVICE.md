@@ -66,15 +66,15 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 For our bot we have the following components
 ![img name](Images/module_list.JPG)
 
-We have created and used a PostgreSQL Database to store and retrieve all the user and status information - The tables with its respective attributes which are present can be seen in the file [dbScript](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/dbScript.sh).
+We have created and used a PostgreSQL Database to store and retrieve all the user and status information - The tables with its respective attributes which are present can be seen in the file [dbScript](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/SciBot/dbScript.sh).
 
-The code for the usecase implementation can be seen in the package [SciBot](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/tree/master/SciBot)
+The code for the usecase implementation can be seen in the package [SciBot](https://github.com/nithya-kumar/CSC510_F17_Project/tree/master/SciBot)
 
-Furthermore, the [class diagram](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
+Furthermore, the [class diagram](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
 
 ## <a name="track"></a> 3. TASK TRACKING
 
-The file to track our tasks [WORKSHEET.md](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/WORKSHEET.md).  
+The file to track our tasks [WORKSHEET.md](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/WORKSHEET.md).  
 For our milestone we used Github Issues to keep track of our tasks to be done.
 
 ## <a name="screencast"></a> 4. SCREENCAST
