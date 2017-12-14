@@ -72,7 +72,7 @@ One more use of this bot is for the admin, i.e. the manager is to configure the 
 ```
 
 ## <a name="mocking"></a>2. MOCKING
-Since SciBot uses external database to store the user details as well as sprint related data like daily status etc, we have created a layer to mock the behavior of the backend database to provide the necessary interface to interact. The implementation can be checked in the [MockDatabaseService.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/MockDatabaseService.js).
+Since SciBot uses external database to store the user details as well as sprint related data like daily status etc, we have created a layer to mock the behavior of the backend database to provide the necessary interface to interact. The implementation can be checked in the [MockDatabaseService.js](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/SciBot/MockDatabaseService.js).
 
 Here we have tried to design the mocking service keeping in mind that no changes are required to the bot implementation at the data access level.
 
@@ -80,7 +80,7 @@ Here we have tried to design the mocking service keeping in mind that no changes
 For our bot we have the following components
 ![img name](Images/Bot_Implementation_components.png)
 
-Furthermore, the [class diagram](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
+Furthermore, the [class diagram](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/ClassDiagram/ClassDiagram.jpg) present in the [design document](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/DESIGN.md) for SciBot can be referred to check on the relationship between different files/components available in the image above.
 
 ### <a name="platform"></a> Bot Platform
 SciBot is a Slack chat bot hence it can be deployed to a local or a central server that can actively connect to Slack RTM API to carry out the conversations.
@@ -91,7 +91,7 @@ SciBot has been integrated with the Slack API using [botkit](https://github.com/
 ## <a name="test"></a>4. SELENIUM TESTING
 
 Each USECASE has a test for the the subflows with atleat one alternate flow per usecase.
-All the testcases are present in the folder **Selenium** [here](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/tree/master/Selenium/src/test/java/selenium/tests).
+All the testcases are present in the folder **Selenium** [here](https://github.com/nithya-kumar/CSC510_F17_Project/tree/master/Selenium/src/test/java/selenium/tests).
 
 ### <a name="test1"></a> USECASE 1 - Tests
 #### Subflow [S1] [S2] : Test case for testing that the user is signing in
@@ -295,7 +295,7 @@ All the testcases are present in the folder **Selenium** [here](https://github.n
 
 ## <a name="track"></a> 5. TASK TRACKING
 
-The file to track our tasks [WORKSHEET.md](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/WORKSHEET.md).  
+The file to track our tasks [WORKSHEET.md](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/WORKSHEET.md).  
 For our milestone we used Github Issues to keep track of our tasks to be done.
 
 ## <a name="screencast"></a> 6. SCREENCAST
