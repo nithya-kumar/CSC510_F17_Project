@@ -12,9 +12,9 @@
 ## <a name="deploy"></a> Deployment Procedure
 
 We have the following ansible playbooks: 
-1. [provision.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/provision.yml) - Provisions a EC2 instance on Amazon Web Services (AWS) and generates ssh key to use as deploy key to help clone the github repo
+1. [provision.yml](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/AnsibleScripts/provision.yml) - Provisions a EC2 instance on Amazon Web Services (AWS) and generates ssh key to use as deploy key to help clone the github repo
 
-2. [install_packages.yml](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/AnsibleScripts/install_packages.yml) - This playbook is responsible for the tasks related to setting up Scibot. This installs all the required modules and packages to run the bot, clones the github respository and runs the bot
+2. [install_packages.yml](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/AnsibleScripts/install_packages.yml) - This playbook is responsible for the tasks related to setting up Scibot. This installs all the required modules and packages to run the bot, clones the github respository and runs the bot
     
 3. [database.yml]() - This playbook is responsible to install and create the database that is required. 
     
@@ -255,18 +255,18 @@ For this module, the bot gives the reply to the user stating that the user is no
 ## <a name="inspect"></a> Exploratory Testing and Code Inspection
 
 The implementation of all use-cases in scibot can be inspected in  
-1. [BotEngine.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/BotEngine.js)  
+1. [BotEngine.js](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/SciBot/BotEngine.js)  
 Bot Engine is the core module of the bot app server. It connects and manages the components of the app server. It helps facilitate communication among the other components of the bot. Every interaction among the app server components goes via the Bot Engine.  
 
-2. [ParserEngine.js file](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/ParserEngine.js)  
+2. [ParserEngine.js file](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/SciBot/ParserEngine.js)  
 Parser Engine is responsible for receiving input from the users and parse it. The output of the engine is either directly store in database or used for processing in other components
 
-3. [DatabaseManager.js](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/SciBot/DatabaseManager.js)  
+3. [DatabaseManager.js](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/SciBot/DatabaseManager.js)  
 Database Manager helps facilitate database connectivity for the Bot. Any CRUD operation on the database goes via this component
 
 ## <a name="track"></a>Task Tracking
 
-WORKSHEET.md file has been updated to this milestone which can be found [here](https://github.ncsu.edu/nkumar8/CSC510_F17_Project/blob/master/WORKSHEET.md) . We have used github issues to keep track of all our tasks.
+WORKSHEET.md file has been updated to this milestone which can be found [here](https://github.com/nithya-kumar/CSC510_F17_Project/blob/master/WORKSHEET.md) . We have used github issues to keep track of all our tasks.
 
 ## <a name="screencast"></a>Screencast
 
